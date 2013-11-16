@@ -1,1 +1,9 @@
 .metadata/
+/build
+.settings/
+.project
+.classpath
+
+*.war
+*.ear
+*.class
