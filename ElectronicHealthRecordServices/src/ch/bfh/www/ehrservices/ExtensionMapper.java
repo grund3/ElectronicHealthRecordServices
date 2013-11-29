@@ -33,6 +33,76 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "ConfidentialyLevel".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.ConfidentialyLevel.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "OrganisationHP".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "SpecialPermissions".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.SpecialPermissions.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "healthCareProfessional".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.HealthCareProfessional.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "Role".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.Role.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "Organisation".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.Organisation.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "Patient".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.Patient.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
                   "Address".equals(typeName)){
                    
                             return  ch.bfh.www.ehrservices.Address.Factory.parse(reader);
@@ -43,9 +113,39 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "User".equals(typeName)){
+                  "Attributes".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.User.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.Attributes.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "DocumentRegisterEntry".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.DocumentRegisterEntry.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "documentLog".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
+                  "permissionSchema".equals(typeName)){
+                   
+                            return  ch.bfh.www.ehrservices.PermissionSchema.Factory.parse(reader);
                         
 
                   }

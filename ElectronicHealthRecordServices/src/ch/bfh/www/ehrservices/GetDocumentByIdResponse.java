@@ -32,6 +32,17 @@
                         
                                     protected javax.activation.DataHandler localDocument ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localDocumentTracker = false ;
+
+                           public boolean isDocumentSpecified(){
+                               return localDocumentTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -48,7 +59,8 @@
                                * @param param Document
                                */
                                public void setDocument(javax.activation.DataHandler param){
-                            
+                            localDocumentTracker = param != null;
+                                   
                                             this.localDocument=param;
                                     
 
@@ -113,7 +125,7 @@
 
                
                    }
-               
+                if (localDocumentTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "document", xmlWriter);
                              
@@ -129,7 +141,7 @@
                                     }
                                  
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -314,12 +326,12 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (localDocumentTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                         "document"));
                                 
                             elementList.add(localDocument);
-                        
+                        }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -406,11 +418,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

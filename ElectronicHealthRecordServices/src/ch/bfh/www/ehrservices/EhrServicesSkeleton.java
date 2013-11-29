@@ -14,16 +14,71 @@ public class EhrServicesSkeleton {
 	/**
 	 * Auto generated method signature
 	 * 
+	 * @param getSpecialPermissionByPatient
+	 * @return getSpecialPermissionByPatientResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetSpecialPermissionByPatientResponse getSpecialPermissionByPatient(
+			ch.bfh.www.ehrservices.GetSpecialPermissionByPatient getSpecialPermissionByPatient) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getSpecialPermissionByPatient");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getDocumentsByAttributes
+	 * @return getDocumentsByAttributesResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetDocumentsByAttributesResponse getDocumentsByAttributes(
+			ch.bfh.www.ehrservices.GetDocumentsByAttributes getDocumentsByAttributes) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getDocumentsByAttributes");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
 	 * @param getDocumentById
 	 * @return getDocumentByIdResponse
 	 */
 
 	public ch.bfh.www.ehrservices.GetDocumentByIdResponse getDocumentById(
 			ch.bfh.www.ehrservices.GetDocumentById getDocumentById) {
-		// testennnenen
 		// TODO : fill this with the necessary business logic
 		throw new java.lang.UnsupportedOperationException("Please implement "
 				+ this.getClass().getName() + "#getDocumentById");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setEmergencyContact
+	 * @return setEmergencyContactResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
+			ch.bfh.www.ehrservices.SetEmergencyContact setEmergencyContact) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setEmergencyContact");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getEmergencyContactByPatientId
+	 * @return getEmergencyContactByPatientIdResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetEmergencyContactByPatientIdResponse getEmergencyContactByPatientId(
+			ch.bfh.www.ehrservices.GetEmergencyContactByPatientId getEmergencyContactByPatientId) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getEmergencyContactByPatientId");
 	}
 
 	/**
@@ -38,6 +93,189 @@ public class EhrServicesSkeleton {
 		// TODO : fill this with the necessary business logic
 		throw new java.lang.UnsupportedOperationException("Please implement "
 				+ this.getClass().getName() + "#getLogin");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getBlacklistByPatientId
+	 * @return getBlacklistByPatientIdResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetBlacklistByPatientIdResponse getBlacklistByPatientId(
+			ch.bfh.www.ehrservices.GetBlacklistByPatientId getBlacklistByPatientId) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getBlacklistByPatientId");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @return getRolesResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
+
+	) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getRoles");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setSpecialPermission
+	 * @return setSpecialPermissionResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermission(
+			ch.bfh.www.ehrservices.SetSpecialPermission setSpecialPermission) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setSpecialPermission");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setHpOnBlacklist
+	 * @return setHpOnBlacklistResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetHpOnBlacklistResponse setHpOnBlacklist(
+			ch.bfh.www.ehrservices.SetHpOnBlacklist setHpOnBlacklist) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setHpOnBlacklist");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getHPByPatientAndRole
+	 * @return getHPByPatientAndRoleResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRole(
+			ch.bfh.www.ehrservices.GetHPByPatientAndRole getHPByPatientAndRole) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getHPByPatientAndRole");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setPermissionMatrixForPatient
+	 * @return setPermissionMatrixForPatientResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetPermissionMatrixForPatientResponse setPermissionMatrixForPatient(
+			ch.bfh.www.ehrservices.SetPermissionMatrixForPatient setPermissionMatrixForPatient) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setPermissionMatrixForPatient");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setWhitelist
+	 * @return setWhitelistResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetWhitelistResponse setWhitelist(
+			ch.bfh.www.ehrservices.SetWhitelist setWhitelist) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setWhitelist");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @return getConfidentialityLevelsResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
+
+	) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getConfidentialityLevels");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getWhitelistByPatientId
+	 * @return getWhitelistByPatientIdResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientId(
+			ch.bfh.www.ehrservices.GetWhitelistByPatientId getWhitelistByPatientId) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getWhitelistByPatientId");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getCurrentPermissionMatrixByPatientId
+	 * @return getCurrentPermissionMatrixByPatientIdResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientId(
+			ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId getCurrentPermissionMatrixByPatientId) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName()
+				+ "#getCurrentPermissionMatrixByPatientId");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setHPRole
+	 * @return setHPRoleResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetHPRoleResponse setHPRole(
+			ch.bfh.www.ehrservices.SetHPRole setHPRole) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setHPRole");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getAllDocumentsByPatientId
+	 * @return getAllDocumentsByPatientIdResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientId(
+			ch.bfh.www.ehrservices.GetAllDocumentsByPatientId getAllDocumentsByPatientId) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getAllDocumentsByPatientId");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setConfidentiality
+	 * @return setConfidentialityResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetConfidentialityResponse setConfidentiality(
+			ch.bfh.www.ehrservices.SetConfidentiality setConfidentiality) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setConfidentiality");
 	}
 
 }

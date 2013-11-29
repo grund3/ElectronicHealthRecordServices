@@ -16,7 +16,7 @@
 			<xsd:element name="getLoginResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="out" type="bfh:Patient" />
+						<xsd:element name="out" type="bfh:Patient" minOccurs="0" maxOccurs="1"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -60,7 +60,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="documentID" type="xsd:int"></xsd:element>
+						<xsd:element name="documentID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -68,7 +68,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="document" type="xsd:base64Binary"></xsd:element>
+						<xsd:element name="document" type="xsd:base64Binary" minOccurs="0" maxOccurs="1"></xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -76,7 +76,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="patientID" type="xsd:int"></xsd:element>
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -94,7 +94,9 @@
 					<xsd:element name="documentType"
 						type="xsd:string">
 					</xsd:element>
-					<xsd:element name="documentRegisterID" type="xsd:int"></xsd:element>
+					<xsd:element name="documentRegisterID"
+						type="xsd:int">
+					</xsd:element>
 					<xsd:element name="confindentialityLevel"
 						type="xsd:string">
 					</xsd:element>
@@ -111,15 +113,16 @@
 						type="xsd:dateTime">
 					</xsd:element>
 					<xsd:element name="title" type="xsd:string"></xsd:element>
+					<xsd:element name="documentLog" type="bfh:documentLog"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getDocumentsByAttributes">
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="patientID" type="xsd:int"></xsd:element>
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
 						<xsd:element name="attributes"
-							type="bfh:Attributes">
+							type="bfh:Attributes" maxOccurs="1" minOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -185,10 +188,10 @@
 					<xsd:sequence>
 
 						<xsd:element name="documentRegisterID"
-							type="xsd:int">
+							type="xsd:int" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="confidentialityID"
-							type="xsd:int">
+							type="xsd:int" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -197,7 +200,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="success" type="xsd:boolean"></xsd:element>
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -214,7 +217,7 @@
 					<xsd:sequence>
 
 						<xsd:element name="confidentialyLevels"
-							type="bfh:ConfidentialyLevel">
+							type="bfh:ConfidentialyLevel" minOccurs="1" maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -233,15 +236,15 @@
 					<xsd:sequence>
 
 						<xsd:element name="patientID"
-							type="xsd:int">
+							type="xsd:int" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="current"
-							type="xsd:boolean">
+							type="xsd:boolean" minOccurs="0" maxOccurs="1">
 						</xsd:element>
-						<xsd:element name="trust" type="xsd:boolean">
+						<xsd:element name="trust" type="xsd:boolean" minOccurs="0" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="potential"
-							type="xsd:boolean">
+							type="xsd:boolean" minOccurs="0" maxOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -250,7 +253,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="healthcareProfessional" type="bfh:OrganisationHP"></xsd:element>
+						<xsd:element name="healthcareProfessional" type="bfh:OrganisationHP" minOccurs="0" maxOccurs="unbounded"></xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -267,6 +270,293 @@
 					<xsd:element name="zsr" type="xsd:string"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
+			<xsd:element name="getBlacklistByPatientId">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBlacklistByPatientIdResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="HealthProfessionals" type="bfh:healthCareProfessional" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setHpOnBlacklist">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+						<xsd:element name="healthProfessionalID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setHpOnBlacklistResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getWhitelistByPatientId">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getWhitelistByPatientIdResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patients"
+							type="bfh:Patient" minOccurs="0" maxOccurs="unbounded">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setWhitelist">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="giverPatientID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="receiverPatientID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setWhitelistResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getEmergencyContactByPatientId">
+				<xsd:complexType>
+					<xsd:sequence>
+
+                        <xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+                    </xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getEmergencyContactByPatientIdResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="emergencyContact" type="bfh:Person" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setEmergencyContact">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="emergencyContact" type="bfh:Person" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setEmergencyContactResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="documentLog">
+				<xsd:sequence>
+					<xsd:element name="accessType" type="xsd:string"></xsd:element>
+					<xsd:element name="time" type="xsd:dateTime"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getCurrentPermissionMatrixByPatientId">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCurrentPermissionMatrixByPatientIdResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="permissionSchema" type="bfh:permissionSchema" minOccurs="0" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="permissionSchema">
+				<xsd:sequence>
+					<xsd:element name="careGiver_adminData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiver_usefulData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiver_medicalData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiver_stigmatizingData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiverOfTrust_adminData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiverOfTrust_usefulData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="careGiverOfTrust_medicalData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element
+						name="careGiverOfTrust_stigmatizingData" type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="potentialCareGiver_adminData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="potentialCareGiver_usefulData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="emergencyCareGiver_adminData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="emergencyCareGiver_usefulData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="emergencyCareGiver_medicalData"
+						type="xsd:boolean">
+					</xsd:element>
+					<xsd:element name="emergencyCareGiver_stigmatizingData" type="xsd:boolean"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="setPermissionMatrixForPatient">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+						<xsd:element name="permissionSchema"
+							type="bfh:permissionSchema" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setPermissionMatrixForPatientResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setHPRole">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+
+						<xsd:element name="healthCareProfessionalID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="roleID" type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="accessTill"
+							type="xsd:dateTime" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setHPRoleResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRoles">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="in" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getRolesResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="roles" type="bfh:Role" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="Role">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:int"></xsd:element>
+					<xsd:element name="name" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getSpecialPermissionByPatient">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="patientID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getSpecialPermissionByPatientResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="specialPermissions" type="bfh:SpecialPermissions" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="SpecialPermissions">
+				<xsd:sequence>
+					<xsd:element name="documentRegisterEntry"
+						type="bfh:DocumentRegisterEntry">
+					</xsd:element>
+					<xsd:element name="healthCareProfessional" type="bfh:healthCareProfessional"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="setSpecialPermission">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="documentID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="healthProfessionalID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="setSpecialPermissionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="out" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="getLoginRequest">
@@ -276,7 +566,7 @@
 		<wsdl:part element="bfh:getLoginResponse" name="parameters" />
 	</wsdl:message>
 	<wsdl:message name="getDocumentByIdRequest">
-		<wsdl:part name="parameters" element="bfh:getDocumentById"></wsdl:part>
+		<wsdl:part name="parameters" element="bfh:getDocumentById"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="getDocumentByIdResponse">
 		<wsdl:part name="parameters" element="bfh:getDocumentByIdResponse"></wsdl:part>
@@ -299,7 +589,7 @@
 	<wsdl:message name="setConfidentialityResponse">
 		<wsdl:part name="parameters" element="bfh:setConfidentialityResponse"></wsdl:part>
 	</wsdl:message>
-	<wsdl:message name="getConfidentialityLevelsRequest">
+	<wsdl:message name="getConfidentialityLevelsRequest">
 	</wsdl:message>
 	<wsdl:message name="getConfidentialityLevelsResponse">
 		<wsdl:part name="parameters" element="bfh:getConfidentialityLevelsResponse"></wsdl:part>
@@ -310,11 +600,82 @@
 	<wsdl:message name="getHPByPatientAndRoleResponse">
 		<wsdl:part name="parameters" element="bfh:getHPByPatientAndRoleResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="getBlacklistByPatientIdRequest">
+		<wsdl:part name="parameters" element="bfh:getBlacklistByPatientId"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBlacklistByPatientIdResponse">
+		<wsdl:part name="parameters" element="bfh:getBlacklistByPatientIdResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setHpOnBlacklistRequest">
+		<wsdl:part name="parameters" element="bfh:setHpOnBlacklist"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setHpOnBlacklistResponse">
+		<wsdl:part name="parameters" element="bfh:setHpOnBlacklistResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getWhitelistByPatientIdRequest">
+		<wsdl:part name="parameters" element="bfh:getWhitelistByPatientId"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getWhitelistByPatientIdResponse">
+		<wsdl:part name="parameters" element="bfh:getWhitelistByPatientIdResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setWhitelistRequest">
+		<wsdl:part name="parameters" element="bfh:setWhitelist"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setWhitelistResponse">
+		<wsdl:part name="parameters" element="bfh:setWhitelistResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getEmergencyContactByPatientIdRequest">
+		<wsdl:part name="parameters" element="bfh:getEmergencyContactByPatientId"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getEmergencyContactByPatientIdResponse">
+		<wsdl:part name="parameters" element="bfh:getEmergencyContactByPatientIdResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setEmergencyContactRequest">
+		<wsdl:part name="parameters" element="bfh:setEmergencyContact"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setEmergencyContactResponse">
+		<wsdl:part name="parameters" element="bfh:setEmergencyContactResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCurrentPermissionMatrixByPatientIdRequest">
+		<wsdl:part name="parameters" element="bfh:getCurrentPermissionMatrixByPatientId"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCurrentPermissionMatrixByPatientIdResponse">
+		<wsdl:part name="parameters" element="bfh:getCurrentPermissionMatrixByPatientIdResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setPermissionMatrixForPatientRequest">
+		<wsdl:part name="parameters" element="bfh:setPermissionMatrixForPatient"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setPermissionMatrixForPatientResponse">
+		<wsdl:part name="parameters" element="bfh:setPermissionMatrixForPatientResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setHPRoleRequest">
+		<wsdl:part name="parameters" element="bfh:setHPRole"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setHPRoleResponse">
+		<wsdl:part name="parameters" element="bfh:setHPRoleResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRolesRequest">
+	</wsdl:message>
+	<wsdl:message name="getRolesResponse">
+		<wsdl:part name="parameters" element="bfh:getRolesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getSpecialPermissionByPatientRequest">
+		<wsdl:part name="parameters" element="bfh:getSpecialPermissionByPatient"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getSpecialPermissionByPatientResponse">
+		<wsdl:part name="parameters" element="bfh:getSpecialPermissionByPatientResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setSpecialPermissionRequest">
+		<wsdl:part name="parameters" element="bfh:setSpecialPermission"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="setSpecialPermissionResponse">
+		<wsdl:part name="parameters" element="bfh:setSpecialPermissionResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:portType name="ehrServices">
 		<wsdl:operation name="getLogin">
 			<wsdl:input message="bfh:getLoginRequest" />
 			<wsdl:output message="bfh:getLoginResponse" />
-		</wsdl:operation>		<wsdl:operation name="getDocumentById">			<wsdl:input message="bfh:getDocumentByIdRequest"></wsdl:input>			<wsdl:output message="bfh:getDocumentByIdResponse"></wsdl:output>
+		</wsdl:operation>		<wsdl:operation name="getDocumentById">			<wsdl:input message="bfh:getDocumentByIdRequest"></wsdl:input>			<wsdl:output message="bfh:getDocumentByIdResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAllDocumentsByPatientId">
 			<wsdl:input message="bfh:getAllDocumentsByPatientIdRequest"></wsdl:input>
@@ -328,15 +689,58 @@
 			<wsdl:input message="bfh:setConfidentialityRequest"></wsdl:input>
 			<wsdl:output message="bfh:setConfidentialityResponse"></wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="getConfidentialityLevels">
+		<wsdl:operation name="getConfidentialityLevels">
 			<wsdl:output message="bfh:getConfidentialityLevelsResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getHPByPatientAndRole">
 			<wsdl:input message="bfh:getHPByPatientAndRoleRequest"></wsdl:input>
 			<wsdl:output message="bfh:getHPByPatientAndRoleResponse"></wsdl:output>
 		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="ehrServicesSOAP" type="bfh:ehrServices">
+		<wsdl:operation name="getBlacklistByPatientId">
+			<wsdl:input message="bfh:getBlacklistByPatientIdRequest"></wsdl:input>
+			<wsdl:output message="bfh:getBlacklistByPatientIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setHpOnBlacklist">
+			<wsdl:input message="bfh:setHpOnBlacklistRequest"></wsdl:input>
+			<wsdl:output message="bfh:setHpOnBlacklistResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getWhitelistByPatientId">
+			<wsdl:input message="bfh:getWhitelistByPatientIdRequest"></wsdl:input>
+			<wsdl:output message="bfh:getWhitelistByPatientIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setWhitelist">
+			<wsdl:input message="bfh:setWhitelistRequest"></wsdl:input>
+			<wsdl:output message="bfh:setWhitelistResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEmergencyContactByPatientId">
+			<wsdl:input message="bfh:getEmergencyContactByPatientIdRequest"></wsdl:input>
+			<wsdl:output message="bfh:getEmergencyContactByPatientIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setEmergencyContact">
+			<wsdl:input message="bfh:setEmergencyContactRequest"></wsdl:input>
+			<wsdl:output message="bfh:setEmergencyContactResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCurrentPermissionMatrixByPatientId">
+			<wsdl:input message="bfh:getCurrentPermissionMatrixByPatientIdRequest"></wsdl:input>
+			<wsdl:output message="bfh:getCurrentPermissionMatrixByPatientIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setPermissionMatrixForPatient">
+			<wsdl:input message="bfh:setPermissionMatrixForPatientRequest"></wsdl:input>
+			<wsdl:output message="bfh:setPermissionMatrixForPatientResponse"></wsdl:output>
+		</wsdl:operation>		<wsdl:operation name="setHPRole">			<wsdl:input message="bfh:setHPRoleRequest"></wsdl:input>			<wsdl:output message="bfh:setHPRoleResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoles">
+			<wsdl:output message="bfh:getRolesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getSpecialPermissionByPatient">
+			<wsdl:input message="bfh:getSpecialPermissionByPatientRequest"></wsdl:input>
+			<wsdl:output message="bfh:getSpecialPermissionByPatientResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setSpecialPermission">
+			<wsdl:input message="bfh:setSpecialPermissionRequest"></wsdl:input>
+			<wsdl:output message="bfh:setSpecialPermissionResponse"></wsdl:output>
+		</wsdl:operation></wsdl:portType>
+		<wsdl:binding name="ehrServicesSOAP" type="bfh:ehrServices">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<wsdl:operation name="getLogin">
@@ -359,6 +763,150 @@
 		</wsdl:operation>
 		<wsdl:operation name="getAllDocumentsByPatientId">
 			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getDocumentsByPatientId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBlacklistByPatientId">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getBlacklistByPatientId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getConfidentialityLevels">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getConfidentialityLevels" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCurrentPermissionMatrixByPatientId">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getCurrentPermissionMatrixByPatientId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getDocumentsByAttributes">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getDocumentsByAttributes" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getEmergencyContactByPatientId">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getEmergencyContactByPatientId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getHPByPatientAndRole">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getHPByPatientAndRole" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoles">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getRoles" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getSpecialPermissionByPatient">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getSpecialPermissionByPatient" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getWhitelistByPatientId">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/getWhitelistByPatientId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setConfidentiality">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setConfidentiality" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setEmergencyContact">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setEmergencyContact" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setHpOnBlacklist">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setHpOnBlacklist" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setHPRole">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setHPRole" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setPermissionMatrixForPatient">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setPermissionMatrixForPatient" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setSpecialPermission">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setSpecialPermission" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setWhitelist">
+			<soap:operation soapAction="http://www.bfh.ch/ehrServices/setWhitelist" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
