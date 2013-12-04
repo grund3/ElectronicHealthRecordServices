@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ElectronicHealthRecordServices" transaction-type="RESOURCE_LOCAL">
+		<class>ch.bfh.www.ehrservices.entities.Accesstype</class>
+		<class>ch.bfh.www.ehrservices.entities.Address</class>
+		<class>ch.bfh.www.ehrservices.entities.Blacklist</class>
+		<class>ch.bfh.www.ehrservices.entities.Confidentialitylevel</class>
+		<class>ch.bfh.www.ehrservices.entities.Documentlog</class>
+		<class>ch.bfh.www.ehrservices.entities.Documentregister</class>
+		<class>ch.bfh.www.ehrservices.entities.Documentrepository</class>
+		<class>ch.bfh.www.ehrservices.entities.Documenttype</class>
+		<class>ch.bfh.www.ehrservices.entities.Emergencycontact</class>
+		<class>ch.bfh.www.ehrservices.entities.Healthcareprofessional</class>
+		<class>ch.bfh.www.ehrservices.entities.Hptype</class>
+		<class>ch.bfh.www.ehrservices.entities.Insurance</class>
+		<class>ch.bfh.www.ehrservices.entities.Organisation</class>
+		<class>ch.bfh.www.ehrservices.entities.Organisationhp</class>
+		<class>ch.bfh.www.ehrservices.entities.Organisationtype</class>
+		<class>ch.bfh.www.ehrservices.entities.Patient</class>
+		<class>ch.bfh.www.ehrservices.entities.Patientinsurance</class>
+		<class>ch.bfh.www.ehrservices.entities.Patientrole</class>
+		<class>ch.bfh.www.ehrservices.entities.Permissionmatrix</class>
+		<class>ch.bfh.www.ehrservices.entities.Permissionschema</class>
+		<class>ch.bfh.www.ehrservices.entities.Person</class>
+		<class>ch.bfh.www.ehrservices.entities.Role</class>
+		<class>ch.bfh.www.ehrservices.entities.Whitelist</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://vmnashira.bfh.ch/epatientendossier"/>
+			<property name="javax.persistence.jdbc.user" value="ePatDossier"/>
+			<property name="javax.persistence.jdbc.password" value="BeSafe!"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>

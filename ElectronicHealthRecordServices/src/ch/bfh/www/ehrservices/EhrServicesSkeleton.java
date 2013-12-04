@@ -6,6 +6,10 @@
  */
 package ch.bfh.www.ehrservices;
 
+import javax.persistence.Query;
+
+import ch.bfh.www.util.Utility;
+
 /**
  * EhrServicesSkeleton java skeleton for the axisService
  */
@@ -90,9 +94,25 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.GetLoginResponse getLogin(
 			ch.bfh.www.ehrservices.GetLogin getLogin) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getLogin");
+		String username = getLogin.getUsername();
+		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
+		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
+		ch.bfh.www.ehrservices.Patient patient = new ch.bfh.www.ehrservices.Patient();
+		patient.setMPI(user.getMpi());
+		patient.setPatientID(String.valueOf(user.getId()));
+		patient.setUsername(user.getUsername());
+		
+		ch.bfh.www.ehrservices.Person person = new ch.bfh.www.ehrservices.Person();
+		person.setAddress(patient.getPerson().getAddress());
+		person.setBirthdate(patient.getPerson().getBirthdate());
+		person.setEmail(patient.getPerson().getEmail());
+		person.setFirstname(patient.getPerson().getFirstname());
+		patient.setPerson(person);
+		
+		GetLoginResponse response = new GetLoginResponse();
+		response.setOut(patient);
+		return response;
+		
 	}
 
 	/**
