@@ -6,8 +6,11 @@
  */
 package ch.bfh.www.ehrservices;
 
+import java.util.ArrayList;
+
 import javax.persistence.Query;
 
+import ch.bfh.www.ehrservices.entities.Role;
 import ch.bfh.www.util.Utility;
 
 /**
@@ -135,12 +138,19 @@ public class EhrServicesSkeleton {
 	 * @return getRolesResponse
 	 */
 
-	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
-
-	) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getRoles");
+	public ch.bfh.www.ehrservices.GetRolesResponse getRoles() {
+		Query query = Utility.getEM().createQuery("SELECT r From Role r");
+		ArrayList<ch.bfh.www.ehrservices.entities.Role> dbRoles = (ArrayList<Role>) query.getResultList();
+		
+		GetRolesResponse response = new GetRolesResponse();
+		for(ch.bfh.www.ehrservices.entities.Role role : dbRoles) {
+			ch.bfh.www.ehrservices.Role newRole = new ch.bfh.www.ehrservices.Role();
+			newRole.setId(role.getId());
+			newRole.setName(role.getNameDe()); //TODO Mehrsprachig
+			response.addRoles(newRole);
+		}
+		
+		return response;
 	}
 
 	/**
