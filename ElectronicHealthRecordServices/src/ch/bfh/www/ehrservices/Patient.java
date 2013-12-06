@@ -29,14 +29,14 @@
                         */
 
                         
-                                    protected java.lang.String localPatientID ;
+                                    protected int localPatientID ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getPatientID(){
+                           public  int getPatientID(){
                                return localPatientID;
                            }
 
@@ -46,7 +46,7 @@
                                * Auto generated setter method
                                * @param param PatientID
                                */
-                               public void setPatientID(java.lang.String param){
+                               public void setPatientID(int param){
                             
                                             this.localPatientID=param;
                                     
@@ -181,6 +181,17 @@
                         
                                     protected java.lang.String localLanguage ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localLanguageTracker = false ;
+
+                           public boolean isLanguageSpecified(){
+                               return localLanguageTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -197,7 +208,8 @@
                                * @param param Language
                                */
                                public void setLanguage(java.lang.String param){
-                            
+                            localLanguageTracker = param != null;
+                                   
                                             this.localLanguage=param;
                                     
 
@@ -266,18 +278,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "patientID", xmlWriter);
                              
-
-                                          if (localPatientID==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("patientID cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localPatientID);
-                                            
-                                          }
+                                               if (localPatientID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("patientID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -340,7 +347,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                              if (localLanguageTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "language", xmlWriter);
                              
@@ -358,7 +365,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -547,12 +554,9 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "patientID"));
                                  
-                                        if (localPatientID != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("patientID cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
+                            
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "person"));
                             
@@ -588,7 +592,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("password cannot be null!!");
                                         }
-                                    
+                                     if (localLanguageTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "language"));
                                  
@@ -597,7 +601,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("language cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -687,7 +691,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setPatientID(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -809,11 +813,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

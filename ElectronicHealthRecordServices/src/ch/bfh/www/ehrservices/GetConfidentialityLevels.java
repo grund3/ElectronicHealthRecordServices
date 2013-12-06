@@ -30,14 +30,14 @@
                         */
 
                         
-                                    protected java.lang.String localIn ;
+                                    protected boolean localIn ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return boolean
                            */
-                           public  java.lang.String getIn(){
+                           public  boolean getIn(){
                                return localIn;
                            }
 
@@ -47,7 +47,7 @@
                                * Auto generated setter method
                                * @param param In
                                */
-                               public void setIn(java.lang.String param){
+                               public void setIn(boolean param){
                             
                                             this.localIn=param;
                                     
@@ -117,18 +117,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "in", xmlWriter);
                              
-
-                                          if (localIn==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("in cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localIn);
-                                            
-                                          }
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("in cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIn));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -320,12 +315,9 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "in"));
                                  
-                                        if (localIn != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIn));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("in cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIn));
+                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -415,7 +407,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setIn(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
                                               
                                         reader.next();
                                     

@@ -91,6 +91,17 @@
                         
                                     protected java.lang.String localConfindentialityLevel ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localConfindentialityLevelTracker = false ;
+
+                           public boolean isConfindentialityLevelSpecified(){
+                               return localConfindentialityLevelTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +118,8 @@
                                * @param param ConfindentialityLevel
                                */
                                public void setConfindentialityLevel(java.lang.String param){
-                            
+                            localConfindentialityLevelTracker = param != null;
+                                   
                                             this.localConfindentialityLevel=param;
                                     
 
@@ -211,6 +223,17 @@
                         
                                     protected java.util.Calendar localCreationDate ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCreationDateTracker = false ;
+
+                           public boolean isCreationDateSpecified(){
+                               return localCreationDateTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -227,7 +250,8 @@
                                * @param param CreationDate
                                */
                                public void setCreationDate(java.util.Calendar param){
-                            
+                            localCreationDateTracker = param != null;
+                                   
                                             this.localCreationDate=param;
                                     
 
@@ -266,33 +290,83 @@
 
                         /**
                         * field for DocumentLog
+                        * This was an Array!
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.DocumentLog localDocumentLog ;
+                                    protected ch.bfh.www.ehrservices.DocumentLog[] localDocumentLog ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localDocumentLogTracker = false ;
+
+                           public boolean isDocumentLogSpecified(){
+                               return localDocumentLogTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.DocumentLog
+                           * @return ch.bfh.www.ehrservices.DocumentLog[]
                            */
-                           public  ch.bfh.www.ehrservices.DocumentLog getDocumentLog(){
+                           public  ch.bfh.www.ehrservices.DocumentLog[] getDocumentLog(){
                                return localDocumentLog;
                            }
 
                            
                         
-                            /**
-                               * Auto generated setter method
-                               * @param param DocumentLog
-                               */
-                               public void setDocumentLog(ch.bfh.www.ehrservices.DocumentLog param){
-                            
-                                            this.localDocumentLog=param;
-                                    
 
-                               }
+
+                               
+                              /**
+                               * validate the array for DocumentLog
+                               */
+                              protected void validateDocumentLog(ch.bfh.www.ehrservices.DocumentLog[] param){
+                             
+                              }
+
+
+                             /**
+                              * Auto generated setter method
+                              * @param param DocumentLog
+                              */
+                              public void setDocumentLog(ch.bfh.www.ehrservices.DocumentLog[] param){
+                              
+                                   validateDocumentLog(param);
+
+                               localDocumentLogTracker = param != null;
+                                      
+                                      this.localDocumentLog=param;
+                              }
+
+                               
+                             
+                             /**
+                             * Auto generated add method for the array for convenience
+                             * @param param ch.bfh.www.ehrservices.DocumentLog
+                             */
+                             public void addDocumentLog(ch.bfh.www.ehrservices.DocumentLog param){
+                                   if (localDocumentLog == null){
+                                   localDocumentLog = new ch.bfh.www.ehrservices.DocumentLog[]{};
+                                   }
+
                             
+                                 //update the setting tracker
+                                localDocumentLogTracker = true;
+                            
+
+                               java.util.List list =
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localDocumentLog);
+                               list.add(param);
+                               this.localDocumentLog =
+                             (ch.bfh.www.ehrservices.DocumentLog[])list.toArray(
+                            new ch.bfh.www.ehrservices.DocumentLog[list.size()]);
+
+                             }
+                             
 
      
      
@@ -383,7 +457,7 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                              if (localConfindentialityLevelTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "confindentialityLevel", xmlWriter);
                              
@@ -401,7 +475,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                                             if (localOrganisation==null){
                                                  throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
                                             }
@@ -431,7 +505,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                              if (localCreationDateTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "creationDate", xmlWriter);
                              
@@ -449,7 +523,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                                     namespace = "";
                                     writeStartElement(null, namespace, "title", xmlWriter);
                              
@@ -467,13 +541,25 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
-                                            if (localDocumentLog==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("documentLog cannot be null!!");
+                              if (localDocumentLogTracker){
+                                       if (localDocumentLog!=null){
+                                            for (int i = 0;i < localDocumentLog.length;i++){
+                                                if (localDocumentLog[i] != null){
+                                                 localDocumentLog[i].serialize(new javax.xml.namespace.QName("","documentLog"),
+                                                           xmlWriter);
+                                                } else {
+                                                   
+                                                        // we don't have to do any thing since minOccures is zero
+                                                    
+                                                }
+
                                             }
-                                           localDocumentLog.serialize(new javax.xml.namespace.QName("","documentLog"),
-                                               xmlWriter);
+                                     } else {
                                         
+                                               throw new org.apache.axis2.databinding.ADBException("documentLog cannot be null!!");
+                                        
+                                    }
+                                 }
                     xmlWriter.writeEndElement();
                
 
@@ -673,7 +759,7 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDocumentRegisterID));
-                            
+                             if (localConfindentialityLevelTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "confindentialityLevel"));
                                  
@@ -682,7 +768,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("confindentialityLevel cannot be null!!");
                                         }
-                                    
+                                    }
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "organisation"));
                             
@@ -709,7 +795,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("uploadDate cannot be null!!");
                                         }
-                                    
+                                     if (localCreationDateTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "creationDate"));
                                  
@@ -718,7 +804,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("creationDate cannot be null!!");
                                         }
-                                    
+                                    }
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "title"));
                                  
@@ -727,16 +813,28 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("title cannot be null!!");
                                         }
-                                    
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "documentLog"));
-                            
-                            
-                                    if (localDocumentLog==null){
-                                         throw new org.apache.axis2.databinding.ADBException("documentLog cannot be null!!");
+                                     if (localDocumentLogTracker){
+                             if (localDocumentLog!=null) {
+                                 for (int i = 0;i < localDocumentLog.length;i++){
+
+                                    if (localDocumentLog[i] != null){
+                                         elementList.add(new javax.xml.namespace.QName("",
+                                                                          "documentLog"));
+                                         elementList.add(localDocumentLog[i]);
+                                    } else {
+                                        
+                                                // nothing to do
+                                            
                                     }
-                                    elementList.add(localDocumentLog);
-                                
+
+                                 }
+                             } else {
+                                 
+                                        throw new org.apache.axis2.databinding.ADBException("documentLog cannot be null!!");
+                                    
+                             }
+
+                        }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -812,6 +910,8 @@
                     
                     reader.next();
                 
+                        java.util.ArrayList list9 = new java.util.ArrayList();
+                    
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -882,11 +982,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -964,11 +1063,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -999,17 +1097,47 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","documentLog").equals(reader.getName())){
                                 
-                                                object.setDocumentLog(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
-                                              
-                                        reader.next();
                                     
+                                    
+                                    // Process the array and step past its final element's end.
+                                    list9.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
+                                                                
+                                                        //loop until we find a start element that is not part of this array
+                                                        boolean loopDone9 = false;
+                                                        while(!loopDone9){
+                                                            // We should be at the end element, but make sure
+                                                            while (!reader.isEndElement())
+                                                                reader.next();
+                                                            // Step out of this element
+                                                            reader.next();
+                                                            // Step to next element event.
+                                                            while (!reader.isStartElement() && !reader.isEndElement())
+                                                                reader.next();
+                                                            if (reader.isEndElement()){
+                                                                //two continuous end elements means we are exiting the xml structure
+                                                                loopDone9 = true;
+                                                            } else {
+                                                                if (new javax.xml.namespace.QName("","documentLog").equals(reader.getName())){
+                                                                    list9.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
+                                                                        
+                                                                }else{
+                                                                    loopDone9 = true;
+                                                                }
+                                                            }
+                                                        }
+                                                        // call the converter utility  to convert and set the array
+                                                        
+                                                        object.setDocumentLog((ch.bfh.www.ehrservices.DocumentLog[])
+                                                            org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                                                                ch.bfh.www.ehrservices.DocumentLog.class,
+                                                                list9));
+                                                            
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

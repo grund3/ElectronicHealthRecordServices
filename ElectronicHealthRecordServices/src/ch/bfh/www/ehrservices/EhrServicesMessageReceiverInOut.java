@@ -170,193 +170,231 @@
                                                     "getBlacklistByPatientId"));
                                     } else 
 
+            if("getRoles".equals(methodName)){
+                
+                ch.bfh.www.ehrservices.GetRolesResponse getRolesResponse15 = null;
+	                        ch.bfh.www.ehrservices.GetRoles wrappedParam =
+                                                             (ch.bfh.www.ehrservices.GetRoles)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    ch.bfh.www.ehrservices.GetRoles.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               getRolesResponse15 =
+                                                   
+                                                   
+                                                         skel.getRoles(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getRolesResponse15, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                                    "getRoles"));
+                                    } else 
+
             if("setSpecialPermission".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermissionResponse15 = null;
+                ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermissionResponse17 = null;
 	                        ch.bfh.www.ehrservices.SetSpecialPermission wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetSpecialPermission)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetSpecialPermission.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setSpecialPermissionResponse15 =
+                                               setSpecialPermissionResponse17 =
                                                    
                                                    
                                                          skel.setSpecialPermission(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setSpecialPermissionResponse15, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setSpecialPermissionResponse17, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setSpecialPermission"));
                                     } else 
 
             if("setHpOnBlacklist".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetHpOnBlacklistResponse setHpOnBlacklistResponse17 = null;
+                ch.bfh.www.ehrservices.SetHpOnBlacklistResponse setHpOnBlacklistResponse19 = null;
 	                        ch.bfh.www.ehrservices.SetHpOnBlacklist wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetHpOnBlacklist)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetHpOnBlacklist.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setHpOnBlacklistResponse17 =
+                                               setHpOnBlacklistResponse19 =
                                                    
                                                    
                                                          skel.setHpOnBlacklist(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setHpOnBlacklistResponse17, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setHpOnBlacklistResponse19, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setHpOnBlacklist"));
                                     } else 
 
             if("getHPByPatientAndRole".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRoleResponse19 = null;
+                ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRoleResponse21 = null;
 	                        ch.bfh.www.ehrservices.GetHPByPatientAndRole wrappedParam =
                                                              (ch.bfh.www.ehrservices.GetHPByPatientAndRole)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.GetHPByPatientAndRole.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getHPByPatientAndRoleResponse19 =
+                                               getHPByPatientAndRoleResponse21 =
                                                    
                                                    
                                                          skel.getHPByPatientAndRole(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getHPByPatientAndRoleResponse19, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getHPByPatientAndRoleResponse21, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "getHPByPatientAndRole"));
                                     } else 
 
             if("setPermissionMatrixForPatient".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetPermissionMatrixForPatientResponse setPermissionMatrixForPatientResponse21 = null;
+                ch.bfh.www.ehrservices.SetPermissionMatrixForPatientResponse setPermissionMatrixForPatientResponse23 = null;
 	                        ch.bfh.www.ehrservices.SetPermissionMatrixForPatient wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetPermissionMatrixForPatient)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetPermissionMatrixForPatient.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setPermissionMatrixForPatientResponse21 =
+                                               setPermissionMatrixForPatientResponse23 =
                                                    
                                                    
                                                          skel.setPermissionMatrixForPatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setPermissionMatrixForPatientResponse21, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setPermissionMatrixForPatientResponse23, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setPermissionMatrixForPatient"));
                                     } else 
 
             if("setWhitelist".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetWhitelistResponse setWhitelistResponse23 = null;
+                ch.bfh.www.ehrservices.SetWhitelistResponse setWhitelistResponse25 = null;
 	                        ch.bfh.www.ehrservices.SetWhitelist wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetWhitelist)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetWhitelist.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setWhitelistResponse23 =
+                                               setWhitelistResponse25 =
                                                    
                                                    
                                                          skel.setWhitelist(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setWhitelistResponse23, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setWhitelistResponse25, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setWhitelist"));
+                                    } else 
+
+            if("getConfidentialityLevels".equals(methodName)){
+                
+                ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevelsResponse27 = null;
+	                        ch.bfh.www.ehrservices.GetConfidentialityLevels wrappedParam =
+                                                             (ch.bfh.www.ehrservices.GetConfidentialityLevels)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    ch.bfh.www.ehrservices.GetConfidentialityLevels.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               getConfidentialityLevelsResponse27 =
+                                                   
+                                                   
+                                                         skel.getConfidentialityLevels(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getConfidentialityLevelsResponse27, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                                    "getConfidentialityLevels"));
                                     } else 
 
             if("getWhitelistByPatientId".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientIdResponse25 = null;
+                ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientIdResponse29 = null;
 	                        ch.bfh.www.ehrservices.GetWhitelistByPatientId wrappedParam =
                                                              (ch.bfh.www.ehrservices.GetWhitelistByPatientId)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.GetWhitelistByPatientId.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getWhitelistByPatientIdResponse25 =
+                                               getWhitelistByPatientIdResponse29 =
                                                    
                                                    
                                                          skel.getWhitelistByPatientId(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWhitelistByPatientIdResponse25, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWhitelistByPatientIdResponse29, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "getWhitelistByPatientId"));
                                     } else 
 
             if("getCurrentPermissionMatrixByPatientId".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientIdResponse27 = null;
+                ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientIdResponse31 = null;
 	                        ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId wrappedParam =
                                                              (ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getCurrentPermissionMatrixByPatientIdResponse27 =
+                                               getCurrentPermissionMatrixByPatientIdResponse31 =
                                                    
                                                    
                                                          skel.getCurrentPermissionMatrixByPatientId(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCurrentPermissionMatrixByPatientIdResponse27, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCurrentPermissionMatrixByPatientIdResponse31, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "getCurrentPermissionMatrixByPatientId"));
                                     } else 
 
             if("setHPRole".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetHPRoleResponse setHPRoleResponse29 = null;
+                ch.bfh.www.ehrservices.SetHPRoleResponse setHPRoleResponse33 = null;
 	                        ch.bfh.www.ehrservices.SetHPRole wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetHPRole)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetHPRole.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setHPRoleResponse29 =
+                                               setHPRoleResponse33 =
                                                    
                                                    
                                                          skel.setHPRole(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setHPRoleResponse29, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setHPRoleResponse33, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setHPRole"));
                                     } else 
 
             if("getAllDocumentsByPatientId".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientIdResponse31 = null;
+                ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientIdResponse35 = null;
 	                        ch.bfh.www.ehrservices.GetAllDocumentsByPatientId wrappedParam =
                                                              (ch.bfh.www.ehrservices.GetAllDocumentsByPatientId)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.GetAllDocumentsByPatientId.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getAllDocumentsByPatientIdResponse31 =
+                                               getAllDocumentsByPatientIdResponse35 =
                                                    
                                                    
                                                          skel.getAllDocumentsByPatientId(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllDocumentsByPatientIdResponse31, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllDocumentsByPatientIdResponse35, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "getAllDocumentsByPatientId"));
                                     } else 
 
             if("setConfidentiality".equals(methodName)){
                 
-                ch.bfh.www.ehrservices.SetConfidentialityResponse setConfidentialityResponse33 = null;
+                ch.bfh.www.ehrservices.SetConfidentialityResponse setConfidentialityResponse37 = null;
 	                        ch.bfh.www.ehrservices.SetConfidentiality wrappedParam =
                                                              (ch.bfh.www.ehrservices.SetConfidentiality)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     ch.bfh.www.ehrservices.SetConfidentiality.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               setConfidentialityResponse33 =
+                                               setConfidentialityResponse37 =
                                                    
                                                    
                                                          skel.setConfidentiality(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), setConfidentialityResponse33, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), setConfidentialityResponse37, false, new javax.xml.namespace.QName("http://www.bfh.ch/ehrServices/",
                                                     "setConfidentiality"));
                                     
             } else {
@@ -569,6 +607,20 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(ch.bfh.www.ehrservices.GetRoles param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(ch.bfh.www.ehrservices.GetRoles.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(ch.bfh.www.ehrservices.GetRolesResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -715,6 +767,20 @@
             
                         try{
                              return param.getOMElement(ch.bfh.www.ehrservices.SetWhitelistResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(ch.bfh.www.ehrservices.GetConfidentialityLevels param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(ch.bfh.www.ehrservices.GetConfidentialityLevels.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -1353,6 +1419,13 @@
 
                 }
            
+                if (ch.bfh.www.ehrservices.GetRoles.class.equals(type)){
+                
+                           return ch.bfh.www.ehrservices.GetRoles.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
                 if (ch.bfh.www.ehrservices.GetRolesResponse.class.equals(type)){
                 
                            return ch.bfh.www.ehrservices.GetRolesResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
@@ -1426,6 +1499,13 @@
                 if (ch.bfh.www.ehrservices.SetWhitelistResponse.class.equals(type)){
                 
                            return ch.bfh.www.ehrservices.SetWhitelistResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (ch.bfh.www.ehrservices.GetConfidentialityLevels.class.equals(type)){
+                
+                           return ch.bfh.www.ehrservices.GetConfidentialityLevels.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

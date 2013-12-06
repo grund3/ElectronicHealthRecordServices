@@ -34,9 +34,9 @@
             <actionMapping>http://www.bfh.ch/ehrServices/getBlacklistByPatientId</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getBlacklistByPatientIdResponse</outputActionMapping>
         </operation>
-        <operation name="getRoles" mep="http://www.w3.org/ns/wsdl/out-only" namespace="http://www.bfh.ch/ehrServices/">
+        <operation name="getRoles" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getRoles</actionMapping>
-            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getRoles</outputActionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getRolesResponse</outputActionMapping>
         </operation>
         <operation name="setSpecialPermission" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/setSpecialPermission</actionMapping>
@@ -58,9 +58,9 @@
             <actionMapping>http://www.bfh.ch/ehrServices/setWhitelist</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setWhitelistResponse</outputActionMapping>
         </operation>
-        <operation name="getConfidentialityLevels" mep="http://www.w3.org/ns/wsdl/out-only" namespace="http://www.bfh.ch/ehrServices/">
+        <operation name="getConfidentialityLevels" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getConfidentialityLevels</actionMapping>
-            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getConfidentialityLevels</outputActionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getConfidentialityLevelsResponse</outputActionMapping>
         </operation>
         <operation name="getWhitelistByPatientId" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getWhitelistByPatientId</actionMapping>

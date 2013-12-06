@@ -6,11 +6,11 @@
  */
 package ch.bfh.www.ehrservices;
 
-import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.persistence.Query;
 
-import ch.bfh.www.ehrservices.entities.Role;
 import ch.bfh.www.util.Utility;
 
 /**
@@ -100,22 +100,38 @@ public class EhrServicesSkeleton {
 		String username = getLogin.getUsername();
 		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
 		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
+		
 		ch.bfh.www.ehrservices.Patient patient = new ch.bfh.www.ehrservices.Patient();
 		patient.setMPI(user.getMpi());
-		patient.setPatientID(String.valueOf(user.getId()));
+		patient.setPatientID(user.getId());
 		patient.setUsername(user.getUsername());
+		patient.setPassword(user.getPassword());
+		patient.setLanguage(user.getLanguage());
 		
 		ch.bfh.www.ehrservices.Person person = new ch.bfh.www.ehrservices.Person();
-		person.setAddress(patient.getPerson().getAddress());
-		person.setBirthdate(patient.getPerson().getBirthdate());
-		person.setEmail(patient.getPerson().getEmail());
-		person.setFirstname(patient.getPerson().getFirstname());
+		ch.bfh.www.ehrservices.Address address = new ch.bfh.www.ehrservices.Address();
+		address.setAddress(user.getPerson().getAddress().getAddress());
+		address.setCanton(user.getPerson().getAddress().getCanton());
+		address.setCountry(user.getPerson().getAddress().getCountry());
+		address.setMunicipality(user.getPerson().getAddress().getMunicipality());
+		address.setPostalcode(user.getPerson().getAddress().getPostalcode());		
+		person.setAddress(address);
+		
+		person.setTitle(user.getPerson().getTitle());
+		person.setName(user.getPerson().getName());
+		person.setGender(user.getPerson().getGender());
+		person.setMobile(user.getPerson().getMobile());
+		person.setPhone(user.getPerson().getPhone());
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(user.getPerson().getBirthdate());
+		person.setBirthdate(cal);
+		person.setEmail(user.getPerson().getEmail());
+		person.setFirstname(user.getPerson().getFirstname());
 		patient.setPerson(person);
 		
 		GetLoginResponse response = new GetLoginResponse();
-		response.setOut(patient);
+		response.setPatient(patient);
 		return response;
-		
 	}
 
 	/**
@@ -135,12 +151,14 @@ public class EhrServicesSkeleton {
 	/**
 	 * Auto generated method signature
 	 * 
+	 * @param getRoles
 	 * @return getRolesResponse
 	 */
 
-	public ch.bfh.www.ehrservices.GetRolesResponse getRoles() {
+	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
+			ch.bfh.www.ehrservices.GetRoles getRoles) {
 		Query query = Utility.getEM().createQuery("SELECT r From Role r");
-		ArrayList<ch.bfh.www.ehrservices.entities.Role> dbRoles = (ArrayList<Role>) query.getResultList();
+		List<ch.bfh.www.ehrservices.entities.Role> dbRoles = query.getResultList();
 		
 		GetRolesResponse response = new GetRolesResponse();
 		for(ch.bfh.www.ehrservices.entities.Role role : dbRoles) {
@@ -226,12 +244,12 @@ public class EhrServicesSkeleton {
 	/**
 	 * Auto generated method signature
 	 * 
+	 * @param getConfidentialityLevels
 	 * @return getConfidentialityLevelsResponse
 	 */
 
 	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
-
-	) {
+			ch.bfh.www.ehrservices.GetConfidentialityLevels getConfidentialityLevels) {
 		// TODO : fill this with the necessary business logic
 		throw new java.lang.UnsupportedOperationException("Please implement "
 				+ this.getClass().getName() + "#getConfidentialityLevels");

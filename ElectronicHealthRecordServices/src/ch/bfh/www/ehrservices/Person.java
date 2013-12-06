@@ -61,6 +61,17 @@
                         
                                     protected java.lang.String localTitle ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localTitleTracker = false ;
+
+                           public boolean isTitleSpecified(){
+                               return localTitleTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -77,7 +88,8 @@
                                * @param param Title
                                */
                                public void setTitle(java.lang.String param){
-                            
+                            localTitleTracker = param != null;
+                                   
                                             this.localTitle=param;
                                     
 
@@ -91,6 +103,17 @@
                         
                                     protected java.lang.String localName ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localNameTracker = false ;
+
+                           public boolean isNameSpecified(){
+                               return localNameTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +130,8 @@
                                * @param param Name
                                */
                                public void setName(java.lang.String param){
-                            
+                            localNameTracker = param != null;
+                                   
                                             this.localName=param;
                                     
 
@@ -121,6 +145,17 @@
                         
                                     protected java.lang.String localFirstname ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localFirstnameTracker = false ;
+
+                           public boolean isFirstnameSpecified(){
+                               return localFirstnameTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -137,7 +172,8 @@
                                * @param param Firstname
                                */
                                public void setFirstname(java.lang.String param){
-                            
+                            localFirstnameTracker = param != null;
+                                   
                                             this.localFirstname=param;
                                     
 
@@ -151,6 +187,17 @@
                         
                                     protected java.util.Calendar localBirthdate ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localBirthdateTracker = false ;
+
+                           public boolean isBirthdateSpecified(){
+                               return localBirthdateTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -167,7 +214,8 @@
                                * @param param Birthdate
                                */
                                public void setBirthdate(java.util.Calendar param){
-                            
+                            localBirthdateTracker = param != null;
+                                   
                                             this.localBirthdate=param;
                                     
 
@@ -181,6 +229,17 @@
                         
                                     protected java.lang.String localGender ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localGenderTracker = false ;
+
+                           public boolean isGenderSpecified(){
+                               return localGenderTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -197,7 +256,8 @@
                                * @param param Gender
                                */
                                public void setGender(java.lang.String param){
-                            
+                            localGenderTracker = param != null;
+                                   
                                             this.localGender=param;
                                     
 
@@ -211,6 +271,17 @@
                         
                                     protected int localPhone ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPhoneTracker = false ;
+
+                           public boolean isPhoneSpecified(){
+                               return localPhoneTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -228,6 +299,10 @@
                                */
                                public void setPhone(int param){
                             
+                                       // setting primitive attribute tracker to true
+                                       localPhoneTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
+                                   
                                             this.localPhone=param;
                                     
 
@@ -241,6 +316,17 @@
                         
                                     protected int localMobile ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localMobileTracker = false ;
+
+                           public boolean isMobileSpecified(){
+                               return localMobileTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -258,6 +344,10 @@
                                */
                                public void setMobile(int param){
                             
+                                       // setting primitive attribute tracker to true
+                                       localMobileTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
+                                   
                                             this.localMobile=param;
                                     
 
@@ -271,6 +361,17 @@
                         
                                     protected java.lang.String localEmail ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localEmailTracker = false ;
+
+                           public boolean isEmailSpecified(){
+                               return localEmailTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -287,7 +388,8 @@
                                * @param param Email
                                */
                                public void setEmail(java.lang.String param){
-                            
+                            localEmailTracker = param != null;
+                                   
                                             this.localEmail=param;
                                     
 
@@ -358,7 +460,7 @@
                                             }
                                            localAddress.serialize(new javax.xml.namespace.QName("","address"),
                                                xmlWriter);
-                                        
+                                         if (localTitleTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "title", xmlWriter);
                              
@@ -376,7 +478,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localNameTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "name", xmlWriter);
                              
@@ -394,7 +496,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localFirstnameTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "firstname", xmlWriter);
                              
@@ -412,7 +514,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localBirthdateTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "birthdate", xmlWriter);
                              
@@ -430,7 +532,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localGenderTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "gender", xmlWriter);
                              
@@ -448,7 +550,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localPhoneTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "phone", xmlWriter);
                              
@@ -461,7 +563,7 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localMobileTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "mobile", xmlWriter);
                              
@@ -474,7 +576,7 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localEmailTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "email", xmlWriter);
                              
@@ -492,7 +594,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -686,7 +788,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("address cannot be null!!");
                                     }
                                     elementList.add(localAddress);
-                                
+                                 if (localTitleTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "title"));
                                  
@@ -695,7 +797,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("title cannot be null!!");
                                         }
-                                    
+                                    } if (localNameTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "name"));
                                  
@@ -704,7 +806,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("name cannot be null!!");
                                         }
-                                    
+                                    } if (localFirstnameTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "firstname"));
                                  
@@ -713,7 +815,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("firstname cannot be null!!");
                                         }
-                                    
+                                    } if (localBirthdateTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "birthdate"));
                                  
@@ -722,7 +824,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("birthdate cannot be null!!");
                                         }
-                                    
+                                    } if (localGenderTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "gender"));
                                  
@@ -731,19 +833,19 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("gender cannot be null!!");
                                         }
-                                    
+                                    } if (localPhoneTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "phone"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPhone));
-                            
+                            } if (localMobileTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "mobile"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMobile));
-                            
+                            } if (localEmailTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "email"));
                                  
@@ -752,7 +854,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("email cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -864,11 +966,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -889,11 +990,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -914,11 +1014,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -939,11 +1038,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -964,11 +1062,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -989,11 +1086,12 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                               object.setPhone(java.lang.Integer.MIN_VALUE);
+                                           
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -1014,11 +1112,12 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                               object.setMobile(java.lang.Integer.MIN_VALUE);
+                                           
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -1039,11 +1138,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

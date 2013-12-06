@@ -31,6 +31,17 @@
                         
                                     protected java.lang.String localAddress ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localAddressTracker = false ;
+
+                           public boolean isAddressSpecified(){
+                               return localAddressTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -47,7 +58,8 @@
                                * @param param Address
                                */
                                public void setAddress(java.lang.String param){
-                            
+                            localAddressTracker = param != null;
+                                   
                                             this.localAddress=param;
                                     
 
@@ -61,6 +73,17 @@
                         
                                     protected int localPostalcode ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPostalcodeTracker = false ;
+
+                           public boolean isPostalcodeSpecified(){
+                               return localPostalcodeTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -78,6 +101,10 @@
                                */
                                public void setPostalcode(int param){
                             
+                                       // setting primitive attribute tracker to true
+                                       localPostalcodeTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
+                                   
                                             this.localPostalcode=param;
                                     
 
@@ -91,6 +118,17 @@
                         
                                     protected java.lang.String localMunicipality ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localMunicipalityTracker = false ;
+
+                           public boolean isMunicipalitySpecified(){
+                               return localMunicipalityTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +145,8 @@
                                * @param param Municipality
                                */
                                public void setMunicipality(java.lang.String param){
-                            
+                            localMunicipalityTracker = param != null;
+                                   
                                             this.localMunicipality=param;
                                     
 
@@ -121,6 +160,17 @@
                         
                                     protected java.lang.String localCanton ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCantonTracker = false ;
+
+                           public boolean isCantonSpecified(){
+                               return localCantonTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -137,7 +187,8 @@
                                * @param param Canton
                                */
                                public void setCanton(java.lang.String param){
-                            
+                            localCantonTracker = param != null;
+                                   
                                             this.localCanton=param;
                                     
 
@@ -151,6 +202,17 @@
                         
                                     protected java.lang.String localCountry ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCountryTracker = false ;
+
+                           public boolean isCountrySpecified(){
+                               return localCountryTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -167,7 +229,8 @@
                                * @param param Country
                                */
                                public void setCountry(java.lang.String param){
-                            
+                            localCountryTracker = param != null;
+                                   
                                             this.localCountry=param;
                                     
 
@@ -232,7 +295,7 @@
 
                
                    }
-               
+                if (localAddressTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "address", xmlWriter);
                              
@@ -250,7 +313,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localPostalcodeTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "postalcode", xmlWriter);
                              
@@ -263,7 +326,7 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localMunicipalityTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "municipality", xmlWriter);
                              
@@ -281,7 +344,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localCantonTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "canton", xmlWriter);
                              
@@ -299,7 +362,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localCountryTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "country", xmlWriter);
                              
@@ -317,7 +380,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -502,7 +565,7 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (localAddressTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "address"));
                                  
@@ -511,13 +574,13 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("address cannot be null!!");
                                         }
-                                    
+                                    } if (localPostalcodeTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "postalcode"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPostalcode));
-                            
+                            } if (localMunicipalityTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "municipality"));
                                  
@@ -526,7 +589,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("municipality cannot be null!!");
                                         }
-                                    
+                                    } if (localCantonTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "canton"));
                                  
@@ -535,7 +598,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("canton cannot be null!!");
                                         }
-                                    
+                                    } if (localCountryTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "country"));
                                  
@@ -544,7 +607,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("country cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -640,11 +703,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -665,11 +727,12 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                               object.setPostalcode(java.lang.Integer.MIN_VALUE);
+                                           
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -690,11 +753,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -715,11 +777,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -740,11 +801,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

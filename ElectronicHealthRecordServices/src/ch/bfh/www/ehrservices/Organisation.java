@@ -91,6 +91,17 @@
                         
                                     protected ch.bfh.www.ehrservices.Organisation localParent ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localParentTracker = false ;
+
+                           public boolean isParentSpecified(){
+                               return localParentTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +118,8 @@
                                * @param param Parent
                                */
                                public void setParent(ch.bfh.www.ehrservices.Organisation param){
-                            
+                            localParentTracker = param != null;
+                                   
                                             this.localParent=param;
                                     
 
@@ -181,6 +193,17 @@
                         
                                     protected java.lang.String localUrl ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localUrlTracker = false ;
+
+                           public boolean isUrlSpecified(){
+                               return localUrlTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -197,7 +220,8 @@
                                * @param param Url
                                */
                                public void setUrl(java.lang.String param){
-                            
+                            localUrlTracker = param != null;
+                                   
                                             this.localUrl=param;
                                     
 
@@ -281,13 +305,13 @@
                                             }
                                            localAddress.serialize(new javax.xml.namespace.QName("","address"),
                                                xmlWriter);
-                                        
+                                         if (localParentTracker){
                                             if (localParent==null){
                                                  throw new org.apache.axis2.databinding.ADBException("parent cannot be null!!");
                                             }
                                            localParent.serialize(new javax.xml.namespace.QName("","parent"),
                                                xmlWriter);
-                                        
+                                        }
                                     namespace = "";
                                     writeStartElement(null, namespace, "organisationType", xmlWriter);
                              
@@ -323,7 +347,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                              if (localUrlTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "url", xmlWriter);
                              
@@ -341,7 +365,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -541,7 +565,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("address cannot be null!!");
                                     }
                                     elementList.add(localAddress);
-                                
+                                 if (localParentTracker){
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "parent"));
                             
@@ -550,7 +574,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("parent cannot be null!!");
                                     }
                                     elementList.add(localParent);
-                                
+                                }
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "organisationType"));
                                  
@@ -568,7 +592,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("name cannot be null!!");
                                         }
-                                    
+                                     if (localUrlTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "url"));
                                  
@@ -577,7 +601,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("url cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -705,11 +729,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -780,11 +803,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

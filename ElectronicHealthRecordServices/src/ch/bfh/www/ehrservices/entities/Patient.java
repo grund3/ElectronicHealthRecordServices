@@ -1,7 +1,11 @@
 package ch.bfh.www.ehrservices.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import sun.net.ftp.FtpReplyCode;
+
 import java.util.List;
 
 

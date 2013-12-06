@@ -26,20 +26,20 @@
             
 
                         /**
-                        * field for Out
+                        * field for Patient
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Patient localOut ;
+                                    protected ch.bfh.www.ehrservices.Patient localPatient ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localOutTracker = false ;
+                           protected boolean localPatientTracker = false ;
 
-                           public boolean isOutSpecified(){
-                               return localOutTracker;
+                           public boolean isPatientSpecified(){
+                               return localPatientTracker;
                            }
 
                            
@@ -48,20 +48,20 @@
                            * Auto generated getter method
                            * @return ch.bfh.www.ehrservices.Patient
                            */
-                           public  ch.bfh.www.ehrservices.Patient getOut(){
-                               return localOut;
+                           public  ch.bfh.www.ehrservices.Patient getPatient(){
+                               return localPatient;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Out
+                               * @param param Patient
                                */
-                               public void setOut(ch.bfh.www.ehrservices.Patient param){
-                            localOutTracker = param != null;
+                               public void setPatient(ch.bfh.www.ehrservices.Patient param){
+                            localPatientTracker = param != null;
                                    
-                                            this.localOut=param;
+                                            this.localPatient=param;
                                     
 
                                }
@@ -125,11 +125,11 @@
 
                
                    }
-                if (localOutTracker){
-                                            if (localOut==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                if (localPatientTracker){
+                                            if (localPatient==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("patient cannot be null!!");
                                             }
-                                           localOut.serialize(new javax.xml.namespace.QName("","out"),
+                                           localPatient.serialize(new javax.xml.namespace.QName("","patient"),
                                                xmlWriter);
                                         }
                     xmlWriter.writeEndElement();
@@ -316,15 +316,15 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localOutTracker){
+                 if (localPatientTracker){
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "out"));
+                                                                      "patient"));
                             
                             
-                                    if (localOut==null){
-                                         throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                                    if (localPatient==null){
+                                         throw new org.apache.axis2.databinding.ADBException("patient cannot be null!!");
                                     }
-                                    elementList.add(localOut);
+                                    elementList.add(localPatient);
                                 }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -404,9 +404,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","out").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","patient").equals(reader.getName())){
                                 
-                                                object.setOut(ch.bfh.www.ehrservices.Patient.Factory.parse(reader));
+                                                object.setPatient(ch.bfh.www.ehrservices.Patient.Factory.parse(reader));
                                               
                                         reader.next();
                                     

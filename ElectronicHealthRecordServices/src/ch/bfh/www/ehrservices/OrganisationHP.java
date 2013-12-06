@@ -91,6 +91,17 @@
                         
                                     protected java.lang.String localHpType ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localHpTypeTracker = false ;
+
+                           public boolean isHpTypeSpecified(){
+                               return localHpTypeTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +118,8 @@
                                * @param param HpType
                                */
                                public void setHpType(java.lang.String param){
-                            
+                            localHpTypeTracker = param != null;
+                                   
                                             this.localHpType=param;
                                     
 
@@ -121,6 +133,17 @@
                         
                                     protected java.lang.String localZsr ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localZsrTracker = false ;
+
+                           public boolean isZsrSpecified(){
+                               return localZsrTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -137,7 +160,8 @@
                                * @param param Zsr
                                */
                                public void setZsr(java.lang.String param){
-                            
+                            localZsrTracker = param != null;
+                                   
                                             this.localZsr=param;
                                     
 
@@ -214,7 +238,7 @@
                                             }
                                            localOrganisation.serialize(new javax.xml.namespace.QName("","organisation"),
                                                xmlWriter);
-                                        
+                                         if (localHpTypeTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "hpType", xmlWriter);
                              
@@ -232,7 +256,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localZsrTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "zsr", xmlWriter);
                              
@@ -250,7 +274,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -453,7 +477,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
                                     }
                                     elementList.add(localOrganisation);
-                                
+                                 if (localHpTypeTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "hpType"));
                                  
@@ -462,7 +486,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("hpType cannot be null!!");
                                         }
-                                    
+                                    } if (localZsrTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "zsr"));
                                  
@@ -471,7 +495,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("zsr cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -599,11 +623,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -624,11 +647,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

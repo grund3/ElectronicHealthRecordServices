@@ -91,6 +91,17 @@
                         
                                     protected java.lang.String localQualitativeDignity ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localQualitativeDignityTracker = false ;
+
+                           public boolean isQualitativeDignitySpecified(){
+                               return localQualitativeDignityTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -107,7 +118,8 @@
                                * @param param QualitativeDignity
                                */
                                public void setQualitativeDignity(java.lang.String param){
-                            
+                            localQualitativeDignityTracker = param != null;
+                                   
                                             this.localQualitativeDignity=param;
                                     
 
@@ -121,6 +133,17 @@
                         
                                     protected java.lang.String localGln ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localGlnTracker = false ;
+
+                           public boolean isGlnSpecified(){
+                               return localGlnTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -137,7 +160,8 @@
                                * @param param Gln
                                */
                                public void setGln(java.lang.String param){
-                            
+                            localGlnTracker = param != null;
+                                   
                                             this.localGln=param;
                                     
 
@@ -151,6 +175,17 @@
                         
                                     protected java.lang.String localFmh ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localFmhTracker = false ;
+
+                           public boolean isFmhSpecified(){
+                               return localFmhTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -167,7 +202,8 @@
                                * @param param Fmh
                                */
                                public void setFmh(java.lang.String param){
-                            
+                            localFmhTracker = param != null;
+                                   
                                             this.localFmh=param;
                                     
 
@@ -181,6 +217,17 @@
                         
                                     protected java.lang.String localHpc ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localHpcTracker = false ;
+
+                           public boolean isHpcSpecified(){
+                               return localHpcTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -197,7 +244,8 @@
                                * @param param Hpc
                                */
                                public void setHpc(java.lang.String param){
-                            
+                            localHpcTracker = param != null;
+                                   
                                             this.localHpc=param;
                                     
 
@@ -281,7 +329,7 @@
                                             }
                                            localPerson.serialize(new javax.xml.namespace.QName("","person"),
                                                xmlWriter);
-                                        
+                                         if (localQualitativeDignityTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "qualitativeDignity", xmlWriter);
                              
@@ -299,7 +347,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localGlnTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "gln", xmlWriter);
                              
@@ -317,7 +365,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localFmhTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "fmh", xmlWriter);
                              
@@ -335,7 +383,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             } if (localHpcTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "hpc", xmlWriter);
                              
@@ -353,7 +401,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -553,7 +601,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("person cannot be null!!");
                                     }
                                     elementList.add(localPerson);
-                                
+                                 if (localQualitativeDignityTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "qualitativeDignity"));
                                  
@@ -562,7 +610,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("qualitativeDignity cannot be null!!");
                                         }
-                                    
+                                    } if (localGlnTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "gln"));
                                  
@@ -571,7 +619,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("gln cannot be null!!");
                                         }
-                                    
+                                    } if (localFmhTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "fmh"));
                                  
@@ -580,7 +628,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("fmh cannot be null!!");
                                         }
-                                    
+                                    } if (localHpcTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "hpc"));
                                  
@@ -589,7 +637,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("hpc cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -726,11 +774,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -751,11 +798,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -776,11 +822,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -801,11 +846,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
