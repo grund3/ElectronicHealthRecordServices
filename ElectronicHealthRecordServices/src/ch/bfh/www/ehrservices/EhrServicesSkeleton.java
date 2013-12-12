@@ -6,11 +6,19 @@
  */
 package ch.bfh.www.ehrservices;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.activation.DataHandler;
 import javax.persistence.Query;
 
+import org.apache.axiom.attachments.ByteArrayDataSource;
+
+import ch.bfh.www.ehrservices.entities.Documentrepository;
 import ch.bfh.www.util.Utility;
 
 /**
@@ -47,17 +55,39 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns a document with the given id
 	 * 
-	 * @param getDocumentById
-	 * @return getDocumentByIdResponse
+	 * @param int id of the document
+	 * @return blob file
 	 */
 
 	public ch.bfh.www.ehrservices.GetDocumentByIdResponse getDocumentById(
 			ch.bfh.www.ehrservices.GetDocumentById getDocumentById) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getDocumentById");
+		Query query = Utility.getEM().createQuery("SELECT d From Documentrepository d WHERE d.id = "+ getDocumentById.getDocumentID());
+		ch.bfh.www.ehrservices.entities.Documentrepository dbDocument = (Documentrepository) query.getSingleResult();
+		
+		// Create DocumentRepository object and add it to the response object
+		GetDocumentByIdResponse response = new GetDocumentByIdResponse();
+		// The file from the db is a byte array. The response needs a data handler object.
+		// So we have to add the byte array over a file object into a data handler object.
+		DataHandler dh = null;
+		try {
+			File outFile = new File("");              
+			ByteArrayDataSource dataSource = new ByteArrayDataSource(dbDocument.getDocument()); 
+			dh = new DataHandler(dataSource);              
+			FileOutputStream fileOutputStream = new FileOutputStream(outFile);               
+			dh.writeTo(fileOutputStream);             
+			fileOutputStream.flush();              
+			fileOutputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+		
+		response.setDocument(dh);
+		
+		return response;
 	}
 
 	/**
@@ -89,10 +119,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Login method. Gets Patient by given username and related Person and Address.
 	 * 
-	 * @param getLogin
-	 * @return getLoginResponse
+	 * @param String Username
+	 * @return Patient => Person => Address objects
 	 */
 
 	public ch.bfh.www.ehrservices.GetLoginResponse getLogin(
@@ -101,6 +131,7 @@ public class EhrServicesSkeleton {
 		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
 		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
 		
+		// Create Patient object
 		ch.bfh.www.ehrservices.Patient patient = new ch.bfh.www.ehrservices.Patient();
 		patient.setMPI(user.getMpi());
 		patient.setPatientID(user.getId());
@@ -108,29 +139,13 @@ public class EhrServicesSkeleton {
 		patient.setPassword(user.getPassword());
 		patient.setLanguage(user.getLanguage());
 		
-		ch.bfh.www.ehrservices.Person person = new ch.bfh.www.ehrservices.Person();
-		ch.bfh.www.ehrservices.Address address = new ch.bfh.www.ehrservices.Address();
-		address.setAddress(user.getPerson().getAddress().getAddress());
-		address.setCanton(user.getPerson().getAddress().getCanton());
-		address.setCountry(user.getPerson().getAddress().getCountry());
-		address.setMunicipality(user.getPerson().getAddress().getMunicipality());
-		address.setPostalcode(user.getPerson().getAddress().getPostalcode());		
-		person.setAddress(address);
+		// create address and person object
+		patient.setPerson(Utility.createPersonWithAddressHelper(user.getPerson()));
 		
-		person.setTitle(user.getPerson().getTitle());
-		person.setName(user.getPerson().getName());
-		person.setGender(user.getPerson().getGender());
-		person.setMobile(user.getPerson().getMobile());
-		person.setPhone(user.getPerson().getPhone());
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(user.getPerson().getBirthdate());
-		person.setBirthdate(cal);
-		person.setEmail(user.getPerson().getEmail());
-		person.setFirstname(user.getPerson().getFirstname());
-		patient.setPerson(person);
-		
+		// Create Response
 		GetLoginResponse response = new GetLoginResponse();
 		response.setPatient(patient);
+		
 		return response;
 	}
 
@@ -149,10 +164,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns all Roles 
 	 * 
-	 * @param getRoles
-	 * @return getRolesResponse
+	 * @param boolean (doesn't' matter)
+	 * @return Array with Roles
 	 */
 
 	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
@@ -160,6 +175,7 @@ public class EhrServicesSkeleton {
 		Query query = Utility.getEM().createQuery("SELECT r From Role r");
 		List<ch.bfh.www.ehrservices.entities.Role> dbRoles = query.getResultList();
 		
+		// Create Role objects and add them to the array in the response object
 		GetRolesResponse response = new GetRolesResponse();
 		for(ch.bfh.www.ehrservices.entities.Role role : dbRoles) {
 			ch.bfh.www.ehrservices.Role newRole = new ch.bfh.www.ehrservices.Role();
@@ -242,17 +258,27 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns all confidentiality levels 
 	 * 
-	 * @param getConfidentialityLevels
-	 * @return getConfidentialityLevelsResponse
+	 * @param boolean (doesn't matter)
+	 * @return array with confidentiality levels
 	 */
 
 	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
 			ch.bfh.www.ehrservices.GetConfidentialityLevels getConfidentialityLevels) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getConfidentialityLevels");
+		Query query = Utility.getEM().createQuery("SELECT c From Confidentialitylevel c");
+		List<ch.bfh.www.ehrservices.entities.Confidentialitylevel> dbConfLevels = query.getResultList();
+		
+		// Create confidentiality level objects and add them to the array in the response object
+		GetConfidentialityLevelsResponse response = new GetConfidentialityLevelsResponse();
+		for(ch.bfh.www.ehrservices.entities.Confidentialitylevel confLevel : dbConfLevels) {
+			ch.bfh.www.ehrservices.ConfidentialyLevel newConfLevel = new ch.bfh.www.ehrservices.ConfidentialyLevel();
+			newConfLevel.setConfidentialyLevelID(confLevel.getId());
+			newConfLevel.setName(confLevel.getNameDe()); //TODO Mehrsprachig
+			response.addConfidentialyLevels(newConfLevel);
+		}
+		
+		return response;
 	}
 
 	/**
@@ -299,17 +325,60 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns the meta data and related data from a document by the given document id
 	 * 
-	 * @param getAllDocumentsByPatientId
-	 * @return getAllDocumentsByPatientIdResponse
+	 * @param int id
+	 * @return documentRegister 
+	 * 						- Organisation (1)
+	 * 						- HealthcareProfessional (1)
+	 * 							- Person => Address
+	 * 						- DocumentLog (*)
 	 */
 
 	public ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientId(
 			ch.bfh.www.ehrservices.GetAllDocumentsByPatientId getAllDocumentsByPatientId) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getAllDocumentsByPatientId");
+		Query query = Utility.getEM().createQuery("SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getAllDocumentsByPatientId.getPatientID());
+		List<ch.bfh.www.ehrservices.entities.Documentregister> dbDocs = query.getResultList();
+		
+		// Create document register objects and add them to the array in the response object
+		GetAllDocumentsByPatientIdResponse response = new GetAllDocumentsByPatientIdResponse();
+		for(ch.bfh.www.ehrservices.entities.Documentregister doc : dbDocs) {
+			ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
+
+			// create healthcare professional object
+			ch.bfh.www.ehrservices.HealthCareProfessional hp = new HealthCareProfessional();
+			hp.setHcpID(doc.getOrganisationhp().getHealthcareprofessional().getId());
+			hp.setFmh(doc.getOrganisationhp().getHealthcareprofessional().getFmh());
+			hp.setGln(doc.getOrganisationhp().getHealthcareprofessional().getGln());
+			hp.setHpc(doc.getOrganisationhp().getHealthcareprofessional().getHpc());
+			hp.setPerson(Utility.createPersonWithAddressHelper(doc.getOrganisationhp().getHealthcareprofessional().getPerson()));
+			hp.setQualitativeDignity(doc.getOrganisationhp().getHptype().getNameDe());
+			// TODO hier verbindung direkt auf HP und Org aber eigentlich noch über OrganisationHP.. zsr fehlt..
+			
+			// create organisation object
+			ch.bfh.www.ehrservices.Organisation org = new Organisation();
+			org.setOrganisationID(doc.getOrganisationhp().getOrganisation().getId());
+			org.setName(doc.getOrganisationhp().getOrganisation().getNameDe()); // TODO Mehrsprachigkeit
+			org.setOrganisationType(doc.getOrganisationhp().getOrganisation().getOrganisationtype().getNameDe());
+			org.setUrl(doc.getOrganisationhp().getOrganisation().getUrl());
+			org.setAddress(Utility.createAddressHelper(doc.getOrganisationhp().getOrganisation().getAddress()));
+			// TODO braucht es die Parents?
+			
+			// create document register object
+			newDoc.setDocumentRegisterID(doc.getId());			
+			newDoc.setConfindentialityLevel(doc.getConfidentialitylevel().getNameDe()); // TODO Mehrsprachigkeit
+			newDoc.setCreationDate(Utility.convertDateToCalendar(doc.getCreationDate()));
+			newDoc.setDocumentLog(null);//doc.getDocumentlogs()); TODO was muss da rein?!
+			newDoc.setDocumentType(doc.getDocumenttype().getName());
+			newDoc.setDocumentUploader(hp);
+			newDoc.setOrganisation(org);
+			newDoc.setTitle(doc.getTitle());
+			newDoc.setUploadDate(Utility.convertDateToCalendar(doc.getUploadDate()));
+			
+			response.addDocumentRegisterEntries(newDoc);
+		}
+		
+		return response;
 	}
 
 	/**
