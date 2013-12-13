@@ -127,48 +127,18 @@
                             
 
                         /**
-                        * field for Organisation
-                        */
-
-                        
-                                    protected ch.bfh.www.ehrservices.Organisation localOrganisation ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Organisation
-                           */
-                           public  ch.bfh.www.ehrservices.Organisation getOrganisation(){
-                               return localOrganisation;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Organisation
-                               */
-                               public void setOrganisation(ch.bfh.www.ehrservices.Organisation param){
-                            
-                                            this.localOrganisation=param;
-                                    
-
-                               }
-                            
-
-                        /**
                         * field for DocumentUploader
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.HealthCareProfessional localDocumentUploader ;
+                                    protected ch.bfh.www.ehrservices.OrganisationHP localDocumentUploader ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.HealthCareProfessional
+                           * @return ch.bfh.www.ehrservices.OrganisationHP
                            */
-                           public  ch.bfh.www.ehrservices.HealthCareProfessional getDocumentUploader(){
+                           public  ch.bfh.www.ehrservices.OrganisationHP getDocumentUploader(){
                                return localDocumentUploader;
                            }
 
@@ -178,7 +148,7 @@
                                * Auto generated setter method
                                * @param param DocumentUploader
                                */
-                               public void setDocumentUploader(ch.bfh.www.ehrservices.HealthCareProfessional param){
+                               public void setDocumentUploader(ch.bfh.www.ehrservices.OrganisationHP param){
                             
                                             this.localDocumentUploader=param;
                                     
@@ -476,12 +446,6 @@
                                     
                                    xmlWriter.writeEndElement();
                              }
-                                            if (localOrganisation==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
-                                            }
-                                           localOrganisation.serialize(new javax.xml.namespace.QName("","organisation"),
-                                               xmlWriter);
-                                        
                                             if (localDocumentUploader==null){
                                                  throw new org.apache.axis2.databinding.ADBException("documentUploader cannot be null!!");
                                             }
@@ -770,15 +734,6 @@
                                         }
                                     }
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "organisation"));
-                            
-                            
-                                    if (localOrganisation==null){
-                                         throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
-                                    }
-                                    elementList.add(localOrganisation);
-                                
-                            elementList.add(new javax.xml.namespace.QName("",
                                                                       "documentUploader"));
                             
                             
@@ -910,7 +865,7 @@
                     
                     reader.next();
                 
-                        java.util.ArrayList list9 = new java.util.ArrayList();
+                        java.util.ArrayList list8 = new java.util.ArrayList();
                     
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
@@ -989,25 +944,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","organisation").equals(reader.getName())){
-                                
-                                                object.setOrganisation(ch.bfh.www.ehrservices.Organisation.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","documentUploader").equals(reader.getName())){
                                 
-                                                object.setDocumentUploader(ch.bfh.www.ehrservices.HealthCareProfessional.Factory.parse(reader));
+                                                object.setDocumentUploader(ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader));
                                               
                                         reader.next();
                                     
@@ -1100,11 +1039,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list9.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
+                                    list8.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
-                                                        boolean loopDone9 = false;
-                                                        while(!loopDone9){
+                                                        boolean loopDone8 = false;
+                                                        while(!loopDone8){
                                                             // We should be at the end element, but make sure
                                                             while (!reader.isEndElement())
                                                                 reader.next();
@@ -1115,13 +1054,13 @@
                                                                 reader.next();
                                                             if (reader.isEndElement()){
                                                                 //two continuous end elements means we are exiting the xml structure
-                                                                loopDone9 = true;
+                                                                loopDone8 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","documentLog").equals(reader.getName())){
-                                                                    list9.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
+                                                                    list8.add(ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader));
                                                                         
                                                                 }else{
-                                                                    loopDone9 = true;
+                                                                    loopDone8 = true;
                                                                 }
                                                             }
                                                         }
@@ -1130,7 +1069,7 @@
                                                         object.setDocumentLog((ch.bfh.www.ehrservices.DocumentLog[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 ch.bfh.www.ehrservices.DocumentLog.class,
-                                                                list9));
+                                                                list8));
                                                             
                               }  // End of if for expected property start element
                                 

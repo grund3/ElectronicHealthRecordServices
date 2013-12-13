@@ -149,12 +149,9 @@
 					</xsd:element>
 					<xsd:element name="confindentialityLevel"
 						type="xsd:string" minOccurs="0" maxOccurs="1">
-					</xsd:element>
-					<xsd:element name="organisation"
-						type="bfh:Organisation" minOccurs="1" maxOccurs="1">
-					</xsd:element>
+					</xsd:element>
 					<xsd:element name="documentUploader"
-						type="bfh:healthCareProfessional" minOccurs="1" maxOccurs="1">
+						type="bfh:OrganisationHP" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="uploadDate" type="xsd:dateTime"
 						minOccurs="1" maxOccurs="1">
@@ -506,6 +503,7 @@
 					<xsd:element name="time" type="xsd:dateTime"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
+					<xsd:element name="organisationHp" type="bfh:OrganisationHP" minOccurs="1" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getCurrentPermissionMatrixByPatientId">

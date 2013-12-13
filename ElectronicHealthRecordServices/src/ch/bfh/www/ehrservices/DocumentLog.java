@@ -84,6 +84,36 @@
                                }
                             
 
+                        /**
+                        * field for OrganisationHp
+                        */
+
+                        
+                                    protected ch.bfh.www.ehrservices.OrganisationHP localOrganisationHp ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return ch.bfh.www.ehrservices.OrganisationHP
+                           */
+                           public  ch.bfh.www.ehrservices.OrganisationHP getOrganisationHp(){
+                               return localOrganisationHp;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param OrganisationHp
+                               */
+                               public void setOrganisationHp(ch.bfh.www.ehrservices.OrganisationHP param){
+                            
+                                            this.localOrganisationHp=param;
+                                    
+
+                               }
+                            
+
      
      
         /**
@@ -179,6 +209,12 @@
                                     
                                    xmlWriter.writeEndElement();
                              
+                                            if (localOrganisationHp==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("organisationHp cannot be null!!");
+                                            }
+                                           localOrganisationHp.serialize(new javax.xml.namespace.QName("","organisationHp"),
+                                               xmlWriter);
+                                        
                     xmlWriter.writeEndElement();
                
 
@@ -382,6 +418,15 @@
                                            throw new org.apache.axis2.databinding.ADBException("time cannot be null!!");
                                         }
                                     
+                            elementList.add(new javax.xml.namespace.QName("",
+                                                                      "organisationHp"));
+                            
+                            
+                                    if (localOrganisationHp==null){
+                                         throw new org.apache.axis2.databinding.ADBException("organisationHp cannot be null!!");
+                                    }
+                                    elementList.add(localOrganisationHp);
+                                
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -497,6 +542,22 @@
                                     
                                               object.setTime(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","organisationHp").equals(reader.getName())){
+                                
+                                                object.setOrganisationHp(ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader));
                                               
                                         reader.next();
                                     

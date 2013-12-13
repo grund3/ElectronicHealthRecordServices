@@ -19,6 +19,7 @@ import javax.persistence.Query;
 import org.apache.axiom.attachments.ByteArrayDataSource;
 
 import ch.bfh.www.ehrservices.entities.Documentrepository;
+import ch.bfh.www.ehrservices.entities.Permissionmatrix;
 import ch.bfh.www.util.Utility;
 
 /**
@@ -132,12 +133,7 @@ public class EhrServicesSkeleton {
 		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
 		
 		// Create Patient object
-		ch.bfh.www.ehrservices.Patient patient = new ch.bfh.www.ehrservices.Patient();
-		patient.setMPI(user.getMpi());
-		patient.setPatientID(user.getId());
-		patient.setUsername(user.getUsername());
-		patient.setPassword(user.getPassword());
-		patient.setLanguage(user.getLanguage());
+		ch.bfh.www.ehrservices.Patient patient = Utility.createPatientHelper(user);
 		
 		// create address and person object
 		patient.setPerson(Utility.createPersonWithAddressHelper(user.getPerson()));
@@ -282,32 +278,97 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns all whitelist entries for patient by given id
 	 * 
-	 * @param getWhitelistByPatientId
-	 * @return getWhitelistByPatientIdResponse
+	 * @param int patient id
+	 * @return Array of whitelist entries
 	 */
 
 	public ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientId(
 			ch.bfh.www.ehrservices.GetWhitelistByPatientId getWhitelistByPatientId) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getWhitelistByPatientId");
+		Query query = Utility.getEM().createQuery("SELECT wl From Whitelist wl WHERE wl.patient1.id = "+ getWhitelistByPatientId.getPatientID());
+		List<ch.bfh.www.ehrservices.entities.Whitelist> dbWhitelist = query.getResultList();
+		
+		GetWhitelistByPatientIdResponse response = new GetWhitelistByPatientIdResponse();
+		
+		for(ch.bfh.www.ehrservices.entities.Whitelist dbEntry : dbWhitelist) {
+			ch.bfh.www.ehrservices.Patient patient = Utility.createPatientHelper(dbEntry.getPatient2());
+			patient.setPerson(Utility.createPersonWithAddressHelper(dbEntry.getPatient2().getPerson()));
+			
+			response.addPatients(patient);
+		}
+		
+		
+		return response;
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns a collection of booleans for each editable permission schema entry in the currently set permission matrix for the patient. 
+	 * True = 1 ; False = 0 in db
 	 * 
-	 * @param getCurrentPermissionMatrixByPatientId
-	 * @return getCurrentPermissionMatrixByPatientIdResponse
+	 * @param int patient id
+	 * @return collection of booleans
 	 */
 
 	public ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientId(
 			ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId getCurrentPermissionMatrixByPatientId) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName()
-				+ "#getCurrentPermissionMatrixByPatientId");
+		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getCurrentPermissionMatrixByPatientId.getPatientID());
+		ch.bfh.www.ehrservices.entities.Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
+		
+		GetCurrentPermissionMatrixByPatientIdResponse response = new GetCurrentPermissionMatrixByPatientIdResponse();
+		
+		// create permission schema object
+		ch.bfh.www.ehrservices.PermissionSchema schema = new PermissionSchema();
+		
+		List<ch.bfh.www.ehrservices.entities.Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
+		
+		// Mein Behandelnder - Administrative Daten
+		schema.setCareGiver_adminData(dbSchemas.get(0).getValue() != 0);
+		
+		// Mein Behandelnder - Nützliche Daten
+		schema.setCareGiver_usefulData(dbSchemas.get(1).getValue() != 0);
+		
+		// Mein Behandelnder - Medizinische Daten
+		schema.setCareGiver_medicalData(dbSchemas.get(2).getValue() != 0);
+		
+		// Mein Behandelnder - Stigmatisierende Daten
+		schema.setCareGiver_stigmatizingData(dbSchemas.get(3).getValue() != 0);
+		
+		// Mein Behandelnder des Vertrauens - Administrative Daten
+		schema.setCareGiverOfTrust_adminData(dbSchemas.get(4).getValue() != 0);
+		
+		// Mein Behandelnder des Vertrauens - Nützliche Daten
+		schema.setCareGiverOfTrust_usefulData(dbSchemas.get(5).getValue() != 0);
+		
+		// Mein Behandelnder des Vertrauens - Medizinische Daten
+		schema.setCareGiverOfTrust_medicalData(dbSchemas.get(6).getValue() != 0);
+		
+		// Mein Behandelnder des Vertrauens - Stigmatisierende Daten
+		schema.setCareGiverOfTrust_stigmatizingData(dbSchemas.get(7).getValue() != 0);
+		
+		// Potenzieller Behandelnder - Administrative Daten
+		schema.setPotentialCareGiver_adminData(dbSchemas.get(8).getValue() != 0);
+		
+		// Potenzieller Behandelnder - Nützliche Daten
+		schema.setPotentialCareGiver_usefulData(dbSchemas.get(9).getValue() != 0);
+		
+		// Notfall Behandelnder - Administrative Daten
+		schema.setEmergencyCareGiver_adminData(dbSchemas.get(10).getValue() != 0);
+		
+		// Notfall Behandelnder - Nützliche Daten
+		schema.setEmergencyCareGiver_usefulData(dbSchemas.get(11).getValue() != 0);
+		
+		// Notfall Behandelnder - Medizinische Daten
+		schema.setEmergencyCareGiver_medicalData(dbSchemas.get(12).getValue() != 0);
+		
+		// Notfall Behandelnder - Stigmatisierende Daten
+		schema.setEmergencyCareGiver_stigmatizingData(dbSchemas.get(13).getValue() != 0);
+				
+		
+		response.setPermissionSchema(schema);
+		
+		
+		return response;
 	}
 
 	/**
@@ -344,34 +405,22 @@ public class EhrServicesSkeleton {
 		GetAllDocumentsByPatientIdResponse response = new GetAllDocumentsByPatientIdResponse();
 		for(ch.bfh.www.ehrservices.entities.Documentregister doc : dbDocs) {
 			ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
-
-			// create healthcare professional object
-			ch.bfh.www.ehrservices.HealthCareProfessional hp = new HealthCareProfessional();
-			hp.setHcpID(doc.getOrganisationhp().getHealthcareprofessional().getId());
-			hp.setFmh(doc.getOrganisationhp().getHealthcareprofessional().getFmh());
-			hp.setGln(doc.getOrganisationhp().getHealthcareprofessional().getGln());
-			hp.setHpc(doc.getOrganisationhp().getHealthcareprofessional().getHpc());
-			hp.setPerson(Utility.createPersonWithAddressHelper(doc.getOrganisationhp().getHealthcareprofessional().getPerson()));
-			hp.setQualitativeDignity(doc.getOrganisationhp().getHptype().getNameDe());
-			// TODO hier verbindung direkt auf HP und Org aber eigentlich noch über OrganisationHP.. zsr fehlt..
-			
-			// create organisation object
-			ch.bfh.www.ehrservices.Organisation org = new Organisation();
-			org.setOrganisationID(doc.getOrganisationhp().getOrganisation().getId());
-			org.setName(doc.getOrganisationhp().getOrganisation().getNameDe()); // TODO Mehrsprachigkeit
-			org.setOrganisationType(doc.getOrganisationhp().getOrganisation().getOrganisationtype().getNameDe());
-			org.setUrl(doc.getOrganisationhp().getOrganisation().getUrl());
-			org.setAddress(Utility.createAddressHelper(doc.getOrganisationhp().getOrganisation().getAddress()));
-			// TODO braucht es die Parents?
 			
 			// create document register object
 			newDoc.setDocumentRegisterID(doc.getId());			
 			newDoc.setConfindentialityLevel(doc.getConfidentialitylevel().getNameDe()); // TODO Mehrsprachigkeit
 			newDoc.setCreationDate(Utility.convertDateToCalendar(doc.getCreationDate()));
-			newDoc.setDocumentLog(null);//doc.getDocumentlogs()); TODO was muss da rein?!
+			
+			// add document log 
+			for(ch.bfh.www.ehrservices.entities.Documentlog dbLog : doc.getDocumentlogs()) {
+				ch.bfh.www.ehrservices.DocumentLog log = new DocumentLog();
+				log.setAccessType(dbLog.getAccesstype().getNameDe()); // TODO Mehrsprachigkeit
+				log.setOrganisationHp(Utility.createOrganisationHPHelper(dbLog.getOrganisationhp()));
+				log.setTime(Utility.convertDateToCalendar(dbLog.getTime()));
+				newDoc.addDocumentLog(log);
+			}			
 			newDoc.setDocumentType(doc.getDocumenttype().getName());
-			newDoc.setDocumentUploader(hp);
-			newDoc.setOrganisation(org);
+			newDoc.setDocumentUploader(Utility.createOrganisationHPHelper(doc.getOrganisationhp()));
 			newDoc.setTitle(doc.getTitle());
 			newDoc.setUploadDate(Utility.convertDateToCalendar(doc.getUploadDate()));
 			
