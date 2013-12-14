@@ -26,6 +26,15 @@ import ch.bfh.www.util.Utility;
  * EhrServicesSkeleton java skeleton for the axisService
  */
 public class EhrServicesSkeleton {
+	
+	// Meine Behandelnden
+	final private int roleCurrent = 1;
+	
+	// Behandelnder des Vertrauens
+	final private int roleTrust = 2;
+	
+	// Potentieller Behandelnder
+	final private int rolePotential = 3;	
 
 	/**
 	 * Auto generated method signature
@@ -146,17 +155,28 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns a list of HPs which the patient has set on blacklist
 	 * 
-	 * @param getBlacklistByPatientId
-	 * @return getBlacklistByPatientIdResponse
+	 * @param int patient id
+	 * @return list of HPs
 	 */
 
 	public ch.bfh.www.ehrservices.GetBlacklistByPatientIdResponse getBlacklistByPatientId(
 			ch.bfh.www.ehrservices.GetBlacklistByPatientId getBlacklistByPatientId) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getBlacklistByPatientId");
+		Query query = Utility.getEM().createQuery("SELECT bl From Blacklist bl WHERE bl.patient.id = "+ getBlacklistByPatientId.getPatientID());
+		List<ch.bfh.www.ehrservices.entities.Blacklist> dbBlacklist = query.getResultList();
+		
+		GetBlacklistByPatientIdResponse response = new GetBlacklistByPatientIdResponse();
+		
+		for(ch.bfh.www.ehrservices.entities.Blacklist dbEntry : dbBlacklist) {			
+			
+			// create hp object
+			ch.bfh.www.ehrservices.HealthCareProfessional hp = Utility.createHPHelper(dbEntry.getHealthcareprofessional());
+						
+			response.addHealthProfessionals(hp);
+		}
+		
+		return response;
 	}
 
 	/**
@@ -212,17 +232,45 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Returns a list of organisation hp objects filtered by the given attributes
+	 * Attributes: Roles => Trust, Current and Potential
 	 * 
-	 * @param getHPByPatientAndRole
-	 * @return getHPByPatientAndRoleResponse
+	 * It is not possible to set more than one role to filter!
+	 * 
+	 * @param int patient id, boolean which role
+	 * @return list of organisation hp objects
 	 */
 
 	public ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRole(
 			ch.bfh.www.ehrservices.GetHPByPatientAndRole getHPByPatientAndRole) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getHPByPatientAndRole");
+		String statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();
+		if(getHPByPatientAndRole.getTrust()) {
+			statement += " AND pr.role.id = " + roleTrust; 
+		}
+		else if(getHPByPatientAndRole.getCurrent()) {
+			statement += " AND pr.role.id = " + roleCurrent;
+		}
+		else if(getHPByPatientAndRole.getPotential()) {
+			statement += " AND pr.role.id = " + rolePotential;
+		}
+		else {
+			// If there are no conditions set, it returns all HPs for the patient
+		}
+					
+		Query query = Utility.getEM().createQuery(statement);	
+		List<ch.bfh.www.ehrservices.entities.Patientrole> dbPatientRoleList = query.getResultList();
+		
+		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
+		
+		for(ch.bfh.www.ehrservices.entities.Patientrole dbPatientRole : dbPatientRoleList) {			 
+			
+			// create organisation hp object
+			ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
+			
+			response.addHealthcareProfessional(orgHP);
+		}
+		
+		return response;
 	}
 
 	/**
