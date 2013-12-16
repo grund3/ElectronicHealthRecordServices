@@ -26,6 +26,36 @@
             
 
                         /**
+                        * field for PatientID
+                        */
+
+                        
+                                    protected int localPatientID ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return int
+                           */
+                           public  int getPatientID(){
+                               return localPatientID;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param PatientID
+                               */
+                               public void setPatientID(int param){
+                            
+                                            this.localPatientID=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for EmergencyContact
                         */
 
@@ -114,6 +144,19 @@
                
                    }
                
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "patientID", xmlWriter);
+                             
+                                               if (localPatientID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("patientID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
                                             if (localEmergencyContact==null){
                                                  throw new org.apache.axis2.databinding.ADBException("emergencyContact cannot be null!!");
                                             }
@@ -305,6 +348,12 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                 
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "patientID"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
+                            
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "emergencyContact"));
                             
@@ -389,6 +438,31 @@
                     
                     reader.next();
                 
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","patientID").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"patientID" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPatientID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 

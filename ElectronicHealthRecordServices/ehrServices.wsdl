@@ -194,16 +194,16 @@
 
 			<xsd:complexType name="Attributes">
 				<xsd:sequence>
-					<xsd:element name="documentType" type="xsd:string"
+					<xsd:element name="documentTypeID" type="xsd:int"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="confindentialityLevel"
-						type="xsd:string" minOccurs="0" maxOccurs="1">
+					<xsd:element name="confindentialityLevelID"
+						type="xsd:int" minOccurs="0" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="organisationID" type="xsd:int"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="hpcID" type="xsd:int"
+					<xsd:element name="hpID" type="xsd:int"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="uploadDate" type="xsd:dateTime"
@@ -478,6 +478,9 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
+						<xsd:element name="patientID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
 						<xsd:element name="emergencyContact"
 							type="bfh:Person" minOccurs="1" maxOccurs="1">
 						</xsd:element>
@@ -694,6 +697,9 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
+						<xsd:element name="patientID"
+							type="xsd:int" minOccurs="1" maxOccurs="1">
+						</xsd:element>
 						<xsd:element name="documentID" type="xsd:int"
 							minOccurs="1" maxOccurs="1">
 						</xsd:element>

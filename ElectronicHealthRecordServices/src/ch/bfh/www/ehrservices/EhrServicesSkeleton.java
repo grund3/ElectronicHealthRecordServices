@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.activation.DataHandler;
@@ -18,12 +17,14 @@ import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 import org.apache.axiom.attachments.ByteArrayDataSource;
-import org.apache.tomcat.util.digester.SetRootRule;
 
+import ch.bfh.www.ehrservices.entities.Address;
 import ch.bfh.www.ehrservices.entities.Blacklist;
 import ch.bfh.www.ehrservices.entities.Documentrepository;
+import ch.bfh.www.ehrservices.entities.Emergencycontact;
 import ch.bfh.www.ehrservices.entities.Patientrole;
 import ch.bfh.www.ehrservices.entities.Permissionmatrix;
+import ch.bfh.www.ehrservices.entities.Person;
 import ch.bfh.www.ehrservices.entities.Whitelist;
 import ch.bfh.www.util.Utility;
 
@@ -93,8 +94,8 @@ public class EhrServicesSkeleton {
 		
 		ch.bfh.www.ehrservices.Attributes attributes = getDocumentsByAttributes.getAttributes();
 		String statement = "SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getDocumentsByAttributes.getPatientID();
-		if(attributes.isConfindentialityLevelSpecified()) {
-			statement += " AND dr.confidentialitylevel.nameDe = '" + attributes.getConfindentialityLevel() + "'"; // TODO how about ID?!!
+		if(attributes.isConfindentialityLevelIDSpecified()) {
+			statement += " AND dr.confidentialitylevel.id = '" + attributes.getConfindentialityLevelID() + "'"; 
 		}
 		if(attributes.isCreationDateSpecified()) {
 			statement += " AND cast(dr.creationDate as date) = :creationDate";  
@@ -102,17 +103,17 @@ public class EhrServicesSkeleton {
 		if(attributes.isDocumentTitleSpecified()) {
 			statement += " AND dr.title LIKE '" + attributes.getDocumentTitle() + "'";
 		}
-		if(attributes.isDocumentTypeSpecified()) {
-			statement += " AND dr.documenttype.name = '" + attributes.getDocumentType() + "'"; // TODO how about ID?!!
+		if(attributes.isDocumentTypeIDSpecified()) {
+			statement += " AND dr.documenttype.id = '" + attributes.getDocumentTypeID() + "'"; 
 		}
-		if(attributes.isHpcIDSpecified()) {
-			statement += " AND dr.organisationhp.healthcareprofessional.id = " + attributes.getHpcID(); // TODO Werum HPC?!
+		if(attributes.isHpIDSpecified()) {
+			statement += " AND dr.organisationhp.healthcareprofessional.id = " + attributes.getHpID(); 
 		}
 		if(attributes.isOrganisationIDSpecified()) {
 			statement += " AND dr.organisationhp.organisation.id = " + attributes.getOrganisationID();
 		}
 		if(attributes.isUploadDateSpecified()) {
-			statement += " AND cast(dr.uploadDate as date) = :uploadDate";  //:uploadDate"; 
+			statement += " AND cast(dr.uploadDate as date) = :uploadDate";
 		}
 		
 		
@@ -173,24 +174,48 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Insert a emergencycontact for the given patient
 	 * 
-	 * @param setEmergencyContact
-	 * @return setEmergencyContactResponse
+	 * @param int patient id, person => address object
+	 * @return true if successfully saved
 	 */
 
 	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
 			ch.bfh.www.ehrservices.SetEmergencyContact setEmergencyContact) {
 		Utility.getEM().getTransaction().begin();
 		
-		// TODO patient id fehlt in wsdl....
+		ch.bfh.www.ehrservices.entities.Emergencycontact contact = new Emergencycontact();
+		ch.bfh.www.ehrservices.entities.Person dbPerson = new Person();
+		ch.bfh.www.ehrservices.entities.Address dbAddress = new Address();
+		ch.bfh.www.ehrservices.Person person = setEmergencyContact.getEmergencyContact();
 		
-		//ch.bfh.www.ehrservices.entities.Documentregister documentRegister = Utility.getEM().find(ch.bfh.www.ehrservices.entities.Documentregister.class, setConfidentiality.getDocumentRegisterID());
-		//documentRegister.setConfidentialitylevel(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Confidentialitylevel.class, setConfidentiality.getConfidentialityID()));
+		// create address
+		dbAddress.setAddress(person.getAddress().getAddress());
+		dbAddress.setCanton(person.getAddress().getCanton());
+		dbAddress.setCountry(person.getAddress().getCountry());
+		dbAddress.setMunicipality(person.getAddress().getMunicipality());
+		dbAddress.setPostalcode(person.getAddress().getPostalcode());		
+		Utility.getEM().persist(dbAddress);
 		
-		//setEmergencyContact.get
+		// create person
+		dbPerson.setAddress(dbAddress);
+		dbPerson.setBirthdate(person.getBirthdate().getTime());
+		dbPerson.setEmail(person.getEmail());
+		dbPerson.setFirstname(person.getFirstname());
+		dbPerson.setGender(person.getGender());
+		dbPerson.setMobile(person.getMobile());
+		dbPerson.setName(person.getName());
+		dbPerson.setPhone(person.getPhone());
+		dbPerson.setTitle(person.getTitle());
+		Utility.getEM().persist(dbPerson);
 		
-		//Utility.getEM().persist(documentRegister);
+		// create emergency contact
+		contact.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setEmergencyContact.getPatientID()));
+		contact.setPerson(dbPerson);
+		
+		//Utility.getEM().persist(contact);
+		Utility.getEM().persist(dbPerson);
+		
 		Utility.getEM().getTransaction().commit();
 		
 		SetEmergencyContactResponse response = new SetEmergencyContactResponse();
@@ -300,19 +325,28 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Inserts a new special permission for the given patient, hp and documentregister entry
 	 * 
-	 * @param setSpecialPermission
-	 * @return setSpecialPermissionResponse
+	 * @param int patient id, int hp id, int documentregister id
+	 * @return true if successfully saved
 	 */
 
 	public ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermission(
 			ch.bfh.www.ehrservices.SetSpecialPermission setSpecialPermission) {
-		// TODO : Hier fehlt auch die personID im wsdl
+		Utility.getEM().getTransaction().begin();
 		
+		ch.bfh.www.ehrservices.entities.Permissionmatrix permissionMatrix = new Permissionmatrix();
+		permissionMatrix.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setSpecialPermission.getPatientID()));
+		permissionMatrix.setHealthcareprofessional(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Healthcareprofessional.class, setSpecialPermission.getHealthProfessionalID()));
+		permissionMatrix.setDocumentregister(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Documentregister.class, setSpecialPermission.getDocumentID()));
 		
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#setSpecialPermission");
+		Utility.getEM().persist(permissionMatrix);
+		Utility.getEM().getTransaction().commit();
+		
+		SetSpecialPermissionResponse response = new SetSpecialPermissionResponse();
+		response.setOut("true"); // TODO sollte boolean sein..
+		
+		return response;
 	}
 
 	/**

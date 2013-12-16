@@ -25,84 +25,90 @@
             
 
                         /**
-                        * field for DocumentType
+                        * field for DocumentTypeID
                         */
 
                         
-                                    protected java.lang.String localDocumentType ;
+                                    protected int localDocumentTypeID ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localDocumentTypeTracker = false ;
+                           protected boolean localDocumentTypeIDTracker = false ;
 
-                           public boolean isDocumentTypeSpecified(){
-                               return localDocumentTypeTracker;
+                           public boolean isDocumentTypeIDSpecified(){
+                               return localDocumentTypeIDTracker;
                            }
 
                            
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getDocumentType(){
-                               return localDocumentType;
+                           public  int getDocumentTypeID(){
+                               return localDocumentTypeID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param DocumentType
+                               * @param param DocumentTypeID
                                */
-                               public void setDocumentType(java.lang.String param){
-                            localDocumentTypeTracker = param != null;
+                               public void setDocumentTypeID(int param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localDocumentTypeIDTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
                                    
-                                            this.localDocumentType=param;
+                                            this.localDocumentTypeID=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for ConfindentialityLevel
+                        * field for ConfindentialityLevelID
                         */
 
                         
-                                    protected java.lang.String localConfindentialityLevel ;
+                                    protected int localConfindentialityLevelID ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localConfindentialityLevelTracker = false ;
+                           protected boolean localConfindentialityLevelIDTracker = false ;
 
-                           public boolean isConfindentialityLevelSpecified(){
-                               return localConfindentialityLevelTracker;
+                           public boolean isConfindentialityLevelIDSpecified(){
+                               return localConfindentialityLevelIDTracker;
                            }
 
                            
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getConfindentialityLevel(){
-                               return localConfindentialityLevel;
+                           public  int getConfindentialityLevelID(){
+                               return localConfindentialityLevelID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ConfindentialityLevel
+                               * @param param ConfindentialityLevelID
                                */
-                               public void setConfindentialityLevel(java.lang.String param){
-                            localConfindentialityLevelTracker = param != null;
+                               public void setConfindentialityLevelID(int param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localConfindentialityLevelIDTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
                                    
-                                            this.localConfindentialityLevel=param;
+                                            this.localConfindentialityLevelID=param;
                                     
 
                                }
@@ -154,20 +160,20 @@
                             
 
                         /**
-                        * field for HpcID
+                        * field for HpID
                         */
 
                         
-                                    protected int localHpcID ;
+                                    protected int localHpID ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localHpcIDTracker = false ;
+                           protected boolean localHpIDTracker = false ;
 
-                           public boolean isHpcIDSpecified(){
-                               return localHpcIDTracker;
+                           public boolean isHpIDSpecified(){
+                               return localHpIDTracker;
                            }
 
                            
@@ -176,23 +182,23 @@
                            * Auto generated getter method
                            * @return int
                            */
-                           public  int getHpcID(){
-                               return localHpcID;
+                           public  int getHpID(){
+                               return localHpID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param HpcID
+                               * @param param HpID
                                */
-                               public void setHpcID(int param){
+                               public void setHpID(int param){
                             
                                        // setting primitive attribute tracker to true
-                                       localHpcIDTracker =
+                                       localHpIDTracker =
                                        param != java.lang.Integer.MIN_VALUE;
                                    
-                                            this.localHpcID=param;
+                                            this.localHpID=param;
                                     
 
                                }
@@ -382,40 +388,30 @@
 
                
                    }
-                if (localDocumentTypeTracker){
+                if (localDocumentTypeIDTracker){
                                     namespace = "";
-                                    writeStartElement(null, namespace, "documentType", xmlWriter);
+                                    writeStartElement(null, namespace, "documentTypeID", xmlWriter);
                              
-
-                                          if (localDocumentType==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("documentType cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localDocumentType);
-                                            
-                                          }
+                                               if (localDocumentTypeID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("documentTypeID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDocumentTypeID));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localConfindentialityLevelTracker){
+                             } if (localConfindentialityLevelIDTracker){
                                     namespace = "";
-                                    writeStartElement(null, namespace, "confindentialityLevel", xmlWriter);
+                                    writeStartElement(null, namespace, "confindentialityLevelID", xmlWriter);
                              
-
-                                          if (localConfindentialityLevel==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("confindentialityLevel cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localConfindentialityLevel);
-                                            
-                                          }
+                                               if (localConfindentialityLevelID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("confindentialityLevelID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConfindentialityLevelID));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              } if (localOrganisationIDTracker){
@@ -431,16 +427,16 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localHpcIDTracker){
+                             } if (localHpIDTracker){
                                     namespace = "";
-                                    writeStartElement(null, namespace, "hpcID", xmlWriter);
+                                    writeStartElement(null, namespace, "hpID", xmlWriter);
                              
-                                               if (localHpcID==java.lang.Integer.MIN_VALUE) {
+                                               if (localHpID==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("hpcID cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("hpID cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHpcID));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHpID));
                                                }
                                     
                                    xmlWriter.writeEndElement();
@@ -683,36 +679,30 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localDocumentTypeTracker){
+                 if (localDocumentTypeIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "documentType"));
+                                                                      "documentTypeID"));
                                  
-                                        if (localDocumentType != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDocumentType));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("documentType cannot be null!!");
-                                        }
-                                    } if (localConfindentialityLevelTracker){
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDocumentTypeID));
+                            } if (localConfindentialityLevelIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "confindentialityLevel"));
+                                                                      "confindentialityLevelID"));
                                  
-                                        if (localConfindentialityLevel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConfindentialityLevel));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("confindentialityLevel cannot be null!!");
-                                        }
-                                    } if (localOrganisationIDTracker){
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConfindentialityLevelID));
+                            } if (localOrganisationIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "organisationID"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrganisationID));
-                            } if (localHpcIDTracker){
+                            } if (localHpIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "hpcID"));
+                                                                      "hpID"));
                                  
                                 elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHpcID));
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHpID));
                             } if (localUploadDateTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "uploadDate"));
@@ -819,18 +809,18 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","documentType").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","documentTypeID").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"documentType" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"documentTypeID" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setDocumentType(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              object.setDocumentTypeID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -838,23 +828,25 @@
                                 
                                     else {
                                         
+                                               object.setDocumentTypeID(java.lang.Integer.MIN_VALUE);
+                                           
                                     }
                                 
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","confindentialityLevel").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","confindentialityLevelID").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"confindentialityLevel" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"confindentialityLevelID" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setConfindentialityLevel(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              object.setConfindentialityLevelID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -862,6 +854,8 @@
                                 
                                     else {
                                         
+                                               object.setConfindentialityLevelID(java.lang.Integer.MIN_VALUE);
+                                           
                                     }
                                 
                                     
@@ -893,17 +887,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","hpcID").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","hpID").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"hpcID" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"hpID" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setHpcID(
+                                              object.setHpID(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
@@ -912,7 +906,7 @@
                                 
                                     else {
                                         
-                                               object.setHpcID(java.lang.Integer.MIN_VALUE);
+                                               object.setHpID(java.lang.Integer.MIN_VALUE);
                                            
                                     }
                                 
