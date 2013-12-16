@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import ch.bfh.www.ehrservices.DocumentLog;
 import ch.bfh.www.ehrservices.HealthCareProfessional;
 import ch.bfh.www.ehrservices.Organisation;
 import ch.bfh.www.ehrservices.OrganisationHP;
@@ -146,6 +147,35 @@ public class Utility {
 		hp.setQualitativeDignity(dbHP.getHptype().getNameDe()); // TODO Mehrsprachigkeit
 		
 		return hp;
+	}
+	
+	
+	/**
+	 * Returns a documentregister object created from the documentregister object from the db
+	 * @param dbDocRegister
+	 * @return documentregister object
+	 */
+	public static ch.bfh.www.ehrservices.DocumentRegisterEntry createDocumentRegisterHelper(ch.bfh.www.ehrservices.entities.Documentregister dbDocRegister) {
+		ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
+		
+		newDoc.setDocumentRegisterID(dbDocRegister.getId());			
+		newDoc.setConfindentialityLevel(dbDocRegister.getConfidentialitylevel().getNameDe()); // TODO Mehrsprachigkeit
+		newDoc.setCreationDate(Utility.convertDateToCalendar(dbDocRegister.getCreationDate()));
+		
+		// add document log 
+		for(ch.bfh.www.ehrservices.entities.Documentlog dbLog : dbDocRegister.getDocumentlogs()) {
+			ch.bfh.www.ehrservices.DocumentLog log = new DocumentLog();
+			log.setAccessType(dbLog.getAccesstype().getNameDe()); // TODO Mehrsprachigkeit
+			log.setOrganisationHp(Utility.createOrganisationHPHelper(dbLog.getOrganisationhp()));
+			log.setTime(Utility.convertDateToCalendar(dbLog.getTime()));
+			newDoc.addDocumentLog(log);
+		}			
+		newDoc.setDocumentType(dbDocRegister.getDocumenttype().getName());
+		newDoc.setDocumentUploader(Utility.createOrganisationHPHelper(dbDocRegister.getOrganisationhp()));
+		newDoc.setTitle(dbDocRegister.getTitle());
+		newDoc.setUploadDate(Utility.convertDateToCalendar(dbDocRegister.getUploadDate()));
+		
+		return newDoc;
 	}
 	
 }
