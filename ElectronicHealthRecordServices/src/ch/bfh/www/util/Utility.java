@@ -12,6 +12,12 @@ import ch.bfh.www.ehrservices.HealthCareProfessional;
 import ch.bfh.www.ehrservices.Organisation;
 import ch.bfh.www.ehrservices.OrganisationHP;
 
+/**
+ * Utility methods
+ * 
+ * @author Dominik Grünert
+ *
+ */
 public class Utility {
 	private static EntityManagerFactory emf = null;
 	private static EntityManager em = null;

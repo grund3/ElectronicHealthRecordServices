@@ -28,8 +28,13 @@ import ch.bfh.www.ehrservices.entities.Person;
 import ch.bfh.www.ehrservices.entities.Whitelist;
 import ch.bfh.www.util.Utility;
 
+
+
 /**
- * EhrServicesSkeleton java skeleton for the axisService
+ * Diese Klasse enthält alle Funktionen des ElectronicHealthRecords
+ * 
+ * @author Dominik Grünert, Pascal Schrei
+ *
  */
 public class EhrServicesSkeleton {
 	
@@ -43,12 +48,16 @@ public class EhrServicesSkeleton {
 	final private int rolePotential = 3;	
 
 	/**
-	 * Returns a list of special permission for the given patient
-	 * 
-	 * @param int patient id
-	 * @return list of special permissions
-	 * 				- DocumentRegister
-	 * 				- Healthcareprofessional
+	 * <pre>
+	 * Diese Methode liefert die speziell definierten Zugriffsberechtigungen für 
+	 * einen Behandelnden auf ein bestimmtes Dokument zurück. 
+	 * Die Berechtigungen gehören zu einem bestimmten Patienten.
+	 * </pre>
+	 * @param int Patienten ID
+	 * @return 	Array mit allen Spezialberechtigungen
+	 * 			Angehängt sind: 
+	 * 				- DocumentRegister (1)
+	 * 				- Healthcareprofessional (1)
 	 */
 
 	public ch.bfh.www.ehrservices.GetSpecialPermissionByPatientResponse getSpecialPermissionByPatient(
@@ -71,21 +80,24 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns the meta data and related data from a document by the given document id and the given attributes
-	 * Attributes:
-	 * 	- int ConfidentialityLevelID
-	 *  - calendar CreationDate (date without time)
-	 *  - string DocumentTitle (Like)
-	 *  - int DocumentTypeID
-	 *  - int healthprofessionalID
-	 *  - int organisationID
-	 *  - calendar UploadDate (date without time)
-	 *  
-	 * @param int patient id, attributes see above
-	 * @return documentRegister 
+	 * <pre>
+	 * Diese Methode liefert alle Metadaten zu Dokumenten von einem Patienten zurück.
+	 * Die Dokumente selber sind nicht enthalten (eigene Methode).
+	 * 
+	 * Folgende Einschränkungen können mitgegeben werden, um die Dokumente einzugrenzen:
+	 * 	- int ConfidentialityLevelID (Vertrauchlichkeitsstufe)
+	 *  - calendar CreationDate (date without time) (Erstelldatum)
+	 *  - string DocumentTitle (Like)(Dokumenttitel)
+	 *  - int DocumentTypeID (Dateityp)
+	 *  - int healthprofessionalID (Von welchem Behandelnden)
+	 *  - int organisationID (Von welcher Organisation)
+	 *  - calendar UploadDate (date without time) (Upload Datum)
+	 *  </pre>
+	 * @param int Patienten ID, Einschränkungen siehe Beschrieb
+	 * @return Array mit allen Dokumenten (Metadaten) die zu den Einschränkungen passen.  
 	 * 						- Organisation (1)
 	 * 						- HealthcareProfessional (1)
-	 * 							- Person => Address
+	 * 							- Person (1) => Address (1)
 	 * 						- DocumentLog (*)
 	 */
 
@@ -138,10 +150,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns a document by the given id
+	 * Diese Methode liefert das Dokument mit der gegebenen ID zurück (Binary)
 	 * 
-	 * @param int id of the document
-	 * @return blob file
+	 * @param int Dokumenten ID
+	 * @return Dokument in Binary Form
 	 */
 
 	public ch.bfh.www.ehrservices.GetDocumentByIdResponse getDocumentById(
@@ -174,10 +186,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Insert a emergencycontact for the given patient
+	 * Fügt einen Notfallkontakt (Person) zu einem bestimmten Patienten hinzu.
 	 * 
-	 * @param int patient id, person => address object
-	 * @return true if successfully saved
+	 * @param int Patienten ID, Person und Adressen Objekt 
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
@@ -225,10 +237,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns all emergency contact objects by the given patient id
+	 * Diese Methode liefert alle Notfallkontakte zu einem bestimmten Patienten zurück.
 	 * 
-	 * @param int patient id
-	 * @return list of emergencycontact objects
+	 * @param int Patienten ID
+	 * @return Array mit Notfallkontakten
+	 * 			- Person (1)
+	 * 			- Address (1)
 	 */
 
 	public ch.bfh.www.ehrservices.GetEmergencyContactByPatientIdResponse getEmergencyContactByPatientId(
@@ -250,10 +264,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Login method. Gets Patient by given username and related Person and Address.
-	 * 
-	 * @param String Username
-	 * @return Patient => Person => Address objects
+	 * <pre>
+	 * Diese Methode liefert ein Patient zurück. Dieser Patient wird anhand des Benutzernamens gesucht.
+	 * Mit dem enthaltenen Passwort kann der Benutzer eingeloggt werden.
+	 * </pre>
+	 * @param String Benutzername 
+	 * @return Patient => Person => Address Objekte
 	 */
 
 	public ch.bfh.www.ehrservices.GetLoginResponse getLogin(
@@ -276,10 +292,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns a list of HPs which the patient has set on blacklist
+	 * Diese Methode liefert alle Behandelnden auf der Blacklist des Patienten zurück.
 	 * 
-	 * @param int patient id
-	 * @return list of HPs
+	 * @param int Patient ID
+	 * @return Array mit Behandelnden (Healthcareprofessional)
 	 */
 
 	public ch.bfh.www.ehrservices.GetBlacklistByPatientIdResponse getBlacklistByPatientId(
@@ -301,10 +317,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns all Roles 
+	 * Diese Methode liefert alle Rollen zurück. 
 	 * 
-	 * @param boolean (doesn't' matter)
-	 * @return Array with Roles
+	 * @param boolean True mitgeben
+	 * @return Array mit Rollen
 	 */
 
 	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
@@ -325,10 +341,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Inserts a new special permission for the given patient, hp and documentregister entry
-	 * 
-	 * @param int patient id, int hp id, int documentregister id
-	 * @return true if successfully saved
+	 * <pre>
+	 * Fügt eine neue Spezialberechtigung für einen Patienten hinzu.
+	 * Er berechtigt einen bestimmten Behandlenden auf ein bestimmtes Dokument.
+	 * </pre>
+	 * @param int Patient ID, int healthcareprofessional ID (Behandelnder), int documentregister ID (Metadaten)
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermission(
@@ -350,10 +368,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Inserts a new blacklist object by the given patient and hp id
+	 * Fügt einen Behandelnden auf die Blacklist des Patienten hinzu.
 	 * 
-	 * @param patient id, hp id
-	 * @return true if successfully saved
+	 * @param int Patient ID, healthcareprofessional ID (Behandelnder)
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetHpOnBlacklistResponse setHpOnBlacklist(
@@ -374,18 +392,36 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns a list of organisation hp objects filtered by the given attributes
-	 * Attributes: Roles => Trust, Current and Potential
+	 * <pre>
+	 * Diese Methode liefert OrganisationHP Objekte zurück passend zum angegebenen Patienten und der Rolle.
+	 * OrganisationHP ist das Verbindungsglid von Behandelnden und Organisationen. Also welcher Behandelnde arbeit
+	 * in welcher Organisation. 
+	 * Folgende Attribute können gesetzt werden:
+	 * 	- Keine Patienten ID (0) => gibt alle OrganisationHP zurück (ohne Verbindung zum Patienten)
+	 * 	- Keine Rolle (null) => gibt alle OrganisationHP zum Patienten zurück oder ohne Verbindung zum Patienten
+	 * 	- Trust => Behandelnde des Vertrauens
+	 * 	- Current => Meine Behandelnde
+	 * 	- Portential => Potentielle Behandelnde
 	 * 
-	 * It is not possible to set more than one role to filter!
-	 * 
-	 * @param int patient id, boolean which role
-	 * @return list of organisation hp objects
+	 * Es ist nicht möglich nach mehr als einer Rolle zu suchen.
+	 * </pre>
+	 * @param int Patienten ID, boolean true bei der gewählten Rolle
+	 * @return Array mit OrganisationHP Objekte
 	 */
 
 	public ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRole(
 			ch.bfh.www.ehrservices.GetHPByPatientAndRole getHPByPatientAndRole) {
-		String statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();
+		String statement;
+		if(getHPByPatientAndRole.getPatientID() == 0) {
+			statement = "SELECT pr From Patientrole pr ";
+			if(getHPByPatientAndRole.getTrust() || getHPByPatientAndRole.getCurrent() || getHPByPatientAndRole.getPotential()) {
+				statement += "WHERE"; 
+			}
+		}
+		else {
+			statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();
+		}
+		
 		if(getHPByPatientAndRole.getTrust()) {
 			statement += " AND pr.role.id = " + roleTrust; 
 		}
@@ -396,7 +432,7 @@ public class EhrServicesSkeleton {
 			statement += " AND pr.role.id = " + rolePotential;
 		}
 		else {
-			// If there are no conditions set, it returns all HPs for the patient
+			// If there are no conditions set, it returns all HPs for the patient or not for the patient
 		}
 					
 		Query query = Utility.getEM().createQuery(statement);	
@@ -416,10 +452,17 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Update current patient permission matrix by given booleans
+	 * <pre>
+	 * Überschreibt die bestehenden Berechtigungen (Matrix)
+	 * Für jedes (14 Stück) Element in der Berechtigungsmatrix kann ein Wert gesetzt werden (boolean).
 	 * 
-	 * @param int patient id, permission booleans
-	 * @return true if successfully saved
+	 * CareGiver => Mein Behandelnder
+	 * CareGiverOfTrust => Behandelnder des Vertrauens
+	 * PotentialCareGiver => Potentieller Behandelnder
+	 * EmergencyCareGiver => Notfallbehandelnder
+	 * </pre>
+	 * @param int Patienten ID, Attribute nach Matrix (Empfehlungen) booleans
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetPermissionMatrixForPatientResponse setPermissionMatrixForPatient(
@@ -498,10 +541,15 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Insert a new whitelist object by the giver patient and receiver patient
+	 * <pre>
+	 * Fügt einen neuen Eintrag in der Whitelist des Patienten hinzu.
+	 * Der Eintrag ist ein anderer Patient, welcher volle Berechtigung auf den Rechte gebenden Patienten erhält.
 	 * 
-	 * @param giver patient id, receiver patient id
-	 * @return true if successfully saved
+	 * Giver => Gibt die Rechte an
+	 * Receiver => Erhält die Rechte von
+	 * </pre>
+	 * @param giver Patienten ID, receiver Patienten ID
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetWhitelistResponse setWhitelist(
@@ -522,10 +570,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns all confidentiality levels 
+	 * Diese Methode liefert alle Vertrauchlichkeitsstufen zurück. 
 	 * 
-	 * @param boolean (doesn't matter)
-	 * @return array with confidentiality levels
+	 * @param boolean True mitgeben
+	 * @return Array mit Vertraulichkeitsstufen
 	 */
 
 	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
@@ -546,10 +594,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns all whitelist entries for patient by given id
+	 * Diese Methode liefert liefert alle Whitelist Einträge zum gegebenen Patienten zurück.
 	 * 
-	 * @param int patient id
-	 * @return Array of whitelist entries
+	 * @param int Patienten ID
+	 * @return Array von Whitelist Einträgen
 	 */
 
 	public ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientId(
@@ -571,11 +619,18 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns a collection of booleans for each editable permission schema entry in the currently set permission matrix for the patient. 
-	 * True = 1 ; False = 0 in db
+	 * <pre>
+	 * Diese Methode liefert eine Gruppe von booleans zurück und stellt die Berechtigungsmatrix des Patienten dar.
+	 * True = 1 also gesetztes Flag
+	 * False = 0 also nicht gesetztes Flag
 	 * 
-	 * @param int patient id
-	 * @return collection of booleans
+	 * CareGiver => Mein Behandelnder
+	 * CareGiverOfTrust => Behandelnder des Vertrauens
+	 * PotentialCareGiver => Potentieller Behandelnder
+	 * EmergencyCareGiver => Notfallbehandelnder
+	 * </pre>
+	 * @param int Patienten ID
+	 * @return Gruppe von booleans
 	 */
 
 	public ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientId(
@@ -641,10 +696,15 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Inserts a new PatientRole object by the given attributes in the db
+	 * <pre>
+	 * Setzt die gesetzte Rolle für die gegebene OrganisationHP ID. 
+	 * Somit ist der Behandelnde von einer bestimmten Organisation mit einer Rolle versehen und gehört zu einem Patienten.
 	 * 
-	 * @param patient id, role id, organisationhp id
-	 * @return true if successfully saved
+	 * Rollen ID => getAllRoles
+	 * OrganisationHP ID => GetHPByPatientAndRole
+	 * </pre>
+	 * @param int Patienten ID, Rollen ID, OrganisationHP ID
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetHPRoleResponse setHPRole(
@@ -666,7 +726,10 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Returns the meta data and related data from a document by the given document id
+	 * <pre>
+	 * Diese Methode liefert alle Metadaten zu Dokumenten von einem Patienten zurück.
+	 * Die Dokumente selber sind nicht enthalten (eigene Methode).
+	 * </pre>
 	 * 
 	 * @param int id
 	 * @return documentRegister 
@@ -694,10 +757,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Sets the confidentiality level of the given documentregister object
-	 * 
-	 * @param documentregister id, confidentialitylevel id
-	 * @return true if successfully saved
+	 * <pre>
+	 * Setzt die Vertrauchlichkeitsstufe für das gegebene Dokument.
+	 * Vertrauchlichkeitsstufe von getConfidentialityLevels
+	 * </pre>
+	 * @param int Documentregister ID, Confidentialitylevel ID
+	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetConfidentialityResponse setConfidentiality(
