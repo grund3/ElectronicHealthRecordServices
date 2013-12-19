@@ -413,39 +413,54 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetHPByPatientAndRole getHPByPatientAndRole) {
 		String statement;
 		if(getHPByPatientAndRole.getPatientID() == 0) {
-			statement = "SELECT pr From Patientrole pr ";
-			if(getHPByPatientAndRole.getTrust() || getHPByPatientAndRole.getCurrent() || getHPByPatientAndRole.getPotential()) {
-				statement += "WHERE"; 
+			statement = "SELECT oh From Organisationhp oh"; 
+		}
+		else {
+			statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();		
+		
+			if(getHPByPatientAndRole.getTrust()) {
+				statement += " AND pr.role.id = " + roleTrust; 
+			}
+			else if(getHPByPatientAndRole.getCurrent()) {
+				statement += " AND pr.role.id = " + roleCurrent;
+			}
+			else if(getHPByPatientAndRole.getPotential()) {
+				statement += " AND pr.role.id = " + rolePotential;
+			}
+			else {
+				// If there are no conditions set, it returns all HPs for the patient or not for the patient
+			}
+		}
+					
+		Query query = Utility.getEM().createQuery(statement);
+		List<ch.bfh.www.ehrservices.entities.Patientrole> dbPatientRoleList = null;
+		List<ch.bfh.www.ehrservices.entities.Organisationhp> dbOrganisationHPList = null;
+		if(getHPByPatientAndRole.getPatientID() == 0) {
+			dbOrganisationHPList = query.getResultList();
+		}
+		else {
+			dbPatientRoleList = query.getResultList();
+		}
+		
+		
+		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
+		if(getHPByPatientAndRole.getPatientID() == 0) {
+			for(ch.bfh.www.ehrservices.entities.Organisationhp dbOrgaHp : dbOrganisationHPList) {			 
+				
+				// create organisation hp object
+				ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbOrgaHp);
+				
+				response.addHealthcareProfessional(orgHP);
 			}
 		}
 		else {
-			statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();
-		}
-		
-		if(getHPByPatientAndRole.getTrust()) {
-			statement += " AND pr.role.id = " + roleTrust; 
-		}
-		else if(getHPByPatientAndRole.getCurrent()) {
-			statement += " AND pr.role.id = " + roleCurrent;
-		}
-		else if(getHPByPatientAndRole.getPotential()) {
-			statement += " AND pr.role.id = " + rolePotential;
-		}
-		else {
-			// If there are no conditions set, it returns all HPs for the patient or not for the patient
-		}
-					
-		Query query = Utility.getEM().createQuery(statement);	
-		List<ch.bfh.www.ehrservices.entities.Patientrole> dbPatientRoleList = query.getResultList();
-		
-		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
-		
-		for(ch.bfh.www.ehrservices.entities.Patientrole dbPatientRole : dbPatientRoleList) {			 
-			
-			// create organisation hp object
-			ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
-			
-			response.addHealthcareProfessional(orgHP);
+			for(ch.bfh.www.ehrservices.entities.Patientrole dbPatientRole : dbPatientRoleList) {			 
+				
+				// create organisation hp object
+				ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
+				
+				response.addHealthcareProfessional(orgHP);
+			}
 		}
 		
 		return response;
