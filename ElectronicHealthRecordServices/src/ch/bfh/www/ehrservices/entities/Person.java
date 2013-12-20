@@ -16,6 +16,7 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -27,11 +28,11 @@ public class Person implements Serializable {
 
 	private String gender;
 
-	private int mobile;
+	private String mobile;
 
 	private String name;
 
-	private int phone;
+	private String phone;
 
 	private String title;
 
@@ -95,11 +96,11 @@ public class Person implements Serializable {
 		this.gender = gender;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return this.mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -111,11 +112,11 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

@@ -1,11 +1,7 @@
 package ch.bfh.www.ehrservices.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import sun.net.ftp.FtpReplyCode;
-
 import java.util.List;
 
 
@@ -19,6 +15,7 @@ public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String language;

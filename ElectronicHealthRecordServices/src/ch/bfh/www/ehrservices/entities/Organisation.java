@@ -15,6 +15,7 @@ public class Organisation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String nameDe;
@@ -25,10 +26,10 @@ public class Organisation implements Serializable {
 
 	private String url;
 
-	//bi-directional many-to-one association to Organisationtype
+	//bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="organisationTypeID")
-	private Organisationtype organisationtype;
+	@JoinColumn(name="addressID")
+	private Address address;
 
 	//bi-directional many-to-one association to Organisation
 	@ManyToOne
@@ -39,10 +40,10 @@ public class Organisation implements Serializable {
 	@OneToMany(mappedBy="organisation")
 	private List<Organisation> organisations;
 
-	//bi-directional many-to-one association to Address
+	//bi-directional many-to-one association to Organisationtype
 	@ManyToOne
-	@JoinColumn(name="addressID")
-	private Address address;
+	@JoinColumn(name="organisationTypeID")
+	private Organisationtype organisationtype;
 
 	//bi-directional many-to-one association to Organisationhp
 	@OneToMany(mappedBy="organisation")
@@ -91,12 +92,12 @@ public class Organisation implements Serializable {
 		this.url = url;
 	}
 
-	public Organisationtype getOrganisationtype() {
-		return this.organisationtype;
+	public Address getAddress() {
+		return this.address;
 	}
 
-	public void setOrganisationtype(Organisationtype organisationtype) {
-		this.organisationtype = organisationtype;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Organisation getOrganisation() {
@@ -129,12 +130,12 @@ public class Organisation implements Serializable {
 		return organisation;
 	}
 
-	public Address getAddress() {
-		return this.address;
+	public Organisationtype getOrganisationtype() {
+		return this.organisationtype;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setOrganisationtype(Organisationtype organisationtype) {
+		this.organisationtype = organisationtype;
 	}
 
 	public List<Organisationhp> getOrganisationhps() {

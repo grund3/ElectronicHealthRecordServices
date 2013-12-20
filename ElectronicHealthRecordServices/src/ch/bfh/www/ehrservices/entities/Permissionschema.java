@@ -14,9 +14,15 @@ public class Permissionschema implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private byte value;
+
+	//bi-directional many-to-one association to Confidentialitylevel
+	@ManyToOne
+	@JoinColumn(name="confidentialityLevelID")
+	private Confidentialitylevel confidentialitylevel;
 
 	//bi-directional many-to-one association to Permissionmatrix
 	@ManyToOne
@@ -27,11 +33,6 @@ public class Permissionschema implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="roleID")
 	private Role role;
-
-	//bi-directional many-to-one association to Confidentialitylevel
-	@ManyToOne
-	@JoinColumn(name="confidentialityLevelID")
-	private Confidentialitylevel confidentialitylevel;
 
 	public Permissionschema() {
 	}
@@ -52,6 +53,14 @@ public class Permissionschema implements Serializable {
 		this.value = value;
 	}
 
+	public Confidentialitylevel getConfidentialitylevel() {
+		return this.confidentialitylevel;
+	}
+
+	public void setConfidentialitylevel(Confidentialitylevel confidentialitylevel) {
+		this.confidentialitylevel = confidentialitylevel;
+	}
+
 	public Permissionmatrix getPermissionmatrix() {
 		return this.permissionmatrix;
 	}
@@ -66,14 +75,6 @@ public class Permissionschema implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public Confidentialitylevel getConfidentialitylevel() {
-		return this.confidentialitylevel;
-	}
-
-	public void setConfidentialitylevel(Confidentialitylevel confidentialitylevel) {
-		this.confidentialitylevel = confidentialitylevel;
 	}
 
 }

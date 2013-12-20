@@ -194,7 +194,6 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
 			ch.bfh.www.ehrservices.SetEmergencyContact setEmergencyContact) {
-		Utility.getEM().getTransaction().begin();
 		
 		ch.bfh.www.ehrservices.entities.Emergencycontact contact = new Emergencycontact();
 		ch.bfh.www.ehrservices.entities.Person dbPerson = new Person();
@@ -206,8 +205,7 @@ public class EhrServicesSkeleton {
 		dbAddress.setCanton(person.getAddress().getCanton());
 		dbAddress.setCountry(person.getAddress().getCountry());
 		dbAddress.setMunicipality(person.getAddress().getMunicipality());
-		dbAddress.setPostalcode(person.getAddress().getPostalcode());		
-		Utility.getEM().persist(dbAddress);
+		dbAddress.setPostalcode(person.getAddress().getPostalcode());
 		
 		// create person
 		dbPerson.setAddress(dbAddress);
@@ -219,14 +217,18 @@ public class EhrServicesSkeleton {
 		dbPerson.setName(person.getName());
 		dbPerson.setPhone(person.getPhone());
 		dbPerson.setTitle(person.getTitle());
+		
+		Utility.getEM().getTransaction().begin();
+		Utility.getEM().persist(dbAddress);
 		Utility.getEM().persist(dbPerson);
 		
 		// create emergency contact
-		contact.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setEmergencyContact.getPatientID()));
+		ch.bfh.www.ehrservices.entities.Patient patient = Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setEmergencyContact.getPatientID());
+		contact.setPatient(patient);
 		contact.setPerson(dbPerson);
 		
-		//Utility.getEM().persist(contact);
-		Utility.getEM().persist(dbPerson);
+		
+		Utility.getEM().persist(contact);
 		
 		Utility.getEM().getTransaction().commit();
 		

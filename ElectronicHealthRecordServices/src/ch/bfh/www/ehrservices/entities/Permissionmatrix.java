@@ -15,14 +15,10 @@ public class Permissionmatrix implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String name;
-
-	//bi-directional many-to-one association to Patient
-	@ManyToOne
-	@JoinColumn(name="patientID")
-	private Patient patient;
 
 	//bi-directional many-to-one association to Documentregister
 	@ManyToOne
@@ -33,6 +29,11 @@ public class Permissionmatrix implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="hpID")
 	private Healthcareprofessional healthcareprofessional;
+
+	//bi-directional many-to-one association to Patient
+	@ManyToOne
+	@JoinColumn(name="patientID")
+	private Patient patient;
 
 	//bi-directional many-to-one association to Permissionschema
 	@OneToMany(mappedBy="permissionmatrix")
@@ -57,14 +58,6 @@ public class Permissionmatrix implements Serializable {
 		this.name = name;
 	}
 
-	public Patient getPatient() {
-		return this.patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
 	public Documentregister getDocumentregister() {
 		return this.documentregister;
 	}
@@ -79,6 +72,14 @@ public class Permissionmatrix implements Serializable {
 
 	public void setHealthcareprofessional(Healthcareprofessional healthcareprofessional) {
 		this.healthcareprofessional = healthcareprofessional;
+	}
+
+	public Patient getPatient() {
+		return this.patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	public List<Permissionschema> getPermissionschemas() {

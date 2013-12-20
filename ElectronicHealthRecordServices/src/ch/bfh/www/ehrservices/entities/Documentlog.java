@@ -15,10 +15,16 @@ public class Documentlog implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
+
+	//bi-directional many-to-one association to Accesstype
+	@ManyToOne
+	@JoinColumn(name="accessTypeID")
+	private Accesstype accesstype;
 
 	//bi-directional many-to-one association to Documentregister
 	@ManyToOne
@@ -29,11 +35,6 @@ public class Documentlog implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="organisationHpID")
 	private Organisationhp organisationhp;
-
-	//bi-directional many-to-one association to Accesstype
-	@ManyToOne
-	@JoinColumn(name="accessTypeID")
-	private Accesstype accesstype;
 
 	public Documentlog() {
 	}
@@ -54,6 +55,14 @@ public class Documentlog implements Serializable {
 		this.time = time;
 	}
 
+	public Accesstype getAccesstype() {
+		return this.accesstype;
+	}
+
+	public void setAccesstype(Accesstype accesstype) {
+		this.accesstype = accesstype;
+	}
+
 	public Documentregister getDocumentregister() {
 		return this.documentregister;
 	}
@@ -68,14 +77,6 @@ public class Documentlog implements Serializable {
 
 	public void setOrganisationhp(Organisationhp organisationhp) {
 		this.organisationhp = organisationhp;
-	}
-
-	public Accesstype getAccesstype() {
-		return this.accesstype;
-	}
-
-	public void setAccesstype(Accesstype accesstype) {
-		this.accesstype = accesstype;
 	}
 
 }

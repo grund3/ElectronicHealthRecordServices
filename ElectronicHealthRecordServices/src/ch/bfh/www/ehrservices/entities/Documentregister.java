@@ -16,6 +16,7 @@ public class Documentregister implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -30,6 +31,16 @@ public class Documentregister implements Serializable {
 	@OneToMany(mappedBy="documentregister")
 	private List<Documentlog> documentlogs;
 
+	//bi-directional many-to-one association to Confidentialitylevel
+	@ManyToOne
+	@JoinColumn(name="confidentialityLevelID")
+	private Confidentialitylevel confidentialitylevel;
+
+	//bi-directional many-to-one association to Documentrepository
+	@ManyToOne
+	@JoinColumn(name="documentRepositoryID")
+	private Documentrepository documentrepository;
+
 	//bi-directional many-to-one association to Documenttype
 	@ManyToOne
 	@JoinColumn(name="documentTypeID")
@@ -40,20 +51,10 @@ public class Documentregister implements Serializable {
 	@JoinColumn(name="organisationHpID")
 	private Organisationhp organisationhp;
 
-	//bi-directional many-to-one association to Confidentialitylevel
-	@ManyToOne
-	@JoinColumn(name="confidentialityLevelID")
-	private Confidentialitylevel confidentialitylevel;
-
 	//bi-directional many-to-one association to Patient
 	@ManyToOne
 	@JoinColumn(name="patientID")
 	private Patient patient;
-
-	//bi-directional many-to-one association to Documentrepository
-	@ManyToOne
-	@JoinColumn(name="documentRepositoryID")
-	private Documentrepository documentrepository;
 
 	//bi-directional many-to-one association to Permissionmatrix
 	@OneToMany(mappedBy="documentregister")
@@ -116,6 +117,22 @@ public class Documentregister implements Serializable {
 		return documentlog;
 	}
 
+	public Confidentialitylevel getConfidentialitylevel() {
+		return this.confidentialitylevel;
+	}
+
+	public void setConfidentialitylevel(Confidentialitylevel confidentialitylevel) {
+		this.confidentialitylevel = confidentialitylevel;
+	}
+
+	public Documentrepository getDocumentrepository() {
+		return this.documentrepository;
+	}
+
+	public void setDocumentrepository(Documentrepository documentrepository) {
+		this.documentrepository = documentrepository;
+	}
+
 	public Documenttype getDocumenttype() {
 		return this.documenttype;
 	}
@@ -132,28 +149,12 @@ public class Documentregister implements Serializable {
 		this.organisationhp = organisationhp;
 	}
 
-	public Confidentialitylevel getConfidentialitylevel() {
-		return this.confidentialitylevel;
-	}
-
-	public void setConfidentialitylevel(Confidentialitylevel confidentialitylevel) {
-		this.confidentialitylevel = confidentialitylevel;
-	}
-
 	public Patient getPatient() {
 		return this.patient;
 	}
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-	}
-
-	public Documentrepository getDocumentrepository() {
-		return this.documentrepository;
-	}
-
-	public void setDocumentrepository(Documentrepository documentrepository) {
-		this.documentrepository = documentrepository;
 	}
 
 	public List<Permissionmatrix> getPermissionmatrixs() {

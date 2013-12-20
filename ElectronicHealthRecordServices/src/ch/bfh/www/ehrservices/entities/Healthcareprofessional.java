@@ -15,6 +15,7 @@ public class Healthcareprofessional implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String email;
@@ -25,23 +26,23 @@ public class Healthcareprofessional implements Serializable {
 
 	private String hpc;
 
-	private int mobile;
+	private String mobile;
 
-	private int phone;
+	private String phone;
 
 	//bi-directional many-to-one association to Blacklist
 	@OneToMany(mappedBy="healthcareprofessional")
 	private List<Blacklist> blacklists;
 
-	//bi-directional many-to-one association to Person
-	@ManyToOne
-	@JoinColumn(name="personID")
-	private Person person;
-
 	//bi-directional many-to-one association to Hptype
 	@ManyToOne
 	@JoinColumn(name="qualitativeDignityID")
 	private Hptype hptype;
+
+	//bi-directional many-to-one association to Person
+	@ManyToOne
+	@JoinColumn(name="personID")
+	private Person person;
 
 	//bi-directional many-to-one association to Organisationhp
 	@OneToMany(mappedBy="healthcareprofessional")
@@ -94,19 +95,19 @@ public class Healthcareprofessional implements Serializable {
 		this.hpc = hpc;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return this.mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -132,20 +133,20 @@ public class Healthcareprofessional implements Serializable {
 		return blacklist;
 	}
 
-	public Person getPerson() {
-		return this.person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
 	public Hptype getHptype() {
 		return this.hptype;
 	}
 
 	public void setHptype(Hptype hptype) {
 		this.hptype = hptype;
+	}
+
+	public Person getPerson() {
+		return this.person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public List<Organisationhp> getOrganisationhps() {

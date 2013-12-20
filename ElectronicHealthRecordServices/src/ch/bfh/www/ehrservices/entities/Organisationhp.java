@@ -15,6 +15,7 @@ public class Organisationhp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String zsr;
@@ -32,15 +33,15 @@ public class Organisationhp implements Serializable {
 	@JoinColumn(name="hpID")
 	private Healthcareprofessional healthcareprofessional;
 
-	//bi-directional many-to-one association to Organisation
-	@ManyToOne
-	@JoinColumn(name="organisationID")
-	private Organisation organisation;
-
 	//bi-directional many-to-one association to Hptype
 	@ManyToOne
 	@JoinColumn(name="hpTypeID")
 	private Hptype hptype;
+
+	//bi-directional many-to-one association to Organisation
+	@ManyToOne
+	@JoinColumn(name="organisationID")
+	private Organisation organisation;
 
 	//bi-directional many-to-one association to Patientrole
 	@OneToMany(mappedBy="organisationhp")
@@ -117,20 +118,20 @@ public class Organisationhp implements Serializable {
 		this.healthcareprofessional = healthcareprofessional;
 	}
 
-	public Organisation getOrganisation() {
-		return this.organisation;
-	}
-
-	public void setOrganisation(Organisation organisation) {
-		this.organisation = organisation;
-	}
-
 	public Hptype getHptype() {
 		return this.hptype;
 	}
 
 	public void setHptype(Hptype hptype) {
 		this.hptype = hptype;
+	}
+
+	public Organisation getOrganisation() {
+		return this.organisation;
+	}
+
+	public void setOrganisation(Organisation organisation) {
+		this.organisation = organisation;
 	}
 
 	public List<Patientrole> getPatientroles() {

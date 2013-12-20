@@ -66,10 +66,10 @@
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
 
-					<xsd:element name="phone" type="xsd:int"
+					<xsd:element name="phone" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="mobile" type="xsd:int"
+					<xsd:element name="mobile" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="email" type="xsd:string"

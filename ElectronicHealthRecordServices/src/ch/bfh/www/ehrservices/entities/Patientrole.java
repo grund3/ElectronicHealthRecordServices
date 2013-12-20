@@ -15,10 +15,16 @@ public class Patientrole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date accessTill;
+
+	//bi-directional many-to-one association to Organisationhp
+	@ManyToOne
+	@JoinColumn(name="organisationHpID")
+	private Organisationhp organisationhp;
 
 	//bi-directional many-to-one association to Patient
 	@ManyToOne
@@ -29,11 +35,6 @@ public class Patientrole implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="roleID")
 	private Role role;
-
-	//bi-directional many-to-one association to Organisationhp
-	@ManyToOne
-	@JoinColumn(name="organisationHpID")
-	private Organisationhp organisationhp;
 
 	public Patientrole() {
 	}
@@ -54,6 +55,14 @@ public class Patientrole implements Serializable {
 		this.accessTill = accessTill;
 	}
 
+	public Organisationhp getOrganisationhp() {
+		return this.organisationhp;
+	}
+
+	public void setOrganisationhp(Organisationhp organisationhp) {
+		this.organisationhp = organisationhp;
+	}
+
 	public Patient getPatient() {
 		return this.patient;
 	}
@@ -68,14 +77,6 @@ public class Patientrole implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public Organisationhp getOrganisationhp() {
-		return this.organisationhp;
-	}
-
-	public void setOrganisationhp(Organisationhp organisationhp) {
-		this.organisationhp = organisationhp;
 	}
 
 }

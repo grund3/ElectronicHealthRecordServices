@@ -14,17 +14,18 @@ public class Blacklist implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
-	//bi-directional many-to-one association to Patient
-	@ManyToOne
-	@JoinColumn(name="patientID")
-	private Patient patient;
 
 	//bi-directional many-to-one association to Healthcareprofessional
 	@ManyToOne
 	@JoinColumn(name="hpID")
 	private Healthcareprofessional healthcareprofessional;
+
+	//bi-directional many-to-one association to Patient
+	@ManyToOne
+	@JoinColumn(name="patientID")
+	private Patient patient;
 
 	public Blacklist() {
 	}
@@ -37,20 +38,20 @@ public class Blacklist implements Serializable {
 		this.id = id;
 	}
 
-	public Patient getPatient() {
-		return this.patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
 	public Healthcareprofessional getHealthcareprofessional() {
 		return this.healthcareprofessional;
 	}
 
 	public void setHealthcareprofessional(Healthcareprofessional healthcareprofessional) {
 		this.healthcareprofessional = healthcareprofessional;
+	}
+
+	public Patient getPatient() {
+		return this.patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 }

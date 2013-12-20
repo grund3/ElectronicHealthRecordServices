@@ -269,7 +269,7 @@
                         */
 
                         
-                                    protected int localPhone ;
+                                    protected java.lang.String localPhone ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -285,9 +285,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return int
+                           * @return java.lang.String
                            */
-                           public  int getPhone(){
+                           public  java.lang.String getPhone(){
                                return localPhone;
                            }
 
@@ -297,11 +297,8 @@
                                * Auto generated setter method
                                * @param param Phone
                                */
-                               public void setPhone(int param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localPhoneTracker =
-                                       param != java.lang.Integer.MIN_VALUE;
+                               public void setPhone(java.lang.String param){
+                            localPhoneTracker = param != null;
                                    
                                             this.localPhone=param;
                                     
@@ -314,7 +311,7 @@
                         */
 
                         
-                                    protected int localMobile ;
+                                    protected java.lang.String localMobile ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -330,9 +327,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return int
+                           * @return java.lang.String
                            */
-                           public  int getMobile(){
+                           public  java.lang.String getMobile(){
                                return localMobile;
                            }
 
@@ -342,11 +339,8 @@
                                * Auto generated setter method
                                * @param param Mobile
                                */
-                               public void setMobile(int param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localMobileTracker =
-                                       param != java.lang.Integer.MIN_VALUE;
+                               public void setMobile(java.lang.String param){
+                            localMobileTracker = param != null;
                                    
                                             this.localMobile=param;
                                     
@@ -554,26 +548,36 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "phone", xmlWriter);
                              
-                                               if (localPhone==java.lang.Integer.MIN_VALUE) {
-                                           
-                                                         throw new org.apache.axis2.databinding.ADBException("phone cannot be null!!");
-                                                      
-                                               } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPhone));
-                                               }
+
+                                          if (localPhone==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("phone cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localPhone);
+                                            
+                                          }
                                     
                                    xmlWriter.writeEndElement();
                              } if (localMobileTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "mobile", xmlWriter);
                              
-                                               if (localMobile==java.lang.Integer.MIN_VALUE) {
-                                           
-                                                         throw new org.apache.axis2.databinding.ADBException("mobile cannot be null!!");
-                                                      
-                                               } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMobile));
-                                               }
+
+                                          if (localMobile==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("mobile cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localMobile);
+                                            
+                                          }
                                     
                                    xmlWriter.writeEndElement();
                              } if (localEmailTracker){
@@ -837,15 +841,21 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "phone"));
                                  
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPhone));
-                            } if (localMobileTracker){
+                                        if (localPhone != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPhone));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("phone cannot be null!!");
+                                        }
+                                    } if (localMobileTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "mobile"));
                                  
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMobile));
-                            } if (localEmailTracker){
+                                        if (localMobile != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMobile));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("mobile cannot be null!!");
+                                        }
+                                    } if (localEmailTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "email"));
                                  
@@ -1080,7 +1090,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setPhone(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     
@@ -1088,8 +1098,6 @@
                                 
                                     else {
                                         
-                                               object.setPhone(java.lang.Integer.MIN_VALUE);
-                                           
                                     }
                                 
                                     
@@ -1106,7 +1114,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setMobile(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     
@@ -1114,8 +1122,6 @@
                                 
                                     else {
                                         
-                                               object.setMobile(java.lang.Integer.MIN_VALUE);
-                                           
                                     }
                                 
                                     
