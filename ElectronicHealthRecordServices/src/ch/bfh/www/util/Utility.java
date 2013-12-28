@@ -165,7 +165,7 @@ public class Utility {
 		ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
 		
 		newDoc.setDocumentRegisterID(dbDocRegister.getId());			
-		newDoc.setConfindentialityLevel(dbDocRegister.getConfidentialitylevel().getNameDe()); // TODO Mehrsprachigkeit
+		newDoc.setConfindentialityLevel(dbDocRegister.getConfidentialitylevel() != null ? dbDocRegister.getConfidentialitylevel().getNameDe() : null); // TODO Mehrsprachigkeit
 		newDoc.setCreationDate(Utility.convertDateToCalendar(dbDocRegister.getCreationDate()));
 		
 		// add document log 
