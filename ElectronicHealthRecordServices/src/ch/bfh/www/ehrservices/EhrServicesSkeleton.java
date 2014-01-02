@@ -759,6 +759,8 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientId(
 			ch.bfh.www.ehrservices.GetAllDocumentsByPatientId getAllDocumentsByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getAllDocumentsByPatientId.getPatientID());
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		
 		List<ch.bfh.www.ehrservices.entities.Documentregister> dbDocs = query.getResultList();
 		
 		// Create document register objects and add them to the array in the response object
