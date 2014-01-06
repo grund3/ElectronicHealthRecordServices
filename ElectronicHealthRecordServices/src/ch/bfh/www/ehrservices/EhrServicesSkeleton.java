@@ -129,13 +129,15 @@ public class EhrServicesSkeleton {
 		}
 		
 		
-		Query query = Utility.getEM().createQuery(statement);
+		Query query = Utility.getEM().createQuery(statement);		
 		if(attributes.isCreationDateSpecified()) {
 			query.setParameter("creationDate", attributes.getCreationDate().getTime(), TemporalType.DATE);
 		}
 		if(attributes.isUploadDateSpecified()) {
 			query.setParameter("uploadDate", attributes.getUploadDate().getTime(), TemporalType.DATE);
 		}
+		
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		
 		List<ch.bfh.www.ehrservices.entities.Documentregister> dbDocs = query.getResultList();
 		
@@ -159,6 +161,7 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetDocumentByIdResponse getDocumentById(
 			ch.bfh.www.ehrservices.GetDocumentById getDocumentById) {
 		Query query = Utility.getEM().createQuery("SELECT d From Documentrepository d WHERE d.id = "+ getDocumentById.getDocumentID());
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		ch.bfh.www.ehrservices.entities.Documentrepository dbDocument = (Documentrepository) query.getSingleResult();
 		
 		// Create DocumentRepository object and add it to the response object
