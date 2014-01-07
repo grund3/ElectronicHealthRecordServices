@@ -447,13 +447,20 @@ public class EhrServicesSkeleton {
 			dbPatientRoleList = query.getResultList();
 		}
 		
-		
+		ch.bfh.www.ehrservices.OrganisationHP orgHP = null;
 		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
 		if(getHPByPatientAndRole.getPatientID() == 0) {
 			for(ch.bfh.www.ehrservices.entities.Organisationhp dbOrgaHp : dbOrganisationHPList) {			 
 				
 				// create organisation hp object
-				ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbOrgaHp);
+				orgHP = Utility.createOrganisationHPHelper(dbOrgaHp);
+				
+				
+				if(dbOrgaHp.getPatientroles() != null && !dbOrgaHp.getPatientroles().isEmpty()) {
+					orgHP.setRole(dbOrgaHp.getPatientroles().get(0).getRole().getNameDe());
+					orgHP.setRoleID(dbOrgaHp.getPatientroles().get(0).getRole().getId());
+					orgHP.setAccessTill(Utility.convertDateToCalendar(dbOrgaHp.getPatientroles().get(0).getAccessTill()));
+				}
 				
 				response.addHealthcareProfessional(orgHP);
 			}
@@ -462,7 +469,11 @@ public class EhrServicesSkeleton {
 			for(ch.bfh.www.ehrservices.entities.Patientrole dbPatientRole : dbPatientRoleList) {			 
 				
 				// create organisation hp object
-				ch.bfh.www.ehrservices.OrganisationHP orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
+				orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
+				
+				orgHP.setRole(dbPatientRole.getRole().getNameDe());
+				orgHP.setRoleID(dbPatientRole.getRole().getId());
+				orgHP.setAccessTill(Utility.convertDateToCalendar(dbPatientRole.getAccessTill()));
 				
 				response.addHealthcareProfessional(orgHP);
 			}
@@ -730,7 +741,15 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetHPRoleResponse setHPRole(
 			ch.bfh.www.ehrservices.SetHPRole setHPRole) {
 		Utility.getEM().getTransaction().begin();
+		
 		ch.bfh.www.ehrservices.entities.Patientrole hpRole = new Patientrole();
+		Query query = Utility.getEM().createQuery("SELECT pr From Patientrole pr WHERE pr.patient.id = "+ setHPRole.getPatientID()
+				+ " AND pr.organisationhp.id = " + setHPRole.getHealthCareProfessionalID());
+		List<ch.bfh.www.ehrservices.entities.Patientrole> list = query.getResultList();
+		if(!list.isEmpty()) {
+			hpRole = (Patientrole) query.getSingleResult();
+		}
+		
 		hpRole.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setHPRole.getPatientID()));
 		hpRole.setRole(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Role.class, setHPRole.getRoleID()));
 		hpRole.setOrganisationhp(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Organisationhp.class, setHPRole.getHealthCareProfessionalID())); // TODO wäre organisaitonhp nicht hp

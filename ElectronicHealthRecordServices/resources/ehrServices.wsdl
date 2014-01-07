@@ -128,6 +128,7 @@
 					</xsd:element>
 					<xsd:element maxOccurs="unbounded" minOccurs="0" name="documentLog" type="bfh:documentLog">
 					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="documentRepositoryID" type="xsd:int"/>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getDocumentsByAttributes">
@@ -286,6 +287,12 @@
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="0" name="zsr" type="xsd:string">
 					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="role" type="xsd:string">
+					</xsd:element>
+
+					<xsd:element maxOccurs="1" minOccurs="0" name="roleID" type="xsd:int">
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="accessTill" type="xsd:dateTime"/>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getBlacklistByPatientId">

@@ -95,8 +95,11 @@ public class Utility {
 	 * @return calendar
 	 */
 	public static GregorianCalendar convertDateToCalendar(Date date) {
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(date);
+		GregorianCalendar cal = null;
+		if(date != null) {
+			cal = new GregorianCalendar();
+			cal.setTime(date);
+		}
 		return cal;
 	}
 	
@@ -180,6 +183,7 @@ public class Utility {
 		newDoc.setDocumentUploader(Utility.createOrganisationHPHelper(dbDocRegister.getOrganisationhp()));
 		newDoc.setTitle(dbDocRegister.getTitle());
 		newDoc.setUploadDate(Utility.convertDateToCalendar(dbDocRegister.getUploadDate()));
+		newDoc.setDocumentRepositoryID(dbDocRegister.getDocumentrepository().getId());
 		
 		return newDoc;
 	}

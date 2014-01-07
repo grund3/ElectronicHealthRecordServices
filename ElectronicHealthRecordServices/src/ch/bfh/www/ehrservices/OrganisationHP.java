@@ -168,6 +168,135 @@
                                }
                             
 
+                        /**
+                        * field for Role
+                        */
+
+                        
+                                    protected java.lang.String localRole ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localRoleTracker = false ;
+
+                           public boolean isRoleSpecified(){
+                               return localRoleTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getRole(){
+                               return localRole;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Role
+                               */
+                               public void setRole(java.lang.String param){
+                            localRoleTracker = param != null;
+                                   
+                                            this.localRole=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for RoleID
+                        */
+
+                        
+                                    protected int localRoleID ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localRoleIDTracker = false ;
+
+                           public boolean isRoleIDSpecified(){
+                               return localRoleIDTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return int
+                           */
+                           public  int getRoleID(){
+                               return localRoleID;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param RoleID
+                               */
+                               public void setRoleID(int param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localRoleIDTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
+                                   
+                                            this.localRoleID=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for AccessTill
+                        */
+
+                        
+                                    protected java.util.Calendar localAccessTill ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localAccessTillTracker = false ;
+
+                           public boolean isAccessTillSpecified(){
+                               return localAccessTillTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.util.Calendar
+                           */
+                           public  java.util.Calendar getAccessTill(){
+                               return localAccessTill;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param AccessTill
+                               */
+                               public void setAccessTill(java.util.Calendar param){
+                            localAccessTillTracker = param != null;
+                                   
+                                            this.localAccessTill=param;
+                                    
+
+                               }
+                            
+
      
      
         /**
@@ -270,6 +399,55 @@
 
                                         
                                                    xmlWriter.writeCharacters(localZsr);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localRoleTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "role", xmlWriter);
+                             
+
+                                          if (localRole==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("role cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localRole);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localRoleIDTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "roleID", xmlWriter);
+                             
+                                               if (localRoleID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("roleID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRoleID));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localAccessTillTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "accessTill", xmlWriter);
+                             
+
+                                          if (localAccessTill==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("accessTill cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessTill));
                                             
                                           }
                                     
@@ -495,6 +673,30 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("zsr cannot be null!!");
                                         }
+                                    } if (localRoleTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "role"));
+                                 
+                                        if (localRole != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRole));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("role cannot be null!!");
+                                        }
+                                    } if (localRoleIDTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "roleID"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRoleID));
+                            } if (localAccessTillTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "accessTill"));
+                                 
+                                        if (localAccessTill != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessTill));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("accessTill cannot be null!!");
+                                        }
                                     }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -642,6 +844,80 @@
                                     
                                               object.setZsr(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","role").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"role" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setRole(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","roleID").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"roleID" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setRoleID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                               object.setRoleID(java.lang.Integer.MIN_VALUE);
+                                           
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","accessTill").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"accessTill" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setAccessTill(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(content));
                                               
                                         reader.next();
                                     
