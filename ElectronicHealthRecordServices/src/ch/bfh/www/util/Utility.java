@@ -118,6 +118,7 @@ public class Utility {
 		orgHp.setHpType(dbOrganisationHP.getHptype().getNameDe()); // TODO Mehrsprachigkeit
 		orgHp.setOrganisation(org);
 		orgHp.setZsr(dbOrganisationHP.getZsr());
+		orgHp.setOrganisationHPID(dbOrganisationHP.getId());
 		
 		return orgHp;
 	}
@@ -154,6 +155,8 @@ public class Utility {
 		hp.setHpc(dbHP.getHpc());
 		hp.setPerson(Utility.createPersonWithAddressHelper(dbHP.getPerson()));
 		hp.setQualitativeDignity(dbHP.getHptype().getNameDe()); // TODO Mehrsprachigkeit
+		hp.setEmail(dbHP.getEmail());
+		hp.setPhone(dbHP.getPhone());
 		
 		return hp;
 	}

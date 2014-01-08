@@ -252,6 +252,90 @@
                                }
                             
 
+                        /**
+                        * field for Phone
+                        */
+
+                        
+                                    protected java.lang.String localPhone ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPhoneTracker = false ;
+
+                           public boolean isPhoneSpecified(){
+                               return localPhoneTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getPhone(){
+                               return localPhone;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Phone
+                               */
+                               public void setPhone(java.lang.String param){
+                            localPhoneTracker = param != null;
+                                   
+                                            this.localPhone=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Email
+                        */
+
+                        
+                                    protected java.lang.String localEmail ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localEmailTracker = false ;
+
+                           public boolean isEmailSpecified(){
+                               return localEmailTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getEmail(){
+                               return localEmail;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Email
+                               */
+                               public void setEmail(java.lang.String param){
+                            localEmailTracker = param != null;
+                                   
+                                            this.localEmail=param;
+                                    
+
+                               }
+                            
+
      
      
         /**
@@ -397,6 +481,42 @@
 
                                         
                                                    xmlWriter.writeCharacters(localHpc);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localPhoneTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "phone", xmlWriter);
+                             
+
+                                          if (localPhone==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("phone cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localPhone);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localEmailTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "email", xmlWriter);
+                             
+
+                                          if (localEmail==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("email cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localEmail);
                                             
                                           }
                                     
@@ -637,6 +757,24 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("hpc cannot be null!!");
                                         }
+                                    } if (localPhoneTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "phone"));
+                                 
+                                        if (localPhone != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPhone));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("phone cannot be null!!");
+                                        }
+                                    } if (localEmailTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "email"));
+                                 
+                                        if (localEmail != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localEmail));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("email cannot be null!!");
+                                        }
                                     }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -840,6 +978,54 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setHpc(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","phone").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"phone" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPhone(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","email").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"email" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setEmail(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();

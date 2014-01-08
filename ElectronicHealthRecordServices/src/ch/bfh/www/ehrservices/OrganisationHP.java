@@ -297,6 +297,36 @@
                                }
                             
 
+                        /**
+                        * field for OrganisationHPID
+                        */
+
+                        
+                                    protected int localOrganisationHPID ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return int
+                           */
+                           public  int getOrganisationHPID(){
+                               return localOrganisationHPID;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param OrganisationHPID
+                               */
+                               public void setOrganisationHPID(int param){
+                            
+                                            this.localOrganisationHPID=param;
+                                    
+
+                               }
+                            
+
      
      
         /**
@@ -453,6 +483,19 @@
                                     
                                    xmlWriter.writeEndElement();
                              }
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "organisationHPID", xmlWriter);
+                             
+                                               if (localOrganisationHPID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("organisationHPID cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrganisationHPID));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
                     xmlWriter.writeEndElement();
                
 
@@ -698,6 +741,12 @@
                                            throw new org.apache.axis2.databinding.ADBException("accessTill cannot be null!!");
                                         }
                                     }
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "organisationHPID"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrganisationHPID));
+                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -926,7 +975,32 @@
                                     else {
                                         
                                     }
-                                  
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","organisationHPID").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"organisationHPID" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setOrganisationHPID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                              
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

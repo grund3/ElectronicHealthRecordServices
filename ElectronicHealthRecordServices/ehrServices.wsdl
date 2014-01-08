@@ -263,6 +263,10 @@
 					<xsd:element name="hpc" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
+					<xsd:element name="phone" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="email" type="xsd:string"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="setConfidentiality">
@@ -372,7 +376,10 @@
 					<xsd:element name="roleID" type="xsd:int"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="accessTill" type="xsd:dateTime" minOccurs="0" maxOccurs="1"></xsd:element>
+					<xsd:element name="accessTill" type="xsd:dateTime"
+						minOccurs="0" maxOccurs="1">
+					</xsd:element>
+					<xsd:element name="organisationHPID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getBlacklistByPatientId">

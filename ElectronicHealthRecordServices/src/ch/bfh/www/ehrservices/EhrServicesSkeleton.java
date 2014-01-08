@@ -64,6 +64,7 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetSpecialPermissionByPatient getSpecialPermissionByPatient) {
 		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getSpecialPermissionByPatient.getPatientID() +
 				" AND pm.documentregister != null AND pm.healthcareprofessional != null");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<ch.bfh.www.ehrservices.entities.Permissionmatrix> dbPermissionmatrix = query.getResultList();
 		
 		GetSpecialPermissionByPatientResponse response = new GetSpecialPermissionByPatientResponse();
@@ -253,6 +254,7 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetEmergencyContactByPatientIdResponse getEmergencyContactByPatientId(
 			ch.bfh.www.ehrservices.GetEmergencyContactByPatientId getEmergencyContactByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT ec From Emergencycontact ec WHERE ec.patient.id = "+ getEmergencyContactByPatientId.getPatientID());
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<ch.bfh.www.ehrservices.entities.Emergencycontact> dbEmergencyContact = query.getResultList();
 		
 		GetEmergencyContactByPatientIdResponse response = new GetEmergencyContactByPatientIdResponse();
@@ -281,6 +283,7 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetLogin getLogin) {
 		String username = getLogin.getUsername();
 		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
 		
 		// Create Patient object
@@ -306,6 +309,7 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetBlacklistByPatientIdResponse getBlacklistByPatientId(
 			ch.bfh.www.ehrservices.GetBlacklistByPatientId getBlacklistByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT bl From Blacklist bl WHERE bl.patient.id = "+ getBlacklistByPatientId.getPatientID());
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<ch.bfh.www.ehrservices.entities.Blacklist> dbBlacklist = query.getResultList();
 		
 		GetBlacklistByPatientIdResponse response = new GetBlacklistByPatientIdResponse();
@@ -436,8 +440,9 @@ public class EhrServicesSkeleton {
 				// If there are no conditions set, it returns all HPs for the patient or not for the patient
 			}
 		}
-					
+			
 		Query query = Utility.getEM().createQuery(statement);
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<ch.bfh.www.ehrservices.entities.Patientrole> dbPatientRoleList = null;
 		List<ch.bfh.www.ehrservices.entities.Organisationhp> dbOrganisationHPList = null;
 		if(getHPByPatientAndRole.getPatientID() == 0) {
@@ -634,6 +639,7 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientId(
 			ch.bfh.www.ehrservices.GetWhitelistByPatientId getWhitelistByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT wl From Whitelist wl WHERE wl.patient1.id = "+ getWhitelistByPatientId.getPatientID());
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<ch.bfh.www.ehrservices.entities.Whitelist> dbWhitelist = query.getResultList();
 		
 		GetWhitelistByPatientIdResponse response = new GetWhitelistByPatientIdResponse();
@@ -668,6 +674,7 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId getCurrentPermissionMatrixByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getCurrentPermissionMatrixByPatientId.getPatientID() +
 				" AND pm.documentregister = null AND pm.healthcareprofessional = null");
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		ch.bfh.www.ehrservices.entities.Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
 		
 		GetCurrentPermissionMatrixByPatientIdResponse response = new GetCurrentPermissionMatrixByPatientIdResponse();
