@@ -1,6 +1,6 @@
 
 /**
- * SpecialPermissions.java
+ * SpecialPermissionsType.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:34:40 IST)
@@ -11,14 +11,14 @@
             
 
             /**
-            *  SpecialPermissions bean class
+            *  SpecialPermissionsType bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class SpecialPermissions
+        public  class SpecialPermissionsType
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
-                name = SpecialPermissions
+                name = SpecialPermissionsType
                 Namespace URI = http://www.bfh.ch/ehrServices/
                 Namespace Prefix = ns1
                 */
@@ -29,14 +29,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.DocumentRegisterEntry localDocumentRegisterEntry ;
+                                    protected ch.bfh.www.ehrservices.DocumentRegisterEntryType localDocumentRegisterEntry ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.DocumentRegisterEntry
+                           * @return ch.bfh.www.ehrservices.DocumentRegisterEntryType
                            */
-                           public  ch.bfh.www.ehrservices.DocumentRegisterEntry getDocumentRegisterEntry(){
+                           public  ch.bfh.www.ehrservices.DocumentRegisterEntryType getDocumentRegisterEntry(){
                                return localDocumentRegisterEntry;
                            }
 
@@ -46,7 +46,7 @@
                                * Auto generated setter method
                                * @param param DocumentRegisterEntry
                                */
-                               public void setDocumentRegisterEntry(ch.bfh.www.ehrservices.DocumentRegisterEntry param){
+                               public void setDocumentRegisterEntry(ch.bfh.www.ehrservices.DocumentRegisterEntryType param){
                             
                                             this.localDocumentRegisterEntry=param;
                                     
@@ -59,14 +59,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.HealthCareProfessional localHealthCareProfessional ;
+                                    protected ch.bfh.www.ehrservices.HealthCareProfessionalType localHealthCareProfessional ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.HealthCareProfessional
+                           * @return ch.bfh.www.ehrservices.HealthCareProfessionalType
                            */
-                           public  ch.bfh.www.ehrservices.HealthCareProfessional getHealthCareProfessional(){
+                           public  ch.bfh.www.ehrservices.HealthCareProfessionalType getHealthCareProfessional(){
                                return localHealthCareProfessional;
                            }
 
@@ -76,7 +76,7 @@
                                * Auto generated setter method
                                * @param param HealthCareProfessional
                                */
-                               public void setHealthCareProfessional(ch.bfh.www.ehrservices.HealthCareProfessional param){
+                               public void setHealthCareProfessional(ch.bfh.www.ehrservices.HealthCareProfessionalType param){
                             
                                             this.localHealthCareProfessional=param;
                                     
@@ -132,11 +132,11 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.bfh.ch/ehrServices/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":SpecialPermissions",
+                           namespacePrefix+":SpecialPermissionsType",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "SpecialPermissions",
+                           "SpecialPermissionsType",
                            xmlWriter);
                    }
 
@@ -382,9 +382,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static SpecialPermissions parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            SpecialPermissions object =
-                new SpecialPermissions();
+        public static SpecialPermissionsType parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            SpecialPermissionsType object =
+                new SpecialPermissionsType();
 
             int event;
             java.lang.String nillableValue = null;
@@ -408,10 +408,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"SpecialPermissions".equals(type)){
+                            if (!"SpecialPermissionsType".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (SpecialPermissions)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
+                                return (SpecialPermissionsType)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -438,7 +438,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","documentRegisterEntry").equals(reader.getName())){
                                 
-                                                object.setDocumentRegisterEntry(ch.bfh.www.ehrservices.DocumentRegisterEntry.Factory.parse(reader));
+                                                object.setDocumentRegisterEntry(ch.bfh.www.ehrservices.DocumentRegisterEntryType.Factory.parse(reader));
                                               
                                         reader.next();
                                     
@@ -454,7 +454,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","healthCareProfessional").equals(reader.getName())){
                                 
-                                                object.setHealthCareProfessional(ch.bfh.www.ehrservices.HealthCareProfessional.Factory.parse(reader));
+                                                object.setHealthCareProfessional(ch.bfh.www.ehrservices.HealthCareProfessionalType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

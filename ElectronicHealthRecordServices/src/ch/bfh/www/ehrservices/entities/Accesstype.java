@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Accesstype.findAll", query="SELECT a FROM Accesstype a")
+@NamedQuery(name="EntityAccesstype.findAll", query="SELECT a FROM Accesstype a")
 public class Accesstype implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -18,14 +18,7 @@ import javax.persistence.TemporalType;
 
 import org.apache.axiom.attachments.ByteArrayDataSource;
 
-import ch.bfh.www.ehrservices.entities.Address;
-import ch.bfh.www.ehrservices.entities.Blacklist;
-import ch.bfh.www.ehrservices.entities.Documentrepository;
-import ch.bfh.www.ehrservices.entities.Emergencycontact;
-import ch.bfh.www.ehrservices.entities.Patientrole;
-import ch.bfh.www.ehrservices.entities.Permissionmatrix;
-import ch.bfh.www.ehrservices.entities.Person;
-import ch.bfh.www.ehrservices.entities.Whitelist;
+import ch.bfh.www.ehrservices.entities.*;
 import ch.bfh.www.util.Utility;
 
 
@@ -65,12 +58,12 @@ public class EhrServicesSkeleton {
 		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getSpecialPermissionByPatient.getPatientID() +
 				" AND pm.documentregister != null AND pm.healthcareprofessional != null");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		List<ch.bfh.www.ehrservices.entities.Permissionmatrix> dbPermissionmatrix = query.getResultList();
+		List<Permissionmatrix> dbPermissionmatrix = query.getResultList();
 		
 		GetSpecialPermissionByPatientResponse response = new GetSpecialPermissionByPatientResponse();
 		
-		for(ch.bfh.www.ehrservices.entities.Permissionmatrix dbEntry : dbPermissionmatrix) {			
-			ch.bfh.www.ehrservices.SpecialPermissions specialPermission = new SpecialPermissions();
+		for (Permissionmatrix dbEntry : dbPermissionmatrix) {			
+			ch.bfh.www.ehrservices.SpecialPermissionsType specialPermission = new SpecialPermissionsType();
 			specialPermission.setDocumentRegisterEntry(Utility.createDocumentRegisterHelper(dbEntry.getDocumentregister()));
 			specialPermission.setHealthCareProfessional(Utility.createHPHelper(dbEntry.getHealthcareprofessional()));
 						
@@ -105,7 +98,7 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetDocumentsByAttributesResponse getDocumentsByAttributes(
 			ch.bfh.www.ehrservices.GetDocumentsByAttributes getDocumentsByAttributes) {
 		
-		ch.bfh.www.ehrservices.Attributes attributes = getDocumentsByAttributes.getAttributes();
+		AttributesType attributes = getDocumentsByAttributes.getAttributes();
 		String statement = "SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getDocumentsByAttributes.getPatientID();
 		if(attributes.isConfindentialityLevelIDSpecified()) {
 			statement += " AND dr.confidentialitylevel.id = '" + attributes.getConfindentialityLevelID() + "'"; 
@@ -140,11 +133,11 @@ public class EhrServicesSkeleton {
 		
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		
-		List<ch.bfh.www.ehrservices.entities.Documentregister> dbDocs = query.getResultList();
+		List<Documentregister> dbDocs = query.getResultList();
 		
 		// Create document register objects and add them to the array in the response object
 		GetDocumentsByAttributesResponse response = new GetDocumentsByAttributesResponse();
-		for(ch.bfh.www.ehrservices.entities.Documentregister doc : dbDocs) {			
+		for(Documentregister doc : dbDocs) {			
 			// create documentregister object
 			response.addDocuments(Utility.createDocumentRegisterHelper(doc));
 		}
@@ -163,7 +156,7 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetDocumentById getDocumentById) {
 		Query query = Utility.getEM().createQuery("SELECT d From Documentrepository d WHERE d.id = "+ getDocumentById.getDocumentID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		ch.bfh.www.ehrservices.entities.Documentrepository dbDocument = (Documentrepository) query.getSingleResult();
+		Documentrepository dbDocument = (Documentrepository) query.getSingleResult();
 		
 		// Create DocumentRepository object and add it to the response object
 		GetDocumentByIdResponse response = new GetDocumentByIdResponse();
@@ -199,10 +192,10 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
 			ch.bfh.www.ehrservices.SetEmergencyContact setEmergencyContact) {
 		
-		ch.bfh.www.ehrservices.entities.Emergencycontact contact = new Emergencycontact();
-		ch.bfh.www.ehrservices.entities.Person dbPerson = new Person();
-		ch.bfh.www.ehrservices.entities.Address dbAddress = new Address();
-		ch.bfh.www.ehrservices.Person person = setEmergencyContact.getEmergencyContact();
+		Emergencycontact contact = new Emergencycontact();
+		Person dbPerson = new Person();
+		Address dbAddress = new Address();
+		PersonType person = setEmergencyContact.getEmergencyContact();
 		
 		// create address
 		dbAddress.setAddress(person.getAddress().getAddress());
@@ -227,7 +220,7 @@ public class EhrServicesSkeleton {
 		Utility.getEM().persist(dbPerson);
 		
 		// create emergency contact
-		ch.bfh.www.ehrservices.entities.Patient patient = Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setEmergencyContact.getPatientID());
+		Patient patient = Utility.getEM().find(Patient.class, setEmergencyContact.getPatientID());
 		contact.setPatient(patient);
 		contact.setPerson(dbPerson);
 		
@@ -255,14 +248,14 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetEmergencyContactByPatientId getEmergencyContactByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT ec From Emergencycontact ec WHERE ec.patient.id = "+ getEmergencyContactByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		List<ch.bfh.www.ehrservices.entities.Emergencycontact> dbEmergencyContact = query.getResultList();
+		List<Emergencycontact> dbEmergencyContact = query.getResultList();
 		
 		GetEmergencyContactByPatientIdResponse response = new GetEmergencyContactByPatientIdResponse();
 		
-		for(ch.bfh.www.ehrservices.entities.Emergencycontact dbEntry : dbEmergencyContact) {			
+		for(Emergencycontact dbEntry : dbEmergencyContact) {			
 			
 			// create person object
-			ch.bfh.www.ehrservices.Person contact = Utility.createPersonWithAddressHelper(dbEntry.getPerson());
+			PersonType contact = Utility.createPersonWithAddressHelper(dbEntry.getPerson());
 						
 			response.addEmergencyContact(contact);
 		}
@@ -284,10 +277,10 @@ public class EhrServicesSkeleton {
 		String username = getLogin.getUsername();
 		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		ch.bfh.www.ehrservices.entities.Patient user = (ch.bfh.www.ehrservices.entities.Patient) query.getSingleResult();
+		Patient user = (Patient) query.getSingleResult();
 		
 		// Create Patient object
-		ch.bfh.www.ehrservices.Patient patient = Utility.createPatientHelper(user);
+		PatientType patient = Utility.createPatientHelper(user);
 		
 		// create address and person object
 		patient.setPerson(Utility.createPersonWithAddressHelper(user.getPerson()));
@@ -310,14 +303,14 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetBlacklistByPatientId getBlacklistByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT bl From Blacklist bl WHERE bl.patient.id = "+ getBlacklistByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		List<ch.bfh.www.ehrservices.entities.Blacklist> dbBlacklist = query.getResultList();
+		List<Blacklist> dbBlacklist = query.getResultList();
 		
 		GetBlacklistByPatientIdResponse response = new GetBlacklistByPatientIdResponse();
 		
-		for(ch.bfh.www.ehrservices.entities.Blacklist dbEntry : dbBlacklist) {			
+		for(Blacklist dbEntry : dbBlacklist) {			
 			
 			// create hp object
-			ch.bfh.www.ehrservices.HealthCareProfessional hp = Utility.createHPHelper(dbEntry.getHealthcareprofessional());
+			HealthCareProfessionalType hp = Utility.createHPHelper(dbEntry.getHealthcareprofessional());
 						
 			response.addHealthProfessionals(hp);
 		}
@@ -335,12 +328,12 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetRolesResponse getRoles(
 			ch.bfh.www.ehrservices.GetRoles getRoles) {
 		Query query = Utility.getEM().createQuery("SELECT r From Role r");
-		List<ch.bfh.www.ehrservices.entities.Role> dbRoles = query.getResultList();
+		List<Role> dbRoles = query.getResultList();
 		
 		// Create Role objects and add them to the array in the response object
 		GetRolesResponse response = new GetRolesResponse();
-		for(ch.bfh.www.ehrservices.entities.Role role : dbRoles) {
-			ch.bfh.www.ehrservices.Role newRole = new ch.bfh.www.ehrservices.Role();
+		for(Role role : dbRoles) {
+			RoleType newRole = new RoleType();
 			newRole.setId(role.getId());
 			newRole.setName(role.getNameDe()); //TODO Mehrsprachig
 			response.addRoles(newRole);
@@ -362,10 +355,10 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.SetSpecialPermission setSpecialPermission) {
 		Utility.getEM().getTransaction().begin();
 		
-		ch.bfh.www.ehrservices.entities.Permissionmatrix permissionMatrix = new Permissionmatrix();
-		permissionMatrix.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setSpecialPermission.getPatientID()));
-		permissionMatrix.setHealthcareprofessional(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Healthcareprofessional.class, setSpecialPermission.getHealthProfessionalID()));
-		permissionMatrix.setDocumentregister(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Documentregister.class, setSpecialPermission.getDocumentID()));
+		Permissionmatrix permissionMatrix = new Permissionmatrix();
+		permissionMatrix.setPatient(Utility.getEM().find(Patient.class, setSpecialPermission.getPatientID()));
+		permissionMatrix.setHealthcareprofessional(Utility.getEM().find(Healthcareprofessional.class, setSpecialPermission.getHealthProfessionalID()));
+		permissionMatrix.setDocumentregister(Utility.getEM().find(Documentregister.class, setSpecialPermission.getDocumentID()));
 		
 		Utility.getEM().persist(permissionMatrix);
 		Utility.getEM().getTransaction().commit();
@@ -387,9 +380,9 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.SetHpOnBlacklist setHpOnBlacklist) {
 		Utility.getEM().getTransaction().begin();
 		
-		ch.bfh.www.ehrservices.entities.Blacklist blacklist = new Blacklist();
-		blacklist.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setHpOnBlacklist.getPatientID()));
-		blacklist.setHealthcareprofessional(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Healthcareprofessional.class, setHpOnBlacklist.getHealthProfessionalID()));
+		Blacklist blacklist = new Blacklist();
+		blacklist.setPatient(Utility.getEM().find(Patient.class, setHpOnBlacklist.getPatientID()));
+		blacklist.setHealthcareprofessional(Utility.getEM().find(Healthcareprofessional.class, setHpOnBlacklist.getHealthProfessionalID()));
 		
 		Utility.getEM().persist(blacklist);
 		Utility.getEM().getTransaction().commit();
@@ -443,8 +436,8 @@ public class EhrServicesSkeleton {
 			
 		Query query = Utility.getEM().createQuery(statement);
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		List<ch.bfh.www.ehrservices.entities.Patientrole> dbPatientRoleList = null;
-		List<ch.bfh.www.ehrservices.entities.Organisationhp> dbOrganisationHPList = null;
+		List<Patientrole> dbPatientRoleList = null;
+		List<Organisationhp> dbOrganisationHPList = null;
 		if(getHPByPatientAndRole.getPatientID() == 0) {
 			dbOrganisationHPList = query.getResultList();
 		}
@@ -452,10 +445,10 @@ public class EhrServicesSkeleton {
 			dbPatientRoleList = query.getResultList();
 		}
 		
-		ch.bfh.www.ehrservices.OrganisationHP orgHP = null;
+		OrganisationHPType orgHP = null;
 		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
 		if(getHPByPatientAndRole.getPatientID() == 0) {
-			for(ch.bfh.www.ehrservices.entities.Organisationhp dbOrgaHp : dbOrganisationHPList) {			 
+			for(Organisationhp dbOrgaHp : dbOrganisationHPList) {			 
 				
 				// create organisation hp object
 				orgHP = Utility.createOrganisationHPHelper(dbOrgaHp);
@@ -471,7 +464,7 @@ public class EhrServicesSkeleton {
 			}
 		}
 		else {
-			for(ch.bfh.www.ehrservices.entities.Patientrole dbPatientRole : dbPatientRoleList) {			 
+			for(Patientrole dbPatientRole : dbPatientRoleList) {			 
 				
 				// create organisation hp object
 				orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
@@ -507,10 +500,10 @@ public class EhrServicesSkeleton {
 		
 		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ setPermissionMatrixForPatient.getPatientID() +
 				" AND pm.documentregister = null AND pm.healthcareprofessional = null");
-		ch.bfh.www.ehrservices.entities.Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
+		Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
 		
-		List<ch.bfh.www.ehrservices.entities.Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
-		ch.bfh.www.ehrservices.PermissionSchema schema = setPermissionMatrixForPatient.getPermissionSchema();
+		List<Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
+		PermissionSchemaType schema = setPermissionMatrixForPatient.getPermissionSchema();
 		
 		// Mein Behandelnder - Administrative Daten
 		dbSchemas.get(0).setValue(schema.getCareGiver_adminData() ? (byte)1 : (byte)0);
@@ -592,9 +585,9 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.SetWhitelist setWhitelist) {
 		Utility.getEM().getTransaction().begin();
 		
-		ch.bfh.www.ehrservices.entities.Whitelist whitelist = new Whitelist();
-		whitelist.setPatient1(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setWhitelist.getGiverPatientID()));
-		whitelist.setPatient2(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setWhitelist.getReceiverPatientID()));
+		Whitelist whitelist = new Whitelist();
+		whitelist.setPatient1(Utility.getEM().find(Patient.class, setWhitelist.getGiverPatientID()));
+		whitelist.setPatient2(Utility.getEM().find(Patient.class, setWhitelist.getReceiverPatientID()));
 		
 		Utility.getEM().persist(whitelist);
 		Utility.getEM().getTransaction().commit();
@@ -615,12 +608,12 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
 			ch.bfh.www.ehrservices.GetConfidentialityLevels getConfidentialityLevels) {
 		Query query = Utility.getEM().createQuery("SELECT c From Confidentialitylevel c");
-		List<ch.bfh.www.ehrservices.entities.Confidentialitylevel> dbConfLevels = query.getResultList();
+		List<Confidentialitylevel> dbConfLevels = query.getResultList();
 		
 		// Create confidentiality level objects and add them to the array in the response object
 		GetConfidentialityLevelsResponse response = new GetConfidentialityLevelsResponse();
-		for(ch.bfh.www.ehrservices.entities.Confidentialitylevel confLevel : dbConfLevels) {
-			ch.bfh.www.ehrservices.ConfidentialyLevel newConfLevel = new ch.bfh.www.ehrservices.ConfidentialyLevel();
+		for(Confidentialitylevel confLevel : dbConfLevels) {
+			ConfidentialyLevelType newConfLevel = new ConfidentialyLevelType();
 			newConfLevel.setConfidentialyLevelID(confLevel.getId());
 			newConfLevel.setName(confLevel.getNameDe()); //TODO Mehrsprachig
 			response.addConfidentialyLevels(newConfLevel);
@@ -640,12 +633,12 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetWhitelistByPatientId getWhitelistByPatientId) {
 		Query query = Utility.getEM().createQuery("SELECT wl From Whitelist wl WHERE wl.patient1.id = "+ getWhitelistByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		List<ch.bfh.www.ehrservices.entities.Whitelist> dbWhitelist = query.getResultList();
+		List<Whitelist> dbWhitelist = query.getResultList();
 		
 		GetWhitelistByPatientIdResponse response = new GetWhitelistByPatientIdResponse();
 		
-		for(ch.bfh.www.ehrservices.entities.Whitelist dbEntry : dbWhitelist) {
-			ch.bfh.www.ehrservices.Patient patient = Utility.createPatientHelper(dbEntry.getPatient2());
+		for(Whitelist dbEntry : dbWhitelist) {
+			PatientType patient = Utility.createPatientHelper(dbEntry.getPatient2());
 			patient.setPerson(Utility.createPersonWithAddressHelper(dbEntry.getPatient2().getPerson()));
 			
 			response.addPatients(patient);
@@ -675,14 +668,14 @@ public class EhrServicesSkeleton {
 		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getCurrentPermissionMatrixByPatientId.getPatientID() +
 				" AND pm.documentregister = null AND pm.healthcareprofessional = null");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		ch.bfh.www.ehrservices.entities.Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
+		Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
 		
 		GetCurrentPermissionMatrixByPatientIdResponse response = new GetCurrentPermissionMatrixByPatientIdResponse();
 		
 		// create permission schema object
-		ch.bfh.www.ehrservices.PermissionSchema schema = new PermissionSchema();
+		PermissionSchemaType schema = new PermissionSchemaType();
 		
-		List<ch.bfh.www.ehrservices.entities.Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
+		List<Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
 		
 		// Mein Behandelnder - Administrative Daten
 		schema.setCareGiver_adminData(dbSchemas.get(0).getValue() != 0);
@@ -749,17 +742,17 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.SetHPRole setHPRole) {
 		Utility.getEM().getTransaction().begin();
 		
-		ch.bfh.www.ehrservices.entities.Patientrole hpRole = new Patientrole();
+		Patientrole hpRole = new Patientrole();
 		Query query = Utility.getEM().createQuery("SELECT pr From Patientrole pr WHERE pr.patient.id = "+ setHPRole.getPatientID()
 				+ " AND pr.organisationhp.id = " + setHPRole.getHealthCareProfessionalID());
-		List<ch.bfh.www.ehrservices.entities.Patientrole> list = query.getResultList();
+		List<Patientrole> list = query.getResultList();
 		if(!list.isEmpty()) {
 			hpRole = (Patientrole) query.getSingleResult();
 		}
 		
-		hpRole.setPatient(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Patient.class, setHPRole.getPatientID()));
-		hpRole.setRole(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Role.class, setHPRole.getRoleID()));
-		hpRole.setOrganisationhp(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Organisationhp.class, setHPRole.getHealthCareProfessionalID())); // TODO wäre organisaitonhp nicht hp
+		hpRole.setPatient(Utility.getEM().find(Patient.class, setHPRole.getPatientID()));
+		hpRole.setRole(Utility.getEM().find(Role.class, setHPRole.getRoleID()));
+		hpRole.setOrganisationhp(Utility.getEM().find(Organisationhp.class, setHPRole.getHealthCareProfessionalID())); // TODO wäre organisaitonhp nicht hp
 		hpRole.setAccessTill(setHPRole.getAccessTill().getTime());
 		
 		Utility.getEM().persist(hpRole);
@@ -790,12 +783,12 @@ public class EhrServicesSkeleton {
 		Query query = Utility.getEM().createQuery("SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getAllDocumentsByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		
-		List<ch.bfh.www.ehrservices.entities.Documentregister> dbDocs = query.getResultList();
+		List<Documentregister> dbDocs = query.getResultList();
 		
 		// Create document register objects and add them to the array in the response object
 		GetAllDocumentsByPatientIdResponse response = new GetAllDocumentsByPatientIdResponse();
-		for(ch.bfh.www.ehrservices.entities.Documentregister doc : dbDocs) {
-			ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
+		for(Documentregister doc : dbDocs) {
+			DocumentRegisterEntryType newDoc = new DocumentRegisterEntryType();			
 			
 			// create document register object			
 			response.addDocumentRegisterEntries(Utility.createDocumentRegisterHelper(doc));
@@ -817,8 +810,8 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.SetConfidentiality setConfidentiality) {
 		Utility.getEM().getTransaction().begin();
 		
-		ch.bfh.www.ehrservices.entities.Documentregister documentRegister = Utility.getEM().find(ch.bfh.www.ehrservices.entities.Documentregister.class, setConfidentiality.getDocumentRegisterID());
-		documentRegister.setConfidentialitylevel(Utility.getEM().find(ch.bfh.www.ehrservices.entities.Confidentialitylevel.class, setConfidentiality.getConfidentialityID()));
+		Documentregister documentRegister = Utility.getEM().find(Documentregister.class, setConfidentiality.getDocumentRegisterID());
+		documentRegister.setConfidentialitylevel(Utility.getEM().find(Confidentialitylevel.class, setConfidentiality.getConfidentialityID()));
 		
 				
 		Utility.getEM().persist(documentRegister);

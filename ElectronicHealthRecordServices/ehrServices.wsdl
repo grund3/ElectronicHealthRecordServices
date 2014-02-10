@@ -14,20 +14,22 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="getLoginResponse">
+
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="patient" type="bfh:Patient"
-							minOccurs="0" maxOccurs="1" />
+						<xsd:element name="patient"
+							type="bfh:PatientType">
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="Patient">
+			<xsd:complexType name="PatientType">
 				<xsd:sequence>
 					<xsd:element name="patientID" type="xsd:int"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="person" type="bfh:Person"
+					<xsd:element name="person" type="bfh:PersonType"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="MPI" type="xsd:string"
@@ -45,9 +47,9 @@
 				</xsd:sequence>
 			</xsd:complexType>
 
-			<xsd:complexType name="Person">
+			<xsd:complexType name="PersonType">
 				<xsd:sequence>
-					<xsd:element name="address" type="bfh:Address"
+					<xsd:element name="address" type="bfh:AddressType"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="title" type="xsd:string"
@@ -78,7 +80,7 @@
 				</xsd:sequence>
 			</xsd:complexType>
 
-			<xsd:complexType name="Address">
+			<xsd:complexType name="AddressType">
 				<xsd:sequence>
 					<xsd:element name="address" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
@@ -132,14 +134,14 @@
 					<xsd:sequence>
 
 						<xsd:element name="documentRegisterEntries"
-							type="bfh:DocumentRegisterEntry" maxOccurs="unbounded"
+							type="bfh:DocumentRegisterEntryType" maxOccurs="unbounded"
 							minOccurs="0">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="DocumentRegisterEntry">
+			<xsd:complexType name="DocumentRegisterEntryType">
 				<xsd:sequence>
 					<xsd:element name="documentType" type="xsd:string"
 						minOccurs="1" maxOccurs="1">
@@ -152,7 +154,7 @@
 					</xsd:element>
 
 					<xsd:element name="documentUploader"
-						type="bfh:OrganisationHP" minOccurs="1" maxOccurs="1">
+						type="bfh:OrganisationHPType" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="uploadDate" type="xsd:dateTime"
 						minOccurs="1" maxOccurs="1">
@@ -164,7 +166,7 @@
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="documentLog"
-						type="bfh:documentLog" minOccurs="0" maxOccurs="unbounded">
+						type="bfh:DocumentLogType" minOccurs="0" maxOccurs="unbounded">
 					</xsd:element>
 					<xsd:element name="documentRepositoryID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
@@ -177,7 +179,7 @@
 							minOccurs="1" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="attributes"
-							type="bfh:Attributes" maxOccurs="1" minOccurs="1">
+							type="bfh:AttributesType" maxOccurs="1" minOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -187,14 +189,14 @@
 					<xsd:sequence>
 
 						<xsd:element name="documents"
-							type="bfh:DocumentRegisterEntry" minOccurs="0"
+							type="bfh:DocumentRegisterEntryType" minOccurs="0"
 							maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="Attributes">
+			<xsd:complexType name="AttributesType">
 				<xsd:sequence>
 					<xsd:element name="documentTypeID" type="xsd:int"
 						minOccurs="0" maxOccurs="1">
@@ -220,15 +222,15 @@
 				</xsd:sequence>
 			</xsd:complexType>
 
-			<xsd:complexType name="Organisation">
+			<xsd:complexType name="OrganisationType">
 				<xsd:sequence>
 					<xsd:element name="organisationID" type="xsd:int"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="address" type="bfh:Address"
+					<xsd:element name="address" type="bfh:AddressType"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="parent" type="bfh:Organisation"
+					<xsd:element name="parent" type="bfh:OrganisationType"
 						minOccurs="0" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="organisationType"
@@ -243,12 +245,12 @@
 				</xsd:sequence>
 			</xsd:complexType>
 
-			<xsd:complexType name="healthCareProfessional">
+			<xsd:complexType name="HealthCareProfessionalType">
 				<xsd:sequence>
 					<xsd:element name="hcpID" type="xsd:int"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="person" type="bfh:Person"
+					<xsd:element name="person" type="bfh:PersonType"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="qualitativeDignity"
@@ -307,7 +309,7 @@
 					<xsd:sequence>
 
 						<xsd:element name="confidentialyLevels"
-							type="bfh:ConfidentialyLevel" minOccurs="1"
+							type="bfh:ConfidentialyLevelType" minOccurs="1"
 							maxOccurs="unbounded">
 						</xsd:element>
 
@@ -315,7 +317,7 @@
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="ConfidentialyLevel">
+			<xsd:complexType name="ConfidentialyLevelType">
 				<xsd:sequence>
 					<xsd:element name="confidentialyLevelID"
 						type="xsd:int" minOccurs="1" maxOccurs="1">
@@ -349,19 +351,19 @@
 					<xsd:sequence>
 
 						<xsd:element name="healthcareProfessional"
-							type="bfh:OrganisationHP" minOccurs="0" maxOccurs="unbounded">
+							type="bfh:OrganisationHPType" minOccurs="0" maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="OrganisationHP">
+			<xsd:complexType name="OrganisationHPType">
 				<xsd:sequence>
 					<xsd:element name="healthcareProfessional"
-						type="bfh:healthCareProfessional" minOccurs="1" maxOccurs="1">
+						type="bfh:HealthCareProfessionalType" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="organisation"
-						type="bfh:Organisation" minOccurs="1" maxOccurs="1">
+						type="bfh:OrganisationType" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="hpType" type="xsd:string"
 						minOccurs="0" maxOccurs="1">
@@ -397,7 +399,7 @@
 					<xsd:sequence>
 
 						<xsd:element name="HealthProfessionals"
-							type="bfh:healthCareProfessional" minOccurs="0"
+							type="bfh:HealthCareProfessionalType" minOccurs="0"
 							maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
@@ -440,7 +442,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="patients" type="bfh:Patient"
+						<xsd:element name="patients" type="bfh:PatientType"
 							minOccurs="0" maxOccurs="unbounded">
 						</xsd:element>
 
@@ -486,7 +488,7 @@
 					<xsd:sequence>
 
 						<xsd:element name="emergencyContact"
-							type="bfh:Person" minOccurs="0" maxOccurs="unbounded">
+							type="bfh:PersonType" minOccurs="0" maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -499,7 +501,7 @@
 							type="xsd:int" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="emergencyContact"
-							type="bfh:Person" minOccurs="1" maxOccurs="1">
+							type="bfh:PersonType" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -515,7 +517,7 @@
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="documentLog">
+			<xsd:complexType name="DocumentLogType">
 				<xsd:sequence>
 					<xsd:element name="accessType" type="xsd:string"
 						minOccurs="1" maxOccurs="1">
@@ -523,7 +525,7 @@
 					<xsd:element name="time" type="xsd:dateTime"
 						minOccurs="1" maxOccurs="1">
 					</xsd:element>
-					<xsd:element name="organisationHp" type="bfh:OrganisationHP" minOccurs="1" maxOccurs="1"></xsd:element>
+					<xsd:element name="organisationHp" type="bfh:OrganisationHPType" minOccurs="1" maxOccurs="1"></xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:element name="getCurrentPermissionMatrixByPatientId">
@@ -542,13 +544,13 @@
 					<xsd:sequence>
 
 						<xsd:element name="permissionSchema"
-							type="bfh:permissionSchema" minOccurs="0" maxOccurs="1">
+							type="bfh:PermissionSchemaType" minOccurs="0" maxOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="permissionSchema">
+			<xsd:complexType name="PermissionSchemaType">
 				<xsd:sequence>
 					<xsd:element name="careGiver_adminData"
 						type="xsd:boolean" minOccurs="1" maxOccurs="1">
@@ -604,7 +606,7 @@
 							minOccurs="1" maxOccurs="1">
 						</xsd:element>
 						<xsd:element name="permissionSchema"
-							type="bfh:permissionSchema" minOccurs="1" maxOccurs="1">
+							type="bfh:PermissionSchemaType" minOccurs="1" maxOccurs="1">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
@@ -661,14 +663,14 @@
 				<xsd:complexType>
 					<xsd:sequence>
 
-						<xsd:element name="roles" type="bfh:Role"
+						<xsd:element name="roles" type="bfh:RoleType"
 							minOccurs="1" maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="Role">
+			<xsd:complexType name="RoleType">
 				<xsd:sequence>
 					<xsd:element name="id" type="xsd:int" minOccurs="1"
 						maxOccurs="1">
@@ -693,20 +695,20 @@
 					<xsd:sequence>
 
 						<xsd:element name="specialPermissions"
-							type="bfh:SpecialPermissions" minOccurs="1"
+							type="bfh:SpecialPermissionsType" minOccurs="1"
 							maxOccurs="unbounded">
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 
-			<xsd:complexType name="SpecialPermissions">
+			<xsd:complexType name="SpecialPermissionsType">
 				<xsd:sequence>
 					<xsd:element name="documentRegisterEntry"
-						type="bfh:DocumentRegisterEntry" minOccurs="1" maxOccurs="1">
+						type="bfh:DocumentRegisterEntryType" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 					<xsd:element name="healthCareProfessional"
-						type="bfh:healthCareProfessional" minOccurs="1" maxOccurs="1">
+						type="bfh:HealthCareProfessionalType" minOccurs="1" maxOccurs="1">
 					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
@@ -736,6 +738,7 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+		
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="getLoginRequest">

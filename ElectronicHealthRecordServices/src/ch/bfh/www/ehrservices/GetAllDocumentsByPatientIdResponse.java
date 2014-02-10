@@ -31,7 +31,7 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.DocumentRegisterEntry[] localDocumentRegisterEntries ;
+                                    protected ch.bfh.www.ehrservices.DocumentRegisterEntryType[] localDocumentRegisterEntries ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -47,9 +47,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.DocumentRegisterEntry[]
+                           * @return ch.bfh.www.ehrservices.DocumentRegisterEntryType[]
                            */
-                           public  ch.bfh.www.ehrservices.DocumentRegisterEntry[] getDocumentRegisterEntries(){
+                           public  ch.bfh.www.ehrservices.DocumentRegisterEntryType[] getDocumentRegisterEntries(){
                                return localDocumentRegisterEntries;
                            }
 
@@ -61,7 +61,7 @@
                               /**
                                * validate the array for DocumentRegisterEntries
                                */
-                              protected void validateDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntry[] param){
+                              protected void validateDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntryType[] param){
                              
                               }
 
@@ -70,7 +70,7 @@
                               * Auto generated setter method
                               * @param param DocumentRegisterEntries
                               */
-                              public void setDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntry[] param){
+                              public void setDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntryType[] param){
                               
                                    validateDocumentRegisterEntries(param);
 
@@ -83,11 +83,11 @@
                              
                              /**
                              * Auto generated add method for the array for convenience
-                             * @param param ch.bfh.www.ehrservices.DocumentRegisterEntry
+                             * @param param ch.bfh.www.ehrservices.DocumentRegisterEntryType
                              */
-                             public void addDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntry param){
+                             public void addDocumentRegisterEntries(ch.bfh.www.ehrservices.DocumentRegisterEntryType param){
                                    if (localDocumentRegisterEntries == null){
-                                   localDocumentRegisterEntries = new ch.bfh.www.ehrservices.DocumentRegisterEntry[]{};
+                                   localDocumentRegisterEntries = new ch.bfh.www.ehrservices.DocumentRegisterEntryType[]{};
                                    }
 
                             
@@ -99,8 +99,8 @@
                             org.apache.axis2.databinding.utils.ConverterUtil.toList(localDocumentRegisterEntries);
                                list.add(param);
                                this.localDocumentRegisterEntries =
-                             (ch.bfh.www.ehrservices.DocumentRegisterEntry[])list.toArray(
-                            new ch.bfh.www.ehrservices.DocumentRegisterEntry[list.size()]);
+                             (ch.bfh.www.ehrservices.DocumentRegisterEntryType[])list.toArray(
+                            new ch.bfh.www.ehrservices.DocumentRegisterEntryType[list.size()]);
 
                              }
                              
@@ -473,7 +473,7 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list1.add(ch.bfh.www.ehrservices.DocumentRegisterEntry.Factory.parse(reader));
+                                    list1.add(ch.bfh.www.ehrservices.DocumentRegisterEntryType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
                                                         boolean loopDone1 = false;
@@ -491,7 +491,7 @@
                                                                 loopDone1 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","documentRegisterEntries").equals(reader.getName())){
-                                                                    list1.add(ch.bfh.www.ehrservices.DocumentRegisterEntry.Factory.parse(reader));
+                                                                    list1.add(ch.bfh.www.ehrservices.DocumentRegisterEntryType.Factory.parse(reader));
                                                                         
                                                                 }else{
                                                                     loopDone1 = true;
@@ -500,9 +500,9 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setDocumentRegisterEntries((ch.bfh.www.ehrservices.DocumentRegisterEntry[])
+                                                        object.setDocumentRegisterEntries((ch.bfh.www.ehrservices.DocumentRegisterEntryType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                                                ch.bfh.www.ehrservices.DocumentRegisterEntry.class,
+                                                                ch.bfh.www.ehrservices.DocumentRegisterEntryType.class,
                                                                 list1));
                                                             
                               }  // End of if for expected property start element

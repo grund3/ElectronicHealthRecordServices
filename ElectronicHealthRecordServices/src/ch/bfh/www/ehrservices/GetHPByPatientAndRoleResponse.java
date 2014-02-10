@@ -31,7 +31,7 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.OrganisationHP[] localHealthcareProfessional ;
+                                    protected ch.bfh.www.ehrservices.OrganisationHPType[] localHealthcareProfessional ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -47,9 +47,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.OrganisationHP[]
+                           * @return ch.bfh.www.ehrservices.OrganisationHPType[]
                            */
-                           public  ch.bfh.www.ehrservices.OrganisationHP[] getHealthcareProfessional(){
+                           public  ch.bfh.www.ehrservices.OrganisationHPType[] getHealthcareProfessional(){
                                return localHealthcareProfessional;
                            }
 
@@ -61,7 +61,7 @@
                               /**
                                * validate the array for HealthcareProfessional
                                */
-                              protected void validateHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHP[] param){
+                              protected void validateHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHPType[] param){
                              
                               }
 
@@ -70,7 +70,7 @@
                               * Auto generated setter method
                               * @param param HealthcareProfessional
                               */
-                              public void setHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHP[] param){
+                              public void setHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHPType[] param){
                               
                                    validateHealthcareProfessional(param);
 
@@ -83,11 +83,11 @@
                              
                              /**
                              * Auto generated add method for the array for convenience
-                             * @param param ch.bfh.www.ehrservices.OrganisationHP
+                             * @param param ch.bfh.www.ehrservices.OrganisationHPType
                              */
-                             public void addHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHP param){
+                             public void addHealthcareProfessional(ch.bfh.www.ehrservices.OrganisationHPType param){
                                    if (localHealthcareProfessional == null){
-                                   localHealthcareProfessional = new ch.bfh.www.ehrservices.OrganisationHP[]{};
+                                   localHealthcareProfessional = new ch.bfh.www.ehrservices.OrganisationHPType[]{};
                                    }
 
                             
@@ -99,8 +99,8 @@
                             org.apache.axis2.databinding.utils.ConverterUtil.toList(localHealthcareProfessional);
                                list.add(param);
                                this.localHealthcareProfessional =
-                             (ch.bfh.www.ehrservices.OrganisationHP[])list.toArray(
-                            new ch.bfh.www.ehrservices.OrganisationHP[list.size()]);
+                             (ch.bfh.www.ehrservices.OrganisationHPType[])list.toArray(
+                            new ch.bfh.www.ehrservices.OrganisationHPType[list.size()]);
 
                              }
                              
@@ -473,7 +473,7 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list1.add(ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader));
+                                    list1.add(ch.bfh.www.ehrservices.OrganisationHPType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
                                                         boolean loopDone1 = false;
@@ -491,7 +491,7 @@
                                                                 loopDone1 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","healthcareProfessional").equals(reader.getName())){
-                                                                    list1.add(ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader));
+                                                                    list1.add(ch.bfh.www.ehrservices.OrganisationHPType.Factory.parse(reader));
                                                                         
                                                                 }else{
                                                                     loopDone1 = true;
@@ -500,9 +500,9 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setHealthcareProfessional((ch.bfh.www.ehrservices.OrganisationHP[])
+                                                        object.setHealthcareProfessional((ch.bfh.www.ehrservices.OrganisationHPType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                                                ch.bfh.www.ehrservices.OrganisationHP.class,
+                                                                ch.bfh.www.ehrservices.OrganisationHPType.class,
                                                                 list1));
                                                             
                               }  // End of if for expected property start element

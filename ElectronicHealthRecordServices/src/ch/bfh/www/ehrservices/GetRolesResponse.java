@@ -31,14 +31,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Role[] localRoles ;
+                                    protected ch.bfh.www.ehrservices.RoleType[] localRoles ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Role[]
+                           * @return ch.bfh.www.ehrservices.RoleType[]
                            */
-                           public  ch.bfh.www.ehrservices.Role[] getRoles(){
+                           public  ch.bfh.www.ehrservices.RoleType[] getRoles(){
                                return localRoles;
                            }
 
@@ -50,7 +50,7 @@
                               /**
                                * validate the array for Roles
                                */
-                              protected void validateRoles(ch.bfh.www.ehrservices.Role[] param){
+                              protected void validateRoles(ch.bfh.www.ehrservices.RoleType[] param){
                              
                               if ((param != null) && (param.length < 1)){
                                 throw new java.lang.RuntimeException();
@@ -63,7 +63,7 @@
                               * Auto generated setter method
                               * @param param Roles
                               */
-                              public void setRoles(ch.bfh.www.ehrservices.Role[] param){
+                              public void setRoles(ch.bfh.www.ehrservices.RoleType[] param){
                               
                                    validateRoles(param);
 
@@ -75,11 +75,11 @@
                              
                              /**
                              * Auto generated add method for the array for convenience
-                             * @param param ch.bfh.www.ehrservices.Role
+                             * @param param ch.bfh.www.ehrservices.RoleType
                              */
-                             public void addRoles(ch.bfh.www.ehrservices.Role param){
+                             public void addRoles(ch.bfh.www.ehrservices.RoleType param){
                                    if (localRoles == null){
-                                   localRoles = new ch.bfh.www.ehrservices.Role[]{};
+                                   localRoles = new ch.bfh.www.ehrservices.RoleType[]{};
                                    }
 
                             
@@ -88,8 +88,8 @@
                             org.apache.axis2.databinding.utils.ConverterUtil.toList(localRoles);
                                list.add(param);
                                this.localRoles =
-                             (ch.bfh.www.ehrservices.Role[])list.toArray(
-                            new ch.bfh.www.ehrservices.Role[list.size()]);
+                             (ch.bfh.www.ehrservices.RoleType[])list.toArray(
+                            new ch.bfh.www.ehrservices.RoleType[list.size()]);
 
                              }
                              
@@ -462,7 +462,7 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list1.add(ch.bfh.www.ehrservices.Role.Factory.parse(reader));
+                                    list1.add(ch.bfh.www.ehrservices.RoleType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
                                                         boolean loopDone1 = false;
@@ -480,7 +480,7 @@
                                                                 loopDone1 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","roles").equals(reader.getName())){
-                                                                    list1.add(ch.bfh.www.ehrservices.Role.Factory.parse(reader));
+                                                                    list1.add(ch.bfh.www.ehrservices.RoleType.Factory.parse(reader));
                                                                         
                                                                 }else{
                                                                     loopDone1 = true;
@@ -489,9 +489,9 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setRoles((ch.bfh.www.ehrservices.Role[])
+                                                        object.setRoles((ch.bfh.www.ehrservices.RoleType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                                                ch.bfh.www.ehrservices.Role.class,
+                                                                ch.bfh.www.ehrservices.RoleType.class,
                                                                 list1));
                                                             
                               }  // End of if for expected property start element

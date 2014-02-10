@@ -7,10 +7,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import ch.bfh.www.ehrservices.DocumentLog;
-import ch.bfh.www.ehrservices.HealthCareProfessional;
-import ch.bfh.www.ehrservices.Organisation;
-import ch.bfh.www.ehrservices.OrganisationHP;
+import ch.bfh.www.ehrservices.AddressType;
+import ch.bfh.www.ehrservices.DocumentLogType;
+import ch.bfh.www.ehrservices.DocumentRegisterEntryType;
+import ch.bfh.www.ehrservices.HealthCareProfessionalType;
+import ch.bfh.www.ehrservices.OrganisationType;
+import ch.bfh.www.ehrservices.OrganisationHPType;
+import ch.bfh.www.ehrservices.PatientType;
+import ch.bfh.www.ehrservices.PersonType;
+import ch.bfh.www.ehrservices.entities.Address;
+import ch.bfh.www.ehrservices.entities.Documentlog;
+import ch.bfh.www.ehrservices.entities.Documentregister;
+import ch.bfh.www.ehrservices.entities.Healthcareprofessional;
+import ch.bfh.www.ehrservices.entities.Organisation;
+import ch.bfh.www.ehrservices.entities.Organisationhp;
+import ch.bfh.www.ehrservices.entities.Patient;
+import ch.bfh.www.ehrservices.entities.Person;
 
 /**
  * Utility methods
@@ -36,9 +48,9 @@ public class Utility {
 	 * @param dbPatient
 	 * @return patient object
 	 */
-	public static ch.bfh.www.ehrservices.Patient createPatientHelper(ch.bfh.www.ehrservices.entities.Patient dbPatient) {
+	public static PatientType createPatientHelper(Patient dbPatient) {
 		
-		ch.bfh.www.ehrservices.Patient patient = new ch.bfh.www.ehrservices.Patient();
+		PatientType patient = new PatientType();
 		patient.setMPI(dbPatient.getMpi());
 		patient.setPatientID(dbPatient.getId());
 		patient.setUsername(dbPatient.getUsername());
@@ -53,9 +65,9 @@ public class Utility {
 	 * @param dbPerson
 	 * @return Person object
 	 */
-	public static ch.bfh.www.ehrservices.Person createPersonWithAddressHelper(ch.bfh.www.ehrservices.entities.Person dbPerson) {
+	public static PersonType createPersonWithAddressHelper(Person dbPerson) {
 		
-		ch.bfh.www.ehrservices.Person person = new ch.bfh.www.ehrservices.Person();
+		PersonType person = new PersonType();
 		person.setAddress(createAddressHelper(dbPerson.getAddress()));
 		
 		person.setTitle(dbPerson.getTitle());
@@ -76,9 +88,9 @@ public class Utility {
 	 * @param dbAddress
 	 * @return Address object
 	 */
-	public static ch.bfh.www.ehrservices.Address createAddressHelper(ch.bfh.www.ehrservices.entities.Address dbAddress) {
+	public static AddressType createAddressHelper(Address dbAddress) {
 		
-		ch.bfh.www.ehrservices.Address address = new ch.bfh.www.ehrservices.Address();
+		AddressType address = new AddressType();
 		
 		address.setAddress(dbAddress.getAddress());
 		address.setCanton(dbAddress.getCanton());
@@ -108,11 +120,11 @@ public class Utility {
 	 * @param dbOrganisationHP
 	 * @return organisation hp object
 	 */
-	public static ch.bfh.www.ehrservices.OrganisationHP createOrganisationHPHelper(ch.bfh.www.ehrservices.entities.Organisationhp dbOrganisationHP) {
+	public static OrganisationHPType createOrganisationHPHelper(Organisationhp dbOrganisationHP) {
 		
-		ch.bfh.www.ehrservices.OrganisationHP orgHp = new OrganisationHP();
-		ch.bfh.www.ehrservices.Organisation org = createOrganisationHelper(dbOrganisationHP.getOrganisation());
-		ch.bfh.www.ehrservices.HealthCareProfessional hp = createHPHelper(dbOrganisationHP.getHealthcareprofessional());
+		OrganisationHPType orgHp = new OrganisationHPType();
+		OrganisationType org = createOrganisationHelper(dbOrganisationHP.getOrganisation());
+		HealthCareProfessionalType hp = createHPHelper(dbOrganisationHP.getHealthcareprofessional());
 		
 		orgHp.setHealthcareProfessional(hp);
 		orgHp.setHpType(dbOrganisationHP.getHptype().getNameDe()); // TODO Mehrsprachigkeit
@@ -128,9 +140,9 @@ public class Utility {
 	 * @param dbOrganisation
 	 * @return organisation object
 	 */
-	public static ch.bfh.www.ehrservices.Organisation createOrganisationHelper(ch.bfh.www.ehrservices.entities.Organisation dbOrganisation) {
+	public static OrganisationType createOrganisationHelper(Organisation dbOrganisation) {
 		
-		ch.bfh.www.ehrservices.Organisation org = new Organisation();
+		OrganisationType org = new OrganisationType();
 		org.setOrganisationID(dbOrganisation.getId());
 		org.setName(dbOrganisation.getNameDe()); // TODO Mehrsprachigkeit
 		org.setOrganisationType(dbOrganisation.getOrganisationtype().getNameDe());
@@ -146,9 +158,9 @@ public class Utility {
 	 * @param dbHP
 	 * @return HP object
 	 */
-	public static ch.bfh.www.ehrservices.HealthCareProfessional createHPHelper(ch.bfh.www.ehrservices.entities.Healthcareprofessional dbHP) {
+	public static HealthCareProfessionalType createHPHelper(Healthcareprofessional dbHP) {
 		
-		ch.bfh.www.ehrservices.HealthCareProfessional hp = new HealthCareProfessional();
+		HealthCareProfessionalType hp = new HealthCareProfessionalType();
 		hp.setHcpID(dbHP.getId());
 		hp.setFmh(dbHP.getFmh());
 		hp.setGln(dbHP.getGln());
@@ -167,16 +179,16 @@ public class Utility {
 	 * @param dbDocRegister
 	 * @return documentregister object
 	 */
-	public static ch.bfh.www.ehrservices.DocumentRegisterEntry createDocumentRegisterHelper(ch.bfh.www.ehrservices.entities.Documentregister dbDocRegister) {
-		ch.bfh.www.ehrservices.DocumentRegisterEntry newDoc = new ch.bfh.www.ehrservices.DocumentRegisterEntry();			
+	public static DocumentRegisterEntryType createDocumentRegisterHelper(Documentregister dbDocRegister) {
+		DocumentRegisterEntryType newDoc = new DocumentRegisterEntryType();			
 		
 		newDoc.setDocumentRegisterID(dbDocRegister.getId());			
 		newDoc.setConfindentialityLevel(dbDocRegister.getConfidentialitylevel() != null ? dbDocRegister.getConfidentialitylevel().getNameDe() : null); // TODO Mehrsprachigkeit
 		newDoc.setCreationDate(Utility.convertDateToCalendar(dbDocRegister.getCreationDate()));
 		
 		// add document log 
-		for(ch.bfh.www.ehrservices.entities.Documentlog dbLog : dbDocRegister.getDocumentlogs()) {
-			ch.bfh.www.ehrservices.DocumentLog log = new DocumentLog();
+		for(Documentlog dbLog : dbDocRegister.getDocumentlogs()) {
+			DocumentLogType log = new DocumentLogType();
 			log.setAccessType(dbLog.getAccesstype().getNameDe()); // TODO Mehrsprachigkeit
 			log.setOrganisationHp(Utility.createOrganisationHPHelper(dbLog.getOrganisationhp()));
 			log.setTime(Utility.convertDateToCalendar(dbLog.getTime()));

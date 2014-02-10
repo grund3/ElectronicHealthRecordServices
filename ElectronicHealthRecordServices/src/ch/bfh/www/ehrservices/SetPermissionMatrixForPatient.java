@@ -60,14 +60,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.PermissionSchema localPermissionSchema ;
+                                    protected ch.bfh.www.ehrservices.PermissionSchemaType localPermissionSchema ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.PermissionSchema
+                           * @return ch.bfh.www.ehrservices.PermissionSchemaType
                            */
-                           public  ch.bfh.www.ehrservices.PermissionSchema getPermissionSchema(){
+                           public  ch.bfh.www.ehrservices.PermissionSchemaType getPermissionSchema(){
                                return localPermissionSchema;
                            }
 
@@ -77,7 +77,7 @@
                                * Auto generated setter method
                                * @param param PermissionSchema
                                */
-                               public void setPermissionSchema(ch.bfh.www.ehrservices.PermissionSchema param){
+                               public void setPermissionSchema(ch.bfh.www.ehrservices.PermissionSchemaType param){
                             
                                             this.localPermissionSchema=param;
                                     
@@ -468,7 +468,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","permissionSchema").equals(reader.getName())){
                                 
-                                                object.setPermissionSchema(ch.bfh.www.ehrservices.PermissionSchema.Factory.parse(reader));
+                                                object.setPermissionSchema(ch.bfh.www.ehrservices.PermissionSchemaType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

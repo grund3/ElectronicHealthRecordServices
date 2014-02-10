@@ -60,14 +60,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Person localEmergencyContact ;
+                                    protected ch.bfh.www.ehrservices.PersonType localEmergencyContact ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Person
+                           * @return ch.bfh.www.ehrservices.PersonType
                            */
-                           public  ch.bfh.www.ehrservices.Person getEmergencyContact(){
+                           public  ch.bfh.www.ehrservices.PersonType getEmergencyContact(){
                                return localEmergencyContact;
                            }
 
@@ -77,7 +77,7 @@
                                * Auto generated setter method
                                * @param param EmergencyContact
                                */
-                               public void setEmergencyContact(ch.bfh.www.ehrservices.Person param){
+                               public void setEmergencyContact(ch.bfh.www.ehrservices.PersonType param){
                             
                                             this.localEmergencyContact=param;
                                     
@@ -468,7 +468,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","emergencyContact").equals(reader.getName())){
                                 
-                                                object.setEmergencyContact(ch.bfh.www.ehrservices.Person.Factory.parse(reader));
+                                                object.setEmergencyContact(ch.bfh.www.ehrservices.PersonType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

@@ -1,6 +1,6 @@
 
 /**
- * Role.java
+ * ConfidentialyLevelType.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:34:40 IST)
@@ -11,44 +11,44 @@
             
 
             /**
-            *  Role bean class
+            *  ConfidentialyLevelType bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class Role
+        public  class ConfidentialyLevelType
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
-                name = Role
+                name = ConfidentialyLevelType
                 Namespace URI = http://www.bfh.ch/ehrServices/
                 Namespace Prefix = ns1
                 */
             
 
                         /**
-                        * field for Id
+                        * field for ConfidentialyLevelID
                         */
 
                         
-                                    protected int localId ;
+                                    protected int localConfidentialyLevelID ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return int
                            */
-                           public  int getId(){
-                               return localId;
+                           public  int getConfidentialyLevelID(){
+                               return localConfidentialyLevelID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Id
+                               * @param param ConfidentialyLevelID
                                */
-                               public void setId(int param){
+                               public void setConfidentialyLevelID(int param){
                             
-                                            this.localId=param;
+                                            this.localConfidentialyLevelID=param;
                                     
 
                                }
@@ -132,11 +132,11 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.bfh.ch/ehrServices/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":Role",
+                           namespacePrefix+":ConfidentialyLevelType",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "Role",
+                           "ConfidentialyLevelType",
                            xmlWriter);
                    }
 
@@ -144,14 +144,14 @@
                    }
                
                                     namespace = "";
-                                    writeStartElement(null, namespace, "id", xmlWriter);
+                                    writeStartElement(null, namespace, "confidentialyLevelID", xmlWriter);
                              
-                                               if (localId==java.lang.Integer.MIN_VALUE) {
+                                               if (localConfidentialyLevelID==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("id cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("confidentialyLevelID cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localId));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConfidentialyLevelID));
                                                }
                                     
                                    xmlWriter.writeEndElement();
@@ -360,10 +360,10 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "id"));
+                                                                      "confidentialyLevelID"));
                                  
                                 elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localId));
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConfidentialyLevelID));
                             
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "name"));
@@ -398,9 +398,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static Role parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            Role object =
-                new Role();
+        public static ConfidentialyLevelType parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            ConfidentialyLevelType object =
+                new ConfidentialyLevelType();
 
             int event;
             java.lang.String nillableValue = null;
@@ -424,10 +424,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"Role".equals(type)){
+                            if (!"ConfidentialyLevelType".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (Role)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
+                                return (ConfidentialyLevelType)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -452,17 +452,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","id").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","confidentialyLevelID").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"id" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"confidentialyLevelID" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setId(
+                                              object.setConfidentialyLevelID(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();

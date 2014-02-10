@@ -30,25 +30,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Patient localPatient ;
+                                    protected ch.bfh.www.ehrservices.PatientType localPatient ;
                                 
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localPatientTracker = false ;
-
-                           public boolean isPatientSpecified(){
-                               return localPatientTracker;
-                           }
-
-                           
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Patient
+                           * @return ch.bfh.www.ehrservices.PatientType
                            */
-                           public  ch.bfh.www.ehrservices.Patient getPatient(){
+                           public  ch.bfh.www.ehrservices.PatientType getPatient(){
                                return localPatient;
                            }
 
@@ -58,9 +47,8 @@
                                * Auto generated setter method
                                * @param param Patient
                                */
-                               public void setPatient(ch.bfh.www.ehrservices.Patient param){
-                            localPatientTracker = param != null;
-                                   
+                               public void setPatient(ch.bfh.www.ehrservices.PatientType param){
+                            
                                             this.localPatient=param;
                                     
 
@@ -125,13 +113,13 @@
 
                
                    }
-                if (localPatientTracker){
+               
                                             if (localPatient==null){
                                                  throw new org.apache.axis2.databinding.ADBException("patient cannot be null!!");
                                             }
                                            localPatient.serialize(new javax.xml.namespace.QName("","patient"),
                                                xmlWriter);
-                                        }
+                                        
                     xmlWriter.writeEndElement();
                
 
@@ -316,7 +304,7 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localPatientTracker){
+                
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "patient"));
                             
@@ -325,7 +313,7 @@
                                          throw new org.apache.axis2.databinding.ADBException("patient cannot be null!!");
                                     }
                                     elementList.add(localPatient);
-                                }
+                                
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -406,16 +394,17 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","patient").equals(reader.getName())){
                                 
-                                                object.setPatient(ch.bfh.www.ehrservices.Patient.Factory.parse(reader));
+                                                object.setPatient(ch.bfh.www.ehrservices.PatientType.Factory.parse(reader));
                                               
                                         reader.next();
                                     
                               }  // End of if for expected property start element
                                 
-                                    else {
-                                        
-                                    }
-                                  
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                              
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

@@ -23,9 +23,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Person".equals(typeName)){
+                  "OrganisationHPType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Person.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.OrganisationHPType.Factory.parse(reader);
                         
 
                   }
@@ -33,9 +33,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "ConfidentialyLevel".equals(typeName)){
+                  "AddressType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.ConfidentialyLevel.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.AddressType.Factory.parse(reader);
                         
 
                   }
@@ -43,9 +43,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "OrganisationHP".equals(typeName)){
+                  "SpecialPermissionsType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.OrganisationHP.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.SpecialPermissionsType.Factory.parse(reader);
                         
 
                   }
@@ -53,9 +53,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "SpecialPermissions".equals(typeName)){
+                  "RoleType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.SpecialPermissions.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.RoleType.Factory.parse(reader);
                         
 
                   }
@@ -63,9 +63,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "healthCareProfessional".equals(typeName)){
+                  "PersonType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.HealthCareProfessional.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.PersonType.Factory.parse(reader);
                         
 
                   }
@@ -73,9 +73,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Role".equals(typeName)){
+                  "DocumentRegisterEntryType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Role.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.DocumentRegisterEntryType.Factory.parse(reader);
                         
 
                   }
@@ -83,9 +83,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Organisation".equals(typeName)){
+                  "PatientType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Organisation.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.PatientType.Factory.parse(reader);
                         
 
                   }
@@ -93,9 +93,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Patient".equals(typeName)){
+                  "AttributesType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Patient.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.AttributesType.Factory.parse(reader);
                         
 
                   }
@@ -103,9 +103,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Address".equals(typeName)){
+                  "DocumentLogType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Address.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.DocumentLogType.Factory.parse(reader);
                         
 
                   }
@@ -113,9 +113,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "Attributes".equals(typeName)){
+                  "PermissionSchemaType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.Attributes.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.PermissionSchemaType.Factory.parse(reader);
                         
 
                   }
@@ -123,9 +123,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "DocumentRegisterEntry".equals(typeName)){
+                  "HealthCareProfessionalType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.DocumentRegisterEntry.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.HealthCareProfessionalType.Factory.parse(reader);
                         
 
                   }
@@ -133,9 +133,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "documentLog".equals(typeName)){
+                  "OrganisationType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.DocumentLog.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.OrganisationType.Factory.parse(reader);
                         
 
                   }
@@ -143,9 +143,9 @@
               
                   if (
                   "http://www.bfh.ch/ehrServices/".equals(namespaceURI) &&
-                  "permissionSchema".equals(typeName)){
+                  "ConfidentialyLevelType".equals(typeName)){
                    
-                            return  ch.bfh.www.ehrservices.PermissionSchema.Factory.parse(reader);
+                            return  ch.bfh.www.ehrservices.ConfidentialyLevelType.Factory.parse(reader);
                         
 
                   }

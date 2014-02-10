@@ -1,6 +1,6 @@
 
 /**
- * OrganisationHP.java
+ * PatientType.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:34:40 IST)
@@ -11,317 +11,206 @@
             
 
             /**
-            *  OrganisationHP bean class
+            *  PatientType bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class OrganisationHP
+        public  class PatientType
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
-                name = OrganisationHP
+                name = PatientType
                 Namespace URI = http://www.bfh.ch/ehrServices/
                 Namespace Prefix = ns1
                 */
             
 
                         /**
-                        * field for HealthcareProfessional
+                        * field for PatientID
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.HealthCareProfessional localHealthcareProfessional ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.HealthCareProfessional
-                           */
-                           public  ch.bfh.www.ehrservices.HealthCareProfessional getHealthcareProfessional(){
-                               return localHealthcareProfessional;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param HealthcareProfessional
-                               */
-                               public void setHealthcareProfessional(ch.bfh.www.ehrservices.HealthCareProfessional param){
-                            
-                                            this.localHealthcareProfessional=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for Organisation
-                        */
-
-                        
-                                    protected ch.bfh.www.ehrservices.Organisation localOrganisation ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Organisation
-                           */
-                           public  ch.bfh.www.ehrservices.Organisation getOrganisation(){
-                               return localOrganisation;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Organisation
-                               */
-                               public void setOrganisation(ch.bfh.www.ehrservices.Organisation param){
-                            
-                                            this.localOrganisation=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for HpType
-                        */
-
-                        
-                                    protected java.lang.String localHpType ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localHpTypeTracker = false ;
-
-                           public boolean isHpTypeSpecified(){
-                               return localHpTypeTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getHpType(){
-                               return localHpType;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param HpType
-                               */
-                               public void setHpType(java.lang.String param){
-                            localHpTypeTracker = param != null;
-                                   
-                                            this.localHpType=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for Zsr
-                        */
-
-                        
-                                    protected java.lang.String localZsr ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localZsrTracker = false ;
-
-                           public boolean isZsrSpecified(){
-                               return localZsrTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getZsr(){
-                               return localZsr;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Zsr
-                               */
-                               public void setZsr(java.lang.String param){
-                            localZsrTracker = param != null;
-                                   
-                                            this.localZsr=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for Role
-                        */
-
-                        
-                                    protected java.lang.String localRole ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localRoleTracker = false ;
-
-                           public boolean isRoleSpecified(){
-                               return localRoleTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getRole(){
-                               return localRole;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Role
-                               */
-                               public void setRole(java.lang.String param){
-                            localRoleTracker = param != null;
-                                   
-                                            this.localRole=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for RoleID
-                        */
-
-                        
-                                    protected int localRoleID ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localRoleIDTracker = false ;
-
-                           public boolean isRoleIDSpecified(){
-                               return localRoleIDTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return int
-                           */
-                           public  int getRoleID(){
-                               return localRoleID;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param RoleID
-                               */
-                               public void setRoleID(int param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localRoleIDTracker =
-                                       param != java.lang.Integer.MIN_VALUE;
-                                   
-                                            this.localRoleID=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for AccessTill
-                        */
-
-                        
-                                    protected java.util.Calendar localAccessTill ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localAccessTillTracker = false ;
-
-                           public boolean isAccessTillSpecified(){
-                               return localAccessTillTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.util.Calendar
-                           */
-                           public  java.util.Calendar getAccessTill(){
-                               return localAccessTill;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param AccessTill
-                               */
-                               public void setAccessTill(java.util.Calendar param){
-                            localAccessTillTracker = param != null;
-                                   
-                                            this.localAccessTill=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for OrganisationHPID
-                        */
-
-                        
-                                    protected int localOrganisationHPID ;
+                                    protected int localPatientID ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return int
                            */
-                           public  int getOrganisationHPID(){
-                               return localOrganisationHPID;
+                           public  int getPatientID(){
+                               return localPatientID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param OrganisationHPID
+                               * @param param PatientID
                                */
-                               public void setOrganisationHPID(int param){
+                               public void setPatientID(int param){
                             
-                                            this.localOrganisationHPID=param;
+                                            this.localPatientID=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Person
+                        */
+
+                        
+                                    protected ch.bfh.www.ehrservices.PersonType localPerson ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return ch.bfh.www.ehrservices.PersonType
+                           */
+                           public  ch.bfh.www.ehrservices.PersonType getPerson(){
+                               return localPerson;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Person
+                               */
+                               public void setPerson(ch.bfh.www.ehrservices.PersonType param){
+                            
+                                            this.localPerson=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for MPI
+                        */
+
+                        
+                                    protected java.lang.String localMPI ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMPI(){
+                               return localMPI;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param MPI
+                               */
+                               public void setMPI(java.lang.String param){
+                            
+                                            this.localMPI=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Username
+                        */
+
+                        
+                                    protected java.lang.String localUsername ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getUsername(){
+                               return localUsername;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Username
+                               */
+                               public void setUsername(java.lang.String param){
+                            
+                                            this.localUsername=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Password
+                        */
+
+                        
+                                    protected java.lang.String localPassword ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getPassword(){
+                               return localPassword;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Password
+                               */
+                               public void setPassword(java.lang.String param){
+                            
+                                            this.localPassword=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Language
+                        */
+
+                        
+                                    protected java.lang.String localLanguage ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localLanguageTracker = false ;
+
+                           public boolean isLanguageSpecified(){
+                               return localLanguageTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getLanguage(){
+                               return localLanguage;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Language
+                               */
+                               public void setLanguage(java.lang.String param){
+                            localLanguageTracker = param != null;
+                                   
+                                            this.localLanguage=param;
                                     
 
                                }
@@ -375,127 +264,108 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.bfh.ch/ehrServices/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":OrganisationHP",
+                           namespacePrefix+":PatientType",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "OrganisationHP",
+                           "PatientType",
                            xmlWriter);
                    }
 
                
                    }
                
-                                            if (localHealthcareProfessional==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("healthcareProfessional cannot be null!!");
-                                            }
-                                           localHealthcareProfessional.serialize(new javax.xml.namespace.QName("","healthcareProfessional"),
-                                               xmlWriter);
-                                        
-                                            if (localOrganisation==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
-                                            }
-                                           localOrganisation.serialize(new javax.xml.namespace.QName("","organisation"),
-                                               xmlWriter);
-                                         if (localHpTypeTracker){
                                     namespace = "";
-                                    writeStartElement(null, namespace, "hpType", xmlWriter);
+                                    writeStartElement(null, namespace, "patientID", xmlWriter);
                              
-
-                                          if (localHpType==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("hpType cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localHpType);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localZsrTracker){
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "zsr", xmlWriter);
-                             
-
-                                          if (localZsr==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("zsr cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localZsr);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localRoleTracker){
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "role", xmlWriter);
-                             
-
-                                          if (localRole==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("role cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localRole);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localRoleIDTracker){
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "roleID", xmlWriter);
-                             
-                                               if (localRoleID==java.lang.Integer.MIN_VALUE) {
+                                               if (localPatientID==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("roleID cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("patientID cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRoleID));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localAccessTillTracker){
+                             
+                                            if (localPerson==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("person cannot be null!!");
+                                            }
+                                           localPerson.serialize(new javax.xml.namespace.QName("","person"),
+                                               xmlWriter);
+                                        
                                     namespace = "";
-                                    writeStartElement(null, namespace, "accessTill", xmlWriter);
+                                    writeStartElement(null, namespace, "MPI", xmlWriter);
                              
 
-                                          if (localAccessTill==null){
+                                          if (localMPI==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("accessTill cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("MPI cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessTill));
+                                                   xmlWriter.writeCharacters(localMPI);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "username", xmlWriter);
+                             
+
+                                          if (localUsername==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("username cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localUsername);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "password", xmlWriter);
+                             
+
+                                          if (localPassword==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("password cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localPassword);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                              if (localLanguageTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "language", xmlWriter);
+                             
+
+                                          if (localLanguage==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("language cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localLanguage);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
                              }
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "organisationHPID", xmlWriter);
-                             
-                                               if (localOrganisationHPID==java.lang.Integer.MIN_VALUE) {
-                                           
-                                                         throw new org.apache.axis2.databinding.ADBException("organisationHPID cannot be null!!");
-                                                      
-                                               } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrganisationHPID));
-                                               }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
                     xmlWriter.writeEndElement();
                
 
@@ -681,72 +551,57 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                 
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "patientID"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPatientID));
+                            
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "healthcareProfessional"));
+                                                                      "person"));
                             
                             
-                                    if (localHealthcareProfessional==null){
-                                         throw new org.apache.axis2.databinding.ADBException("healthcareProfessional cannot be null!!");
+                                    if (localPerson==null){
+                                         throw new org.apache.axis2.databinding.ADBException("person cannot be null!!");
                                     }
-                                    elementList.add(localHealthcareProfessional);
+                                    elementList.add(localPerson);
                                 
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "organisation"));
-                            
-                            
-                                    if (localOrganisation==null){
-                                         throw new org.apache.axis2.databinding.ADBException("organisation cannot be null!!");
-                                    }
-                                    elementList.add(localOrganisation);
-                                 if (localHpTypeTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "hpType"));
+                                                                      "MPI"));
                                  
-                                        if (localHpType != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHpType));
+                                        if (localMPI != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMPI));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("hpType cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("MPI cannot be null!!");
                                         }
-                                    } if (localZsrTracker){
+                                    
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "zsr"));
+                                                                      "username"));
                                  
-                                        if (localZsr != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localZsr));
+                                        if (localUsername != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("zsr cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("username cannot be null!!");
                                         }
-                                    } if (localRoleTracker){
+                                    
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "role"));
+                                                                      "password"));
                                  
-                                        if (localRole != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRole));
+                                        if (localPassword != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("role cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("password cannot be null!!");
                                         }
-                                    } if (localRoleIDTracker){
+                                     if (localLanguageTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "roleID"));
+                                                                      "language"));
                                  
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRoleID));
-                            } if (localAccessTillTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "accessTill"));
-                                 
-                                        if (localAccessTill != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessTill));
+                                        if (localLanguage != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localLanguage));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("accessTill cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("language cannot be null!!");
                                         }
                                     }
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "organisationHPID"));
-                                 
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrganisationHPID));
-                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -771,9 +626,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static OrganisationHP parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            OrganisationHP object =
-                new OrganisationHP();
+        public static PatientType parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            PatientType object =
+                new PatientType();
 
             int event;
             java.lang.String nillableValue = null;
@@ -797,10 +652,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"OrganisationHP".equals(type)){
+                            if (!"PatientType".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (OrganisationHP)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
+                                return (PatientType)ch.bfh.www.ehrservices.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -825,9 +680,18 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","healthcareProfessional").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","patientID").equals(reader.getName())){
                                 
-                                                object.setHealthcareProfessional(ch.bfh.www.ehrservices.HealthCareProfessional.Factory.parse(reader));
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"patientID" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPatientID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -841,9 +705,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","organisation").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","person").equals(reader.getName())){
                                 
-                                                object.setOrganisation(ch.bfh.www.ehrservices.Organisation.Factory.parse(reader));
+                                                object.setPerson(ch.bfh.www.ehrservices.PersonType.Factory.parse(reader));
                                               
                                         reader.next();
                                     
@@ -857,140 +721,18 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","hpType").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","MPI").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"hpType" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"MPI" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setHpType(
+                                              object.setMPI(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","zsr").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"zsr" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setZsr(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","role").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"role" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setRole(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","roleID").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"roleID" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setRoleID(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                               object.setRoleID(java.lang.Integer.MIN_VALUE);
-                                           
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","accessTill").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"accessTill" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setAccessTill(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","organisationHPID").equals(reader.getName())){
-                                
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"organisationHPID" +"  cannot be null");
-                                    }
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setOrganisationHPID(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -1000,7 +742,81 @@
                                     // A start element we are not expecting indicates an invalid parameter was passed
                                     throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
                                 }
-                              
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","username").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"username" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setUsername(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","password").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"password" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPassword(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","language").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"language" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setLanguage(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

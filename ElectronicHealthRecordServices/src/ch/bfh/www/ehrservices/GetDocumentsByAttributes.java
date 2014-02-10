@@ -60,14 +60,14 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Attributes localAttributes ;
+                                    protected ch.bfh.www.ehrservices.AttributesType localAttributes ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Attributes
+                           * @return ch.bfh.www.ehrservices.AttributesType
                            */
-                           public  ch.bfh.www.ehrservices.Attributes getAttributes(){
+                           public  ch.bfh.www.ehrservices.AttributesType getAttributes(){
                                return localAttributes;
                            }
 
@@ -77,7 +77,7 @@
                                * Auto generated setter method
                                * @param param Attributes
                                */
-                               public void setAttributes(ch.bfh.www.ehrservices.Attributes param){
+                               public void setAttributes(ch.bfh.www.ehrservices.AttributesType param){
                             
                                             this.localAttributes=param;
                                     
@@ -468,7 +468,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","attributes").equals(reader.getName())){
                                 
-                                                object.setAttributes(ch.bfh.www.ehrservices.Attributes.Factory.parse(reader));
+                                                object.setAttributes(ch.bfh.www.ehrservices.AttributesType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

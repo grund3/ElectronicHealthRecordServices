@@ -31,7 +31,7 @@
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.Patient[] localPatients ;
+                                    protected ch.bfh.www.ehrservices.PatientType[] localPatients ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -47,9 +47,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return ch.bfh.www.ehrservices.Patient[]
+                           * @return ch.bfh.www.ehrservices.PatientType[]
                            */
-                           public  ch.bfh.www.ehrservices.Patient[] getPatients(){
+                           public  ch.bfh.www.ehrservices.PatientType[] getPatients(){
                                return localPatients;
                            }
 
@@ -61,7 +61,7 @@
                               /**
                                * validate the array for Patients
                                */
-                              protected void validatePatients(ch.bfh.www.ehrservices.Patient[] param){
+                              protected void validatePatients(ch.bfh.www.ehrservices.PatientType[] param){
                              
                               }
 
@@ -70,7 +70,7 @@
                               * Auto generated setter method
                               * @param param Patients
                               */
-                              public void setPatients(ch.bfh.www.ehrservices.Patient[] param){
+                              public void setPatients(ch.bfh.www.ehrservices.PatientType[] param){
                               
                                    validatePatients(param);
 
@@ -83,11 +83,11 @@
                              
                              /**
                              * Auto generated add method for the array for convenience
-                             * @param param ch.bfh.www.ehrservices.Patient
+                             * @param param ch.bfh.www.ehrservices.PatientType
                              */
-                             public void addPatients(ch.bfh.www.ehrservices.Patient param){
+                             public void addPatients(ch.bfh.www.ehrservices.PatientType param){
                                    if (localPatients == null){
-                                   localPatients = new ch.bfh.www.ehrservices.Patient[]{};
+                                   localPatients = new ch.bfh.www.ehrservices.PatientType[]{};
                                    }
 
                             
@@ -99,8 +99,8 @@
                             org.apache.axis2.databinding.utils.ConverterUtil.toList(localPatients);
                                list.add(param);
                                this.localPatients =
-                             (ch.bfh.www.ehrservices.Patient[])list.toArray(
-                            new ch.bfh.www.ehrservices.Patient[list.size()]);
+                             (ch.bfh.www.ehrservices.PatientType[])list.toArray(
+                            new ch.bfh.www.ehrservices.PatientType[list.size()]);
 
                              }
                              
@@ -473,7 +473,7 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list1.add(ch.bfh.www.ehrservices.Patient.Factory.parse(reader));
+                                    list1.add(ch.bfh.www.ehrservices.PatientType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
                                                         boolean loopDone1 = false;
@@ -491,7 +491,7 @@
                                                                 loopDone1 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","patients").equals(reader.getName())){
-                                                                    list1.add(ch.bfh.www.ehrservices.Patient.Factory.parse(reader));
+                                                                    list1.add(ch.bfh.www.ehrservices.PatientType.Factory.parse(reader));
                                                                         
                                                                 }else{
                                                                     loopDone1 = true;
@@ -500,9 +500,9 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setPatients((ch.bfh.www.ehrservices.Patient[])
+                                                        object.setPatients((ch.bfh.www.ehrservices.PatientType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                                                ch.bfh.www.ehrservices.Patient.class,
+                                                                ch.bfh.www.ehrservices.PatientType.class,
                                                                 list1));
                                                             
                               }  // End of if for expected property start element
