@@ -6,6 +6,10 @@
         <parameter name="ServiceClass">ch.bfh.www.ehrservices.EhrServicesSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="getAuthorisedOrgaHPsForDocument" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/getAuthorisedOrgaHPsForDocument</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getAuthorisedOrgaHPsForDocumentResponse</outputActionMapping>
+        </operation>
         <operation name="getSpecialPermissionByPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getSpecialPermissionByPatient</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getSpecialPermissionByPatientResponse</outputActionMapping>
@@ -14,13 +18,17 @@
             <actionMapping>http://www.bfh.ch/ehrServices/getDocumentsByAttributes</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getDocumentsByAttributesResponse</outputActionMapping>
         </operation>
+        <operation name="setEmergencyContact" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/setEmergencyContact</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setEmergencyContactResponse</outputActionMapping>
+        </operation>
         <operation name="getDocumentById" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getDocumentById</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getDocumentByIdResponse</outputActionMapping>
         </operation>
-        <operation name="setEmergencyContact" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
-            <actionMapping>http://www.bfh.ch/ehrServices/setEmergencyContact</actionMapping>
-            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setEmergencyContactResponse</outputActionMapping>
+        <operation name="removeEmergencyContact" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/removeEmergencyContact</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/removeEmergencyContactResponse</outputActionMapping>
         </operation>
         <operation name="getEmergencyContactByPatientId" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getEmergencyContactByPatientId</actionMapping>
@@ -38,6 +46,10 @@
             <actionMapping>http://www.bfh.ch/ehrServices/getRoles</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getRolesResponse</outputActionMapping>
         </operation>
+        <operation name="removeOrganisationHPFromPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/removeOrganisationHPFromPatient</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/removeOrganisationHPFromPatientResponse</outputActionMapping>
+        </operation>
         <operation name="setSpecialPermission" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/setSpecialPermission</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setSpecialPermissionResponse</outputActionMapping>
@@ -50,6 +62,10 @@
             <actionMapping>http://www.bfh.ch/ehrServices/getHPByPatientAndRole</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getHPByPatientAndRoleResponse</outputActionMapping>
         </operation>
+        <operation name="removePatientFromWhitelist" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/removePatientFromWhitelist</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/removePatientFromWhitelistResponse</outputActionMapping>
+        </operation>
         <operation name="setPermissionMatrixForPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/setPermissionMatrixForPatient</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setPermissionMatrixForPatientResponse</outputActionMapping>
@@ -57,6 +73,14 @@
         <operation name="setWhitelist" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/setWhitelist</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setWhitelistResponse</outputActionMapping>
+        </operation>
+        <operation name="setMasterDataForPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/setMasterDataForPatient</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/setMasterDataForPatientResponse</outputActionMapping>
+        </operation>
+        <operation name="removeHPFromBlacklist" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/removeHPFromBlacklist</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/removeHPFromBlacklistResponse</outputActionMapping>
         </operation>
         <operation name="getConfidentialityLevels" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getConfidentialityLevels</actionMapping>
@@ -69,6 +93,10 @@
         <operation name="getCurrentPermissionMatrixByPatientId" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/getCurrentPermissionMatrixByPatientId</actionMapping>
             <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getCurrentPermissionMatrixByPatientIdResponse</outputActionMapping>
+        </operation>
+        <operation name="getVisibleDocumentsForOrgaHP" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
+            <actionMapping>http://www.bfh.ch/ehrServices/getVisibleDocumentsForOrgaHP</actionMapping>
+            <outputActionMapping>http://www.bfh.ch/ehrServices/ehrServices/getVisibleDocumentsForOrgaHPResponse</outputActionMapping>
         </operation>
         <operation name="setHPRole" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.bfh.ch/ehrServices/">
             <actionMapping>http://www.bfh.ch/ehrServices/setHPRole</actionMapping>

@@ -21,24 +21,22 @@ import org.apache.axiom.attachments.ByteArrayDataSource;
 import ch.bfh.www.ehrservices.entities.*;
 import ch.bfh.www.util.Utility;
 
-
-
 /**
  * Diese Klasse enthält alle Funktionen des ElectronicHealthRecords
  * 
  * @author Dominik Grünert, Pascal Schrei
- *
+ * 
  */
 public class EhrServicesSkeleton {
-	
+
 	// Meine Behandelnden
 	final private int roleCurrent = 1;
-	
+
 	// Behandelnder des Vertrauens
 	final private int roleTrust = 2;
-	
+
 	// Potentieller Behandelnder
-	final private int rolePotential = 3;	
+	final private int rolePotential = 3;
 
 	/**
 	 * <pre>
@@ -46,30 +44,37 @@ public class EhrServicesSkeleton {
 	 * einen Behandelnden auf ein bestimmtes Dokument zurück. 
 	 * Die Berechtigungen gehören zu einem bestimmten Patienten.
 	 * </pre>
+	 * 
 	 * @param int Patienten ID
-	 * @return 	Array mit allen Spezialberechtigungen
-	 * 			Angehängt sind: 
-	 * 				- DocumentRegister (1)
-	 * 				- Healthcareprofessional (1)
+	 * @return Array mit allen Spezialberechtigungen Angehängt sind: -
+	 *         DocumentRegister (1) - Healthcareprofessional (1)
 	 */
 
 	public ch.bfh.www.ehrservices.GetSpecialPermissionByPatientResponse getSpecialPermissionByPatient(
 			ch.bfh.www.ehrservices.GetSpecialPermissionByPatient getSpecialPermissionByPatient) {
-		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getSpecialPermissionByPatient.getPatientID() +
-				" AND pm.documentregister != null AND pm.healthcareprofessional != null");
+		Query query = Utility
+				.getEM()
+				.createQuery(
+						"SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "
+								+ getSpecialPermissionByPatient.getPatientID()
+								+ " AND pm.documentregister != null AND pm.healthcareprofessional != null");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<Permissionmatrix> dbPermissionmatrix = query.getResultList();
-		
+
 		GetSpecialPermissionByPatientResponse response = new GetSpecialPermissionByPatientResponse();
-		
-		for (Permissionmatrix dbEntry : dbPermissionmatrix) {			
+
+		for (Permissionmatrix dbEntry : dbPermissionmatrix) {
 			ch.bfh.www.ehrservices.SpecialPermissionsType specialPermission = new SpecialPermissionsType();
-			specialPermission.setDocumentRegisterEntry(Utility.createDocumentRegisterHelper(dbEntry.getDocumentregister()));
-			specialPermission.setHealthCareProfessional(Utility.createHPHelper(dbEntry.getHealthcareprofessional()));
-						
+			specialPermission
+					.setDocumentRegisterEntry(Utility
+							.createDocumentRegisterHelper(dbEntry
+									.getDocumentregister()));
+			specialPermission.setHealthCareProfessional(Utility
+					.createHPHelper(dbEntry.getHealthcareprofessional()));
+
 			response.addSpecialPermissions(specialPermission);
 		}
-		
+
 		return response;
 	}
 
@@ -86,62 +91,69 @@ public class EhrServicesSkeleton {
 	 *  - int healthprofessionalID (Von welchem Behandelnden)
 	 *  - int organisationID (Von welcher Organisation)
 	 *  - calendar UploadDate (date without time) (Upload Datum)
-	 *  </pre>
+	 * </pre>
+	 * 
 	 * @param int Patienten ID, Einschränkungen siehe Beschrieb
-	 * @return Array mit allen Dokumenten (Metadaten) die zu den Einschränkungen passen.  
-	 * 						- Organisation (1)
-	 * 						- HealthcareProfessional (1)
-	 * 							- Person (1) => Address (1)
-	 * 						- DocumentLog (*)
+	 * @return Array mit allen Dokumenten (Metadaten) die zu den Einschränkungen
+	 *         passen. - Organisation (1) - HealthcareProfessional (1) - Person
+	 *         (1) => Address (1) - DocumentLog (*)
 	 */
 
 	public ch.bfh.www.ehrservices.GetDocumentsByAttributesResponse getDocumentsByAttributes(
 			ch.bfh.www.ehrservices.GetDocumentsByAttributes getDocumentsByAttributes) {
-		
+
 		AttributesType attributes = getDocumentsByAttributes.getAttributes();
-		String statement = "SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getDocumentsByAttributes.getPatientID();
-		if(attributes.isConfindentialityLevelIDSpecified()) {
-			statement += " AND dr.confidentialitylevel.id = '" + attributes.getConfindentialityLevelID() + "'"; 
+		String statement = "SELECT dr From Documentregister dr WHERE dr.patient.id = "
+				+ getDocumentsByAttributes.getPatientID();
+		if (attributes.isConfindentialityLevelIDSpecified()) {
+			statement += " AND dr.confidentialitylevel.id = '"
+					+ attributes.getConfindentialityLevelID() + "'";
 		}
-		if(attributes.isCreationDateSpecified()) {
-			statement += " AND cast(dr.creationDate as date) = :creationDate";  
+		if (attributes.isCreationDateSpecified()) {
+			statement += " AND cast(dr.creationDate as date) = :creationDate";
 		}
-		if(attributes.isDocumentTitleSpecified()) {
-			statement += " AND dr.title LIKE '" + attributes.getDocumentTitle() + "'";
+		if (attributes.isDocumentTitleSpecified()) {
+			statement += " AND dr.title LIKE '" + attributes.getDocumentTitle()
+					+ "'";
 		}
-		if(attributes.isDocumentTypeIDSpecified()) {
-			statement += " AND dr.documenttype.id = '" + attributes.getDocumentTypeID() + "'"; 
+		if (attributes.isDocumentTypeIDSpecified()) {
+			statement += " AND dr.documenttype.id = '"
+					+ attributes.getDocumentTypeID() + "'";
 		}
-		if(attributes.isHpIDSpecified()) {
-			statement += " AND dr.organisationhp.healthcareprofessional.id = " + attributes.getHpID(); 
+		if (attributes.isHpIDSpecified()) {
+			statement += " AND dr.organisationhp.healthcareprofessional.id = "
+					+ attributes.getHpID();
 		}
-		if(attributes.isOrganisationIDSpecified()) {
-			statement += " AND dr.organisationhp.organisation.id = " + attributes.getOrganisationID();
+		if (attributes.isOrganisationIDSpecified()) {
+			statement += " AND dr.organisationhp.organisation.id = "
+					+ attributes.getOrganisationID();
 		}
-		if(attributes.isUploadDateSpecified()) {
+		if (attributes.isUploadDateSpecified()) {
 			statement += " AND cast(dr.uploadDate as date) = :uploadDate";
 		}
-		
-		
-		Query query = Utility.getEM().createQuery(statement);		
-		if(attributes.isCreationDateSpecified()) {
-			query.setParameter("creationDate", attributes.getCreationDate().getTime(), TemporalType.DATE);
+
+		Query query = Utility.getEM().createQuery(statement);
+		if (attributes.isCreationDateSpecified()) {
+			query.setParameter("creationDate", attributes.getCreationDate()
+					.getTime(), TemporalType.DATE);
 		}
-		if(attributes.isUploadDateSpecified()) {
-			query.setParameter("uploadDate", attributes.getUploadDate().getTime(), TemporalType.DATE);
+		if (attributes.isUploadDateSpecified()) {
+			query.setParameter("uploadDate", attributes.getUploadDate()
+					.getTime(), TemporalType.DATE);
 		}
-		
+
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		
+
 		List<Documentregister> dbDocs = query.getResultList();
-		
-		// Create document register objects and add them to the array in the response object
+
+		// Create document register objects and add them to the array in the
+		// response object
 		GetDocumentsByAttributesResponse response = new GetDocumentsByAttributesResponse();
-		for(Documentregister doc : dbDocs) {			
+		for (Documentregister doc : dbDocs) {
 			// create documentregister object
 			response.addDocuments(Utility.createDocumentRegisterHelper(doc));
 		}
-		
+
 		return response;
 	}
 
@@ -154,56 +166,62 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.GetDocumentByIdResponse getDocumentById(
 			ch.bfh.www.ehrservices.GetDocumentById getDocumentById) {
-		Query query = Utility.getEM().createQuery("SELECT d From Documentrepository d WHERE d.id = "+ getDocumentById.getDocumentID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT d From Documentrepository d WHERE d.id = "
+						+ getDocumentById.getDocumentID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		Documentrepository dbDocument = (Documentrepository) query.getSingleResult();
-		
+		Documentrepository dbDocument = (Documentrepository) query
+				.getSingleResult();
+
 		// Create DocumentRepository object and add it to the response object
 		GetDocumentByIdResponse response = new GetDocumentByIdResponse();
-		// The file from the db is a byte array. The response needs a data handler object.
-		// So we have to add the byte array over a file object into a data handler object.
+		// The file from the db is a byte array. The response needs a data
+		// handler object.
+		// So we have to add the byte array over a file object into a data
+		// handler object.
 		DataHandler dh = null;
 		try {
-			File outFile = new File("");              
-			ByteArrayDataSource dataSource = new ByteArrayDataSource(dbDocument.getDocument()); 
-			dh = new DataHandler(dataSource);              
-			FileOutputStream fileOutputStream = new FileOutputStream(outFile);               
-			dh.writeTo(fileOutputStream);             
-			fileOutputStream.flush();              
+			File outFile = new File("");
+			ByteArrayDataSource dataSource = new ByteArrayDataSource(
+					dbDocument.getDocument());
+			dh = new DataHandler(dataSource);
+			FileOutputStream fileOutputStream = new FileOutputStream(outFile);
+			dh.writeTo(fileOutputStream);
+			fileOutputStream.flush();
 			fileOutputStream.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}  
-		
+		}
+
 		response.setDocument(dh);
-		
+
 		return response;
 	}
 
 	/**
 	 * Fügt einen Notfallkontakt (Person) zu einem bestimmten Patienten hinzu.
 	 * 
-	 * @param int Patienten ID, Person und Adressen Objekt 
+	 * @param int Patienten ID, Person und Adressen Objekt
 	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetEmergencyContactResponse setEmergencyContact(
 			ch.bfh.www.ehrservices.SetEmergencyContact setEmergencyContact) {
-		
+
 		Emergencycontact contact = new Emergencycontact();
 		Person dbPerson = new Person();
 		Address dbAddress = new Address();
 		PersonType person = setEmergencyContact.getEmergencyContact();
-		
+
 		// create address
 		dbAddress.setAddress(person.getAddress().getAddress());
 		dbAddress.setCanton(person.getAddress().getCanton());
 		dbAddress.setCountry(person.getAddress().getCountry());
 		dbAddress.setMunicipality(person.getAddress().getMunicipality());
 		dbAddress.setPostalcode(person.getAddress().getPostalcode());
-		
+
 		// create person
 		dbPerson.setAddress(dbAddress);
 		dbPerson.setBirthdate(person.getBirthdate().getTime());
@@ -214,52 +232,54 @@ public class EhrServicesSkeleton {
 		dbPerson.setName(person.getName());
 		dbPerson.setPhone(person.getPhone());
 		dbPerson.setTitle(person.getTitle());
-		
+
 		Utility.getEM().getTransaction().begin();
 		Utility.getEM().persist(dbAddress);
 		Utility.getEM().persist(dbPerson);
-		
+
 		// create emergency contact
-		Patient patient = Utility.getEM().find(Patient.class, setEmergencyContact.getPatientID());
+		Patient patient = Utility.getEM().find(Patient.class,
+				setEmergencyContact.getPatientID());
 		contact.setPatient(patient);
 		contact.setPerson(dbPerson);
-		
-		
+
 		Utility.getEM().persist(contact);
-		
+
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetEmergencyContactResponse response = new SetEmergencyContactResponse();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
 
 	/**
-	 * Diese Methode liefert alle Notfallkontakte zu einem bestimmten Patienten zurück.
+	 * Diese Methode liefert alle Notfallkontakte zu einem bestimmten Patienten
+	 * zurück.
 	 * 
 	 * @param int Patienten ID
-	 * @return Array mit Notfallkontakten
-	 * 			- Person (1)
-	 * 			- Address (1)
+	 * @return Array mit Notfallkontakten - Person (1) - Address (1)
 	 */
 
 	public ch.bfh.www.ehrservices.GetEmergencyContactByPatientIdResponse getEmergencyContactByPatientId(
 			ch.bfh.www.ehrservices.GetEmergencyContactByPatientId getEmergencyContactByPatientId) {
-		Query query = Utility.getEM().createQuery("SELECT ec From Emergencycontact ec WHERE ec.patient.id = "+ getEmergencyContactByPatientId.getPatientID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT ec From Emergencycontact ec WHERE ec.patient.id = "
+						+ getEmergencyContactByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<Emergencycontact> dbEmergencyContact = query.getResultList();
-		
+
 		GetEmergencyContactByPatientIdResponse response = new GetEmergencyContactByPatientIdResponse();
-		
-		for(Emergencycontact dbEntry : dbEmergencyContact) {			
-			
+
+		for (Emergencycontact dbEntry : dbEmergencyContact) {
+
 			// create person object
-			PersonType contact = Utility.createPersonWithAddressHelper(dbEntry.getPerson());
-						
-			response.addEmergencyContact(contact);
+			PersonType contact = Utility.createPersonWithAddressHelper(dbEntry
+					.getPerson());
+
+			response.addEmergencyContacts(contact);
 		}
-		
+
 		return response;
 	}
 
@@ -268,32 +288,37 @@ public class EhrServicesSkeleton {
 	 * Diese Methode liefert ein Patient zurück. Dieser Patient wird anhand des Benutzernamens gesucht.
 	 * Mit dem enthaltenen Passwort kann der Benutzer eingeloggt werden.
 	 * </pre>
-	 * @param String Benutzername 
+	 * 
+	 * @param String
+	 *            Benutzername
 	 * @return Patient => Person => Address Objekte
 	 */
 
 	public ch.bfh.www.ehrservices.GetLoginResponse getLogin(
 			ch.bfh.www.ehrservices.GetLogin getLogin) {
 		String username = getLogin.getUsername();
-		Query query = Utility.getEM().createQuery("SELECT p FROM Patient p WHERE p.username ='"+username+"'");
+		Query query = Utility.getEM().createQuery(
+				"SELECT p FROM Patient p WHERE p.username ='" + username + "'");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		Patient user = (Patient) query.getSingleResult();
-		
+
 		// Create Patient object
 		PatientType patient = Utility.createPatientHelper(user);
-		
+
 		// create address and person object
-		patient.setPerson(Utility.createPersonWithAddressHelper(user.getPerson()));
-		
+		patient.setPerson(Utility.createPersonWithAddressHelper(user
+				.getPerson()));
+
 		// Create Response
 		GetLoginResponse response = new GetLoginResponse();
 		response.setPatient(patient);
-		
+
 		return response;
 	}
 
 	/**
-	 * Diese Methode liefert alle Behandelnden auf der Blacklist des Patienten zurück.
+	 * Diese Methode liefert alle Behandelnden auf der Blacklist des Patienten
+	 * zurück.
 	 * 
 	 * @param int Patient ID
 	 * @return Array mit Behandelnden (Healthcareprofessional)
@@ -301,25 +326,28 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.GetBlacklistByPatientIdResponse getBlacklistByPatientId(
 			ch.bfh.www.ehrservices.GetBlacklistByPatientId getBlacklistByPatientId) {
-		Query query = Utility.getEM().createQuery("SELECT bl From Blacklist bl WHERE bl.patient.id = "+ getBlacklistByPatientId.getPatientID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT bl From Blacklist bl WHERE bl.patient.id = "
+						+ getBlacklistByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<Blacklist> dbBlacklist = query.getResultList();
-		
+
 		GetBlacklistByPatientIdResponse response = new GetBlacklistByPatientIdResponse();
-		
-		for(Blacklist dbEntry : dbBlacklist) {			
-			
+
+		for (Blacklist dbEntry : dbBlacklist) {
+
 			// create hp object
-			HealthCareProfessionalType hp = Utility.createHPHelper(dbEntry.getHealthcareprofessional());
-						
-			response.addHealthProfessionals(hp);
+			HealthCareProfessionalType hp = Utility.createHPHelper(dbEntry
+					.getHealthcareprofessional());
+
+			response.addHealthCareProfessionals(hp);
 		}
-		
+
 		return response;
 	}
 
 	/**
-	 * Diese Methode liefert alle Rollen zurück. 
+	 * Diese Methode liefert alle Rollen zurück.
 	 * 
 	 * @param boolean True mitgeben
 	 * @return Array mit Rollen
@@ -329,16 +357,16 @@ public class EhrServicesSkeleton {
 			ch.bfh.www.ehrservices.GetRoles getRoles) {
 		Query query = Utility.getEM().createQuery("SELECT r From Role r");
 		List<Role> dbRoles = query.getResultList();
-		
+
 		// Create Role objects and add them to the array in the response object
 		GetRolesResponse response = new GetRolesResponse();
-		for(Role role : dbRoles) {
+		for (Role role : dbRoles) {
 			RoleType newRole = new RoleType();
 			newRole.setId(role.getId());
-			newRole.setName(role.getNameDe()); //TODO Mehrsprachig
+			newRole.setName(role.getNameDe()); // TODO Mehrsprachig
 			response.addRoles(newRole);
 		}
-		
+
 		return response;
 	}
 
@@ -347,25 +375,31 @@ public class EhrServicesSkeleton {
 	 * Fügt eine neue Spezialberechtigung für einen Patienten hinzu.
 	 * Er berechtigt einen bestimmten Behandlenden auf ein bestimmtes Dokument.
 	 * </pre>
-	 * @param int Patient ID, int healthcareprofessional ID (Behandelnder), int documentregister ID (Metadaten)
+	 * 
+	 * @param int Patient ID, int healthcareprofessional ID (Behandelnder), int
+	 *        documentregister ID (Metadaten)
 	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetSpecialPermissionResponse setSpecialPermission(
 			ch.bfh.www.ehrservices.SetSpecialPermission setSpecialPermission) {
 		Utility.getEM().getTransaction().begin();
-		
+
 		Permissionmatrix permissionMatrix = new Permissionmatrix();
-		permissionMatrix.setPatient(Utility.getEM().find(Patient.class, setSpecialPermission.getPatientID()));
-		permissionMatrix.setHealthcareprofessional(Utility.getEM().find(Healthcareprofessional.class, setSpecialPermission.getHealthProfessionalID()));
-		permissionMatrix.setDocumentregister(Utility.getEM().find(Documentregister.class, setSpecialPermission.getDocumentID()));
-		
+		permissionMatrix.setPatient(Utility.getEM().find(Patient.class,
+				setSpecialPermission.getPatientID()));
+		permissionMatrix.setHealthcareprofessional(Utility.getEM().find(
+				Healthcareprofessional.class,
+				setSpecialPermission.getHealthProfessionalID()));
+		permissionMatrix.setDocumentregister(Utility.getEM().find(
+				Documentregister.class, setSpecialPermission.getDocumentID()));
+
 		Utility.getEM().persist(permissionMatrix);
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetSpecialPermissionResponse response = new SetSpecialPermissionResponse();
 		response.setOut("true"); // TODO sollte boolean sein..
-		
+
 		return response;
 	}
 
@@ -379,17 +413,19 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetHpOnBlacklistResponse setHpOnBlacklist(
 			ch.bfh.www.ehrservices.SetHpOnBlacklist setHpOnBlacklist) {
 		Utility.getEM().getTransaction().begin();
-		
+
 		Blacklist blacklist = new Blacklist();
-		blacklist.setPatient(Utility.getEM().find(Patient.class, setHpOnBlacklist.getPatientID()));
-		blacklist.setHealthcareprofessional(Utility.getEM().find(Healthcareprofessional.class, setHpOnBlacklist.getHealthProfessionalID()));
-		
+		blacklist.setPatient(Utility.getEM().find(Patient.class,
+				setHpOnBlacklist.getPatientID())); 
+		blacklist.setHealthcareprofessional(Utility.getEM().find(
+				Healthcareprofessional.class,
+				setHpOnBlacklist.getHealthProfessionalID())); 
 		Utility.getEM().persist(blacklist);
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetHpOnBlacklistResponse response = new SetHpOnBlacklistResponse();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
 
@@ -407,6 +443,7 @@ public class EhrServicesSkeleton {
 	 * 
 	 * Es ist nicht möglich nach mehr als einer Rolle zu suchen.
 	 * </pre>
+	 * 
 	 * @param int Patienten ID, boolean true bei der gewählten Rolle
 	 * @return Array mit OrganisationHP Objekte
 	 */
@@ -414,69 +451,70 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.GetHPByPatientAndRoleResponse getHPByPatientAndRole(
 			ch.bfh.www.ehrservices.GetHPByPatientAndRole getHPByPatientAndRole) {
 		String statement;
-		if(getHPByPatientAndRole.getPatientID() == 0) {
-			statement = "SELECT oh From Organisationhp oh"; 
-		}
-		else {
-			statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = " + getHPByPatientAndRole.getPatientID();		
-		
-			if(getHPByPatientAndRole.getTrust()) {
-				statement += " AND pr.role.id = " + roleTrust; 
-			}
-			else if(getHPByPatientAndRole.getCurrent()) {
+		if (getHPByPatientAndRole.getPatientID() == 0) {
+			statement = "SELECT oh From Organisationhp oh";
+		} else {
+			statement = "SELECT pr From Patientrole pr WHERE pr.patient.id = "
+					+ getHPByPatientAndRole.getPatientID();
+
+			if (getHPByPatientAndRole.getTrust()) {
+				statement += " AND pr.role.id = " + roleTrust;
+			} else if (getHPByPatientAndRole.getCurrent()) {
 				statement += " AND pr.role.id = " + roleCurrent;
-			}
-			else if(getHPByPatientAndRole.getPotential()) {
+			} else if (getHPByPatientAndRole.getPotential()) {
 				statement += " AND pr.role.id = " + rolePotential;
-			}
-			else {
-				// If there are no conditions set, it returns all HPs for the patient or not for the patient
+			} else {
+				// If there are no conditions set, it returns all HPs for the
+				// patient or not for the patient
 			}
 		}
-			
+
 		Query query = Utility.getEM().createQuery(statement);
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<Patientrole> dbPatientRoleList = null;
 		List<Organisationhp> dbOrganisationHPList = null;
-		if(getHPByPatientAndRole.getPatientID() == 0) {
+		if (getHPByPatientAndRole.getPatientID() == 0) {
 			dbOrganisationHPList = query.getResultList();
-		}
-		else {
+		} else {
 			dbPatientRoleList = query.getResultList();
 		}
-		
+
 		OrganisationHPType orgHP = null;
 		GetHPByPatientAndRoleResponse response = new GetHPByPatientAndRoleResponse();
-		if(getHPByPatientAndRole.getPatientID() == 0) {
-			for(Organisationhp dbOrgaHp : dbOrganisationHPList) {			 
-				
+		if (getHPByPatientAndRole.getPatientID() == 0) {
+			for (Organisationhp dbOrgaHp : dbOrganisationHPList) {
+
 				// create organisation hp object
 				orgHP = Utility.createOrganisationHPHelper(dbOrgaHp);
-				
-				
-				if(dbOrgaHp.getPatientroles() != null && !dbOrgaHp.getPatientroles().isEmpty()) {
-					orgHP.setRole(dbOrgaHp.getPatientroles().get(0).getRole().getNameDe());
-					orgHP.setRoleID(dbOrgaHp.getPatientroles().get(0).getRole().getId());
-					orgHP.setAccessTill(Utility.convertDateToCalendar(dbOrgaHp.getPatientroles().get(0).getAccessTill()));
+
+				if (dbOrgaHp.getPatientroles() != null
+						&& !dbOrgaHp.getPatientroles().isEmpty()) {
+					orgHP.setRole(dbOrgaHp.getPatientroles().get(0).getRole()
+							.getNameDe());
+					orgHP.setRoleID(dbOrgaHp.getPatientroles().get(0).getRole()
+							.getId());
+					orgHP.setAccessTill(Utility.convertDateToCalendar(dbOrgaHp
+							.getPatientroles().get(0).getAccessTill()));
 				}
-				
+
 				response.addHealthcareProfessional(orgHP);
 			}
-		}
-		else {
-			for(Patientrole dbPatientRole : dbPatientRoleList) {			 
-				
+		} else {
+			for (Patientrole dbPatientRole : dbPatientRoleList) {
+
 				// create organisation hp object
-				orgHP = Utility.createOrganisationHPHelper(dbPatientRole.getOrganisationhp());
-				
+				orgHP = Utility.createOrganisationHPHelper(dbPatientRole
+						.getOrganisationhp());
+
 				orgHP.setRole(dbPatientRole.getRole().getNameDe());
 				orgHP.setRoleID(dbPatientRole.getRole().getId());
-				orgHP.setAccessTill(Utility.convertDateToCalendar(dbPatientRole.getAccessTill()));
-				
+				orgHP.setAccessTill(Utility.convertDateToCalendar(dbPatientRole
+						.getAccessTill()));
+
 				response.addHealthcareProfessional(orgHP);
 			}
 		}
-		
+
 		return response;
 	}
 
@@ -490,6 +528,7 @@ public class EhrServicesSkeleton {
 	 * PotentialCareGiver => Potentieller Behandelnder
 	 * EmergencyCareGiver => Notfallbehandelnder
 	 * </pre>
+	 * 
 	 * @param int Patienten ID, Attribute nach Matrix (Empfehlungen) booleans
 	 * @return Gibt bei Erfolg true zurück
 	 */
@@ -497,75 +536,101 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetPermissionMatrixForPatientResponse setPermissionMatrixForPatient(
 			ch.bfh.www.ehrservices.SetPermissionMatrixForPatient setPermissionMatrixForPatient) {
 		Utility.getEM().getTransaction().begin();
-		
-		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ setPermissionMatrixForPatient.getPatientID() +
-				" AND pm.documentregister = null AND pm.healthcareprofessional = null");
+
+		Query query = Utility
+				.getEM()
+				.createQuery(
+						"SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "
+								+ setPermissionMatrixForPatient.getPatientID()
+								+ " AND pm.documentregister = null AND pm.healthcareprofessional = null");
 		Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
-		
+
 		List<Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
-		PermissionSchemaType schema = setPermissionMatrixForPatient.getPermissionSchema();
-		
+		PermissionSchemaType schema = setPermissionMatrixForPatient
+				.getPermissionSchema();
+
 		// Mein Behandelnder - Administrative Daten
-		dbSchemas.get(0).setValue(schema.getCareGiver_adminData() ? (byte)1 : (byte)0);
+		dbSchemas.get(0).setValue(
+				schema.getCareGiver_adminData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(0));
-		
+
 		// Mein Behandelnder - Nützliche Daten
-		dbSchemas.get(1).setValue(schema.getCareGiver_usefulData() ? (byte)1 : (byte)0);
+		dbSchemas.get(1).setValue(
+				schema.getCareGiver_usefulData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(1));
-		
+
 		// Mein Behandelnder - Medizinische Daten
-		dbSchemas.get(2).setValue(schema.getCareGiver_medicalData() ? (byte)1 : (byte)0);
+		dbSchemas.get(2).setValue(
+				schema.getCareGiver_medicalData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(2));
-		
+
 		// Mein Behandelnder - Stigmatisierende Daten
-		dbSchemas.get(3).setValue(schema.getCareGiver_stigmatizingData() ? (byte)1 : (byte)0);
+		dbSchemas.get(3).setValue(
+				schema.getCareGiver_stigmatizingData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(3));
-		
+
 		// Mein Behandelnder des Vertrauens - Administrative Daten
-		dbSchemas.get(4).setValue(schema.getCareGiverOfTrust_adminData() ? (byte)1 : (byte)0);
+		dbSchemas.get(4).setValue(
+				schema.getCareGiverOfTrust_adminData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(4));
-		
+
 		// Mein Behandelnder des Vertrauens - Nützliche Daten
-		dbSchemas.get(5).setValue(schema.getCareGiverOfTrust_usefulData() ? (byte)1 : (byte)0);
+		dbSchemas.get(5).setValue(
+				schema.getCareGiverOfTrust_usefulData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(5));
-		
+
 		// Mein Behandelnder des Vertrauens - Medizinische Daten
-		dbSchemas.get(6).setValue(schema.getCareGiverOfTrust_medicalData() ? (byte)1 : (byte)0);
+		dbSchemas.get(6).setValue(
+				schema.getCareGiverOfTrust_medicalData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(6));
-		
+
 		// Mein Behandelnder des Vertrauens - Stigmatisierende Daten
-		dbSchemas.get(7).setValue(schema.getCareGiverOfTrust_stigmatizingData() ? (byte)1 : (byte)0);
+		dbSchemas.get(7).setValue(
+				schema.getCareGiverOfTrust_stigmatizingData() ? (byte) 1
+						: (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(7));
-				
+
 		// Potenzieller Behandelnder - Administrative Daten
-		dbSchemas.get(8).setValue(schema.getPotentialCareGiver_adminData() ? (byte)1 : (byte)0);
+		dbSchemas.get(8).setValue(
+				schema.getPotentialCareGiver_adminData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(8));
-		
+
 		// Potenzieller Behandelnder - Nützliche Daten
-		dbSchemas.get(9).setValue(schema.getPotentialCareGiver_usefulData() ? (byte)1 : (byte)0);
+		dbSchemas.get(9)
+				.setValue(
+						schema.getPotentialCareGiver_usefulData() ? (byte) 1
+								: (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(9));
-		
+
 		// Notfall Behandelnder - Administrative Daten
-		dbSchemas.get(10).setValue(schema.getEmergencyCareGiver_adminData() ? (byte)1 : (byte)0);
+		dbSchemas.get(10).setValue(
+				schema.getEmergencyCareGiver_adminData() ? (byte) 1 : (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(10));
-		
+
 		// Notfall Behandelnder - Nützliche Daten
-		dbSchemas.get(11).setValue(schema.getEmergencyCareGiver_usefulData() ? (byte)1 : (byte)0);
+		dbSchemas.get(11)
+				.setValue(
+						schema.getEmergencyCareGiver_usefulData() ? (byte) 1
+								: (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(11));
-		
+
 		// Notfall Behandelnder - Medizinische Daten
-		dbSchemas.get(12).setValue(schema.getEmergencyCareGiver_medicalData() ? (byte)1 : (byte)0);
+		dbSchemas.get(12).setValue(
+				schema.getEmergencyCareGiver_medicalData() ? (byte) 1
+						: (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(12));
-				
+
 		// Notfall Behandelnder - Stigmatisierende Daten
-		dbSchemas.get(13).setValue(schema.getEmergencyCareGiver_stigmatizingData() ? (byte)1 : (byte)0);
+		dbSchemas.get(13).setValue(
+				schema.getEmergencyCareGiver_stigmatizingData() ? (byte) 1
+						: (byte) 0);
 		Utility.getEM().persist(dbSchemas.get(13));
-				
+
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetPermissionMatrixForPatientResponse response = new SetPermissionMatrixForPatientResponse();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
 
@@ -577,29 +642,33 @@ public class EhrServicesSkeleton {
 	 * Giver => Gibt die Rechte an
 	 * Receiver => Erhält die Rechte von
 	 * </pre>
-	 * @param giver Patienten ID, receiver Patienten ID
+	 * 
+	 * @param giver
+	 *            Patienten ID, receiver Patienten ID
 	 * @return Gibt bei Erfolg true zurück
 	 */
 
 	public ch.bfh.www.ehrservices.SetWhitelistResponse setWhitelist(
 			ch.bfh.www.ehrservices.SetWhitelist setWhitelist) {
 		Utility.getEM().getTransaction().begin();
-		
+
 		Whitelist whitelist = new Whitelist();
-		whitelist.setPatient1(Utility.getEM().find(Patient.class, setWhitelist.getGiverPatientID()));
-		whitelist.setPatient2(Utility.getEM().find(Patient.class, setWhitelist.getReceiverPatientID()));
-		
+		whitelist.setPatient1(Utility.getEM().find(Patient.class,
+				setWhitelist.getGiverPatientID()));
+		whitelist.setPatient2(Utility.getEM().find(Patient.class,
+				setWhitelist.getReceiverPatientID()));
+
 		Utility.getEM().persist(whitelist);
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetWhitelistResponse response = new SetWhitelistResponse();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
 
 	/**
-	 * Diese Methode liefert alle Vertrauchlichkeitsstufen zurück. 
+	 * Diese Methode liefert alle Vertrauchlichkeitsstufen zurück.
 	 * 
 	 * @param boolean True mitgeben
 	 * @return Array mit Vertraulichkeitsstufen
@@ -607,23 +676,26 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.GetConfidentialityLevelsResponse getConfidentialityLevels(
 			ch.bfh.www.ehrservices.GetConfidentialityLevels getConfidentialityLevels) {
-		Query query = Utility.getEM().createQuery("SELECT c From Confidentialitylevel c");
+		Query query = Utility.getEM().createQuery(
+				"SELECT c From Confidentialitylevel c");
 		List<Confidentialitylevel> dbConfLevels = query.getResultList();
-		
-		// Create confidentiality level objects and add them to the array in the response object
+
+		// Create confidentiality level objects and add them to the array in the
+		// response object
 		GetConfidentialityLevelsResponse response = new GetConfidentialityLevelsResponse();
-		for(Confidentialitylevel confLevel : dbConfLevels) {
+		for (Confidentialitylevel confLevel : dbConfLevels) {
 			ConfidentialyLevelType newConfLevel = new ConfidentialyLevelType();
 			newConfLevel.setConfidentialyLevelID(confLevel.getId());
-			newConfLevel.setName(confLevel.getNameDe()); //TODO Mehrsprachig
+			newConfLevel.setName(confLevel.getNameDe()); // TODO Mehrsprachig
 			response.addConfidentialyLevels(newConfLevel);
 		}
-		
+
 		return response;
 	}
 
 	/**
-	 * Diese Methode liefert liefert alle Whitelist Einträge zum gegebenen Patienten zurück.
+	 * Diese Methode liefert liefert alle Whitelist Einträge zum gegebenen
+	 * Patienten zurück.
 	 * 
 	 * @param int Patienten ID
 	 * @return Array von Whitelist Einträgen
@@ -631,20 +703,23 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.GetWhitelistByPatientIdResponse getWhitelistByPatientId(
 			ch.bfh.www.ehrservices.GetWhitelistByPatientId getWhitelistByPatientId) {
-		Query query = Utility.getEM().createQuery("SELECT wl From Whitelist wl WHERE wl.patient1.id = "+ getWhitelistByPatientId.getPatientID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT wl From Whitelist wl WHERE wl.patient1.id = "
+						+ getWhitelistByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		List<Whitelist> dbWhitelist = query.getResultList();
-		
+
 		GetWhitelistByPatientIdResponse response = new GetWhitelistByPatientIdResponse();
-		
-		for(Whitelist dbEntry : dbWhitelist) {
-			PatientType patient = Utility.createPatientHelper(dbEntry.getPatient2());
-			patient.setPerson(Utility.createPersonWithAddressHelper(dbEntry.getPatient2().getPerson()));
-			
+
+		for (Whitelist dbEntry : dbWhitelist) {
+			PatientType patient = Utility.createPatientHelper(dbEntry
+					.getPatient2());
+			patient.setPerson(Utility.createPersonWithAddressHelper(dbEntry
+					.getPatient2().getPerson()));
+
 			response.addPatients(patient);
 		}
-		
-		
+
 		return response;
 	}
 
@@ -659,70 +734,75 @@ public class EhrServicesSkeleton {
 	 * PotentialCareGiver => Potentieller Behandelnder
 	 * EmergencyCareGiver => Notfallbehandelnder
 	 * </pre>
+	 * 
 	 * @param int Patienten ID
 	 * @return Gruppe von booleans
 	 */
 
 	public ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientIdResponse getCurrentPermissionMatrixByPatientId(
 			ch.bfh.www.ehrservices.GetCurrentPermissionMatrixByPatientId getCurrentPermissionMatrixByPatientId) {
-		Query query = Utility.getEM().createQuery("SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "+ getCurrentPermissionMatrixByPatientId.getPatientID() +
-				" AND pm.documentregister = null AND pm.healthcareprofessional = null");
+		Query query = Utility
+				.getEM()
+				.createQuery(
+						"SELECT pm From Permissionmatrix pm WHERE pm.patient.id = "
+								+ getCurrentPermissionMatrixByPatientId
+										.getPatientID()
+								+ " AND pm.documentregister = null AND pm.healthcareprofessional = null");
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
 		Permissionmatrix dbMatrix = (Permissionmatrix) query.getSingleResult();
-		
+
 		GetCurrentPermissionMatrixByPatientIdResponse response = new GetCurrentPermissionMatrixByPatientIdResponse();
-		
+
 		// create permission schema object
 		PermissionSchemaType schema = new PermissionSchemaType();
-		
+
 		List<Permissionschema> dbSchemas = dbMatrix.getPermissionschemas();
-		
+
 		// Mein Behandelnder - Administrative Daten
 		schema.setCareGiver_adminData(dbSchemas.get(0).getValue() != 0);
-		
+
 		// Mein Behandelnder - Nützliche Daten
 		schema.setCareGiver_usefulData(dbSchemas.get(1).getValue() != 0);
-		
+
 		// Mein Behandelnder - Medizinische Daten
 		schema.setCareGiver_medicalData(dbSchemas.get(2).getValue() != 0);
-		
+
 		// Mein Behandelnder - Stigmatisierende Daten
 		schema.setCareGiver_stigmatizingData(dbSchemas.get(3).getValue() != 0);
-		
+
 		// Mein Behandelnder des Vertrauens - Administrative Daten
 		schema.setCareGiverOfTrust_adminData(dbSchemas.get(4).getValue() != 0);
-		
+
 		// Mein Behandelnder des Vertrauens - Nützliche Daten
 		schema.setCareGiverOfTrust_usefulData(dbSchemas.get(5).getValue() != 0);
-		
+
 		// Mein Behandelnder des Vertrauens - Medizinische Daten
 		schema.setCareGiverOfTrust_medicalData(dbSchemas.get(6).getValue() != 0);
-		
+
 		// Mein Behandelnder des Vertrauens - Stigmatisierende Daten
 		schema.setCareGiverOfTrust_stigmatizingData(dbSchemas.get(7).getValue() != 0);
-		
+
 		// Potenzieller Behandelnder - Administrative Daten
 		schema.setPotentialCareGiver_adminData(dbSchemas.get(8).getValue() != 0);
-		
+
 		// Potenzieller Behandelnder - Nützliche Daten
 		schema.setPotentialCareGiver_usefulData(dbSchemas.get(9).getValue() != 0);
-		
+
 		// Notfall Behandelnder - Administrative Daten
 		schema.setEmergencyCareGiver_adminData(dbSchemas.get(10).getValue() != 0);
-		
+
 		// Notfall Behandelnder - Nützliche Daten
 		schema.setEmergencyCareGiver_usefulData(dbSchemas.get(11).getValue() != 0);
-		
+
 		// Notfall Behandelnder - Medizinische Daten
 		schema.setEmergencyCareGiver_medicalData(dbSchemas.get(12).getValue() != 0);
-		
+
 		// Notfall Behandelnder - Stigmatisierende Daten
-		schema.setEmergencyCareGiver_stigmatizingData(dbSchemas.get(13).getValue() != 0);
-				
-		
+		schema.setEmergencyCareGiver_stigmatizingData(dbSchemas.get(13)
+				.getValue() != 0);
+
 		response.setPermissionSchema(schema);
-		
-		
+
 		return response;
 	}
 
@@ -734,6 +814,7 @@ public class EhrServicesSkeleton {
 	 * Rollen ID => getAllRoles
 	 * OrganisationHP ID => GetHPByPatientAndRole
 	 * </pre>
+	 * 
 	 * @param int Patienten ID, Rollen ID, OrganisationHP ID
 	 * @return Gibt bei Erfolg true zurück
 	 */
@@ -741,26 +822,33 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetHPRoleResponse setHPRole(
 			ch.bfh.www.ehrservices.SetHPRole setHPRole) {
 		Utility.getEM().getTransaction().begin();
-		
+
 		Patientrole hpRole = new Patientrole();
-		Query query = Utility.getEM().createQuery("SELECT pr From Patientrole pr WHERE pr.patient.id = "+ setHPRole.getPatientID()
-				+ " AND pr.organisationhp.id = " + setHPRole.getHealthCareProfessionalID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT pr From Patientrole pr WHERE pr.patient.id = "
+						+ setHPRole.getPatientID()
+						+ " AND pr.organisationhp.id = "
+						+ setHPRole.getHealthCareProfessionalID());
 		List<Patientrole> list = query.getResultList();
-		if(!list.isEmpty()) {
+		if (!list.isEmpty()) {
 			hpRole = (Patientrole) query.getSingleResult();
 		}
-		
-		hpRole.setPatient(Utility.getEM().find(Patient.class, setHPRole.getPatientID()));
+
+		hpRole.setPatient(Utility.getEM().find(Patient.class,
+				setHPRole.getPatientID()));
 		hpRole.setRole(Utility.getEM().find(Role.class, setHPRole.getRoleID()));
-		hpRole.setOrganisationhp(Utility.getEM().find(Organisationhp.class, setHPRole.getHealthCareProfessionalID())); // TODO wäre organisaitonhp nicht hp
+		hpRole.setOrganisationhp(Utility.getEM().find(Organisationhp.class,
+				setHPRole.getHealthCareProfessionalID())); // TODO wäre
+															// organisaitonhp
+															// nicht hp
 		hpRole.setAccessTill(setHPRole.getAccessTill().getTime());
-		
+
 		Utility.getEM().persist(hpRole);
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetHPRoleResponse response = new SetHPRoleResponse();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
 
@@ -771,29 +859,30 @@ public class EhrServicesSkeleton {
 	 * </pre>
 	 * 
 	 * @param int id
-	 * @return documentRegister 
-	 * 						- Organisation (1)
-	 * 						- HealthcareProfessional (1)
-	 * 							- Person => Address
-	 * 						- DocumentLog (*)
+	 * @return documentRegister - Organisation (1) - HealthcareProfessional (1)
+	 *         - Person => Address - DocumentLog (*)
 	 */
 
 	public ch.bfh.www.ehrservices.GetAllDocumentsByPatientIdResponse getAllDocumentsByPatientId(
 			ch.bfh.www.ehrservices.GetAllDocumentsByPatientId getAllDocumentsByPatientId) {
-		Query query = Utility.getEM().createQuery("SELECT dr From Documentregister dr WHERE dr.patient.id = "+ getAllDocumentsByPatientId.getPatientID());
+		Query query = Utility.getEM().createQuery(
+				"SELECT dr From Documentregister dr WHERE dr.patient.id = "
+						+ getAllDocumentsByPatientId.getPatientID());
 		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
-		
+
 		List<Documentregister> dbDocs = query.getResultList();
-		
-		// Create document register objects and add them to the array in the response object
+
+		// Create document register objects and add them to the array in the
+		// response object
 		GetAllDocumentsByPatientIdResponse response = new GetAllDocumentsByPatientIdResponse();
-		for(Documentregister doc : dbDocs) {
-			DocumentRegisterEntryType newDoc = new DocumentRegisterEntryType();			
-			
-			// create document register object			
-			response.addDocumentRegisterEntries(Utility.createDocumentRegisterHelper(doc));
+		for (Documentregister doc : dbDocs) {
+			DocumentRegisterEntryType newDoc = new DocumentRegisterEntryType();
+
+			// create document register object
+			response.addDocumentRegisterEntries(Utility
+					.createDocumentRegisterHelper(doc));
 		}
-		
+
 		return response;
 	}
 
@@ -802,6 +891,7 @@ public class EhrServicesSkeleton {
 	 * Setzt die Vertrauchlichkeitsstufe für das gegebene Dokument.
 	 * Vertrauchlichkeitsstufe von getConfidentialityLevels
 	 * </pre>
+	 * 
 	 * @param int Documentregister ID, Confidentialitylevel ID
 	 * @return Gibt bei Erfolg true zurück
 	 */
@@ -809,18 +899,182 @@ public class EhrServicesSkeleton {
 	public ch.bfh.www.ehrservices.SetConfidentialityResponse setConfidentiality(
 			ch.bfh.www.ehrservices.SetConfidentiality setConfidentiality) {
 		Utility.getEM().getTransaction().begin();
-		
-		Documentregister documentRegister = Utility.getEM().find(Documentregister.class, setConfidentiality.getDocumentRegisterID());
-		documentRegister.setConfidentialitylevel(Utility.getEM().find(Confidentialitylevel.class, setConfidentiality.getConfidentialityID()));
-		
-				
+
+		Documentregister documentRegister = Utility.getEM().find(
+				Documentregister.class,
+				setConfidentiality.getDocumentRegisterID());
+		documentRegister.setConfidentialitylevel(Utility.getEM().find(
+				Confidentialitylevel.class,
+				setConfidentiality.getConfidentialityID()));
+
 		Utility.getEM().persist(documentRegister);
 		Utility.getEM().getTransaction().commit();
-		
+
 		SetConfidentialityResponse response = new SetConfidentialityResponse();
 		response.setSuccess(true);
-		
+
 		return response;
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param removeEmergencyContact
+	 * @return removeEmergencyContactResponse
+	 */
+
+	public ch.bfh.www.ehrservices.RemoveEmergencyContactResponse removeEmergencyContact(
+			ch.bfh.www.ehrservices.RemoveEmergencyContact removeEmergencyContact) {
+		
+		Query query = Utility.getEM().createQuery("SELECT ec FROM Emergencycontact ec WHERE ec.patient.id = " 
+		+ removeEmergencyContact.getPatientID() + " AND ec.person.id = " 
+		+ removeEmergencyContact.getPersonID());
+		Emergencycontact emergencyContact = (Emergencycontact) query.getSingleResult();
+		Person person = Utility.getEM().find(Person.class, removeEmergencyContact.getPersonID());
+		
+		RemoveEmergencyContactResponse response = new RemoveEmergencyContactResponse();
+		
+		if(emergencyContact != null && person != null) {
+			Utility.getEM().getTransaction().begin();
+			Utility.getEM().remove(emergencyContact);
+			Utility.getEM().remove(person);
+			Utility.getEM().getTransaction().commit();
+			response.setSuccess(true);
+		}
+		else {
+			response.setSuccess(false);
+		}
+		return response;
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param removeOrganisationHPFromPatient
+	 * @return removeOrganisationHPFromPatientResponse
+	 */
+
+	public ch.bfh.www.ehrservices.RemoveOrganisationHPFromPatientResponse removeOrganisationHPFromPatient(
+			ch.bfh.www.ehrservices.RemoveOrganisationHPFromPatient removeOrganisationHPFromPatient) {
+		Query query = Utility.getEM().createQuery(
+				"SELECT pr FROM Patientrole pr WHERE pr.patient.id = "
+						+ removeOrganisationHPFromPatient.getPatientID()
+						+ " AND pr.organisationhp.id = "
+						+ removeOrganisationHPFromPatient.getOrganisationHPID());
+		Patientrole patientRole = (Patientrole) query.getSingleResult();		
+
+		RemoveOrganisationHPFromPatientResponse response = new RemoveOrganisationHPFromPatientResponse();
+
+		if (patientRole != null) {
+			Utility.getEM().getTransaction().begin();
+			Utility.getEM().remove(patientRole);			
+			Utility.getEM().getTransaction().commit();
+			response.setSuccess(true);
+		} else {
+			response.setSuccess(false);
+		}
+		return response;
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param removePatientFromWhitelist
+	 * @return removePatientFromWhitelistResponse
+	 */
+
+	public ch.bfh.www.ehrservices.RemovePatientFromWhitelistResponse removePatientFromWhitelist(
+			ch.bfh.www.ehrservices.RemovePatientFromWhitelist removePatientFromWhitelist) {
+		Query query = Utility.getEM().createQuery(
+				"SELECT wl FROM Whitelist wl WHERE wl.patient1.id = "
+						+ removePatientFromWhitelist.getPatientID()
+						+ " AND wl.patient2.id = "
+						+ removePatientFromWhitelist.getWhitelistPatientID());
+		Whitelist whitelist = (Whitelist) query.getSingleResult();		
+
+		RemovePatientFromWhitelistResponse response = new RemovePatientFromWhitelistResponse();
+
+		if (whitelist != null) {
+			Utility.getEM().getTransaction().begin();
+			Utility.getEM().remove(whitelist);			
+			Utility.getEM().getTransaction().commit();
+			response.setSuccess(true);
+		} else {
+			response.setSuccess(false);
+		}
+		return response;
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param removeHPFromBlacklist
+	 * @return removeHPFromBlacklistResponse
+	 */
+
+	public ch.bfh.www.ehrservices.RemoveHPFromBlacklistResponse removeHPFromBlacklist(
+			ch.bfh.www.ehrservices.RemoveHPFromBlacklist removeHPFromBlacklist) {
+		Query query = Utility.getEM().createQuery(
+				"SELECT bl FROM Blacklist bl WHERE bl.patient.id = "
+						+ removeHPFromBlacklist.getPatientID()
+						+ " AND bl.healthcareprofessional.id = "
+						+ removeHPFromBlacklist.getHpcID());
+		Blacklist blacklist = (Blacklist) query.getSingleResult();		
+
+		RemoveHPFromBlacklistResponse response = new RemoveHPFromBlacklistResponse();
+
+		if (blacklist != null) {
+			Utility.getEM().getTransaction().begin();
+			Utility.getEM().remove(blacklist);			
+			Utility.getEM().getTransaction().commit();
+			response.setSuccess(true);
+		} else {
+			response.setSuccess(false);
+		}
+		return response;
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param setMasterDataForPatient
+	 * @return setMasterDataForPatientResponse
+	 */
+
+	public ch.bfh.www.ehrservices.SetMasterDataForPatientResponse setMasterDataForPatient(
+			ch.bfh.www.ehrservices.SetMasterDataForPatient setMasterDataForPatient) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#setMasterDataForPatient");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getVisibleDocumentsForOrgaHP
+	 * @return getVisibleDocumentsForOrgaHPResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetVisibleDocumentsForOrgaHPResponse getVisibleDocumentsForOrgaHP(
+			ch.bfh.www.ehrservices.GetVisibleDocumentsForOrgaHP getVisibleDocumentsForOrgaHP) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName() + "#getVisibleDocumentsForOrgaHP");
+	}
+
+	/**
+	 * Auto generated method signature
+	 * 
+	 * @param getAuthorisedOrgaHPsForDocument
+	 * @return getAuthorisedOrgaHPsForDocumentResponse
+	 */
+
+	public ch.bfh.www.ehrservices.GetAuthorisedOrgaHPsForDocumentResponse getAuthorisedOrgaHPsForDocument(
+			ch.bfh.www.ehrservices.GetAuthorisedOrgaHPsForDocument getAuthorisedOrgaHPsForDocument) {
+		// TODO : fill this with the necessary business logic
+		throw new java.lang.UnsupportedOperationException("Please implement "
+				+ this.getClass().getName()
+				+ "#getAuthorisedOrgaHPsForDocument");
 	}
 
 }

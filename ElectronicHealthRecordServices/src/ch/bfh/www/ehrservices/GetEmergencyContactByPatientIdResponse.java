@@ -26,21 +26,21 @@
             
 
                         /**
-                        * field for EmergencyContact
+                        * field for EmergencyContacts
                         * This was an Array!
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.PersonType[] localEmergencyContact ;
+                                    protected ch.bfh.www.ehrservices.PersonType[] localEmergencyContacts ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localEmergencyContactTracker = false ;
+                           protected boolean localEmergencyContactsTracker = false ;
 
-                           public boolean isEmergencyContactSpecified(){
-                               return localEmergencyContactTracker;
+                           public boolean isEmergencyContactsSpecified(){
+                               return localEmergencyContactsTracker;
                            }
 
                            
@@ -49,8 +49,8 @@
                            * Auto generated getter method
                            * @return ch.bfh.www.ehrservices.PersonType[]
                            */
-                           public  ch.bfh.www.ehrservices.PersonType[] getEmergencyContact(){
-                               return localEmergencyContact;
+                           public  ch.bfh.www.ehrservices.PersonType[] getEmergencyContacts(){
+                               return localEmergencyContacts;
                            }
 
                            
@@ -59,24 +59,24 @@
 
                                
                               /**
-                               * validate the array for EmergencyContact
+                               * validate the array for EmergencyContacts
                                */
-                              protected void validateEmergencyContact(ch.bfh.www.ehrservices.PersonType[] param){
+                              protected void validateEmergencyContacts(ch.bfh.www.ehrservices.PersonType[] param){
                              
                               }
 
 
                              /**
                               * Auto generated setter method
-                              * @param param EmergencyContact
+                              * @param param EmergencyContacts
                               */
-                              public void setEmergencyContact(ch.bfh.www.ehrservices.PersonType[] param){
+                              public void setEmergencyContacts(ch.bfh.www.ehrservices.PersonType[] param){
                               
-                                   validateEmergencyContact(param);
+                                   validateEmergencyContacts(param);
 
-                               localEmergencyContactTracker = param != null;
+                               localEmergencyContactsTracker = param != null;
                                       
-                                      this.localEmergencyContact=param;
+                                      this.localEmergencyContacts=param;
                               }
 
                                
@@ -85,20 +85,20 @@
                              * Auto generated add method for the array for convenience
                              * @param param ch.bfh.www.ehrservices.PersonType
                              */
-                             public void addEmergencyContact(ch.bfh.www.ehrservices.PersonType param){
-                                   if (localEmergencyContact == null){
-                                   localEmergencyContact = new ch.bfh.www.ehrservices.PersonType[]{};
+                             public void addEmergencyContacts(ch.bfh.www.ehrservices.PersonType param){
+                                   if (localEmergencyContacts == null){
+                                   localEmergencyContacts = new ch.bfh.www.ehrservices.PersonType[]{};
                                    }
 
                             
                                  //update the setting tracker
-                                localEmergencyContactTracker = true;
+                                localEmergencyContactsTracker = true;
                             
 
                                java.util.List list =
-                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localEmergencyContact);
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localEmergencyContacts);
                                list.add(param);
-                               this.localEmergencyContact =
+                               this.localEmergencyContacts =
                              (ch.bfh.www.ehrservices.PersonType[])list.toArray(
                             new ch.bfh.www.ehrservices.PersonType[list.size()]);
 
@@ -163,11 +163,11 @@
 
                
                    }
-                if (localEmergencyContactTracker){
-                                       if (localEmergencyContact!=null){
-                                            for (int i = 0;i < localEmergencyContact.length;i++){
-                                                if (localEmergencyContact[i] != null){
-                                                 localEmergencyContact[i].serialize(new javax.xml.namespace.QName("","emergencyContact"),
+                if (localEmergencyContactsTracker){
+                                       if (localEmergencyContacts!=null){
+                                            for (int i = 0;i < localEmergencyContacts.length;i++){
+                                                if (localEmergencyContacts[i] != null){
+                                                 localEmergencyContacts[i].serialize(new javax.xml.namespace.QName("","emergencyContacts"),
                                                            xmlWriter);
                                                 } else {
                                                    
@@ -178,7 +178,7 @@
                                             }
                                      } else {
                                         
-                                               throw new org.apache.axis2.databinding.ADBException("emergencyContact cannot be null!!");
+                                               throw new org.apache.axis2.databinding.ADBException("emergencyContacts cannot be null!!");
                                         
                                     }
                                  }
@@ -366,14 +366,14 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localEmergencyContactTracker){
-                             if (localEmergencyContact!=null) {
-                                 for (int i = 0;i < localEmergencyContact.length;i++){
+                 if (localEmergencyContactsTracker){
+                             if (localEmergencyContacts!=null) {
+                                 for (int i = 0;i < localEmergencyContacts.length;i++){
 
-                                    if (localEmergencyContact[i] != null){
+                                    if (localEmergencyContacts[i] != null){
                                          elementList.add(new javax.xml.namespace.QName("",
-                                                                          "emergencyContact"));
-                                         elementList.add(localEmergencyContact[i]);
+                                                                          "emergencyContacts"));
+                                         elementList.add(localEmergencyContacts[i]);
                                     } else {
                                         
                                                 // nothing to do
@@ -383,7 +383,7 @@
                                  }
                              } else {
                                  
-                                        throw new org.apache.axis2.databinding.ADBException("emergencyContact cannot be null!!");
+                                        throw new org.apache.axis2.databinding.ADBException("emergencyContacts cannot be null!!");
                                     
                              }
 
@@ -468,7 +468,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","emergencyContact").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","emergencyContacts").equals(reader.getName())){
                                 
                                     
                                     
@@ -490,7 +490,7 @@
                                                                 //two continuous end elements means we are exiting the xml structure
                                                                 loopDone1 = true;
                                                             } else {
-                                                                if (new javax.xml.namespace.QName("","emergencyContact").equals(reader.getName())){
+                                                                if (new javax.xml.namespace.QName("","emergencyContacts").equals(reader.getName())){
                                                                     list1.add(ch.bfh.www.ehrservices.PersonType.Factory.parse(reader));
                                                                         
                                                                 }else{
@@ -500,7 +500,7 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setEmergencyContact((ch.bfh.www.ehrservices.PersonType[])
+                                                        object.setEmergencyContacts((ch.bfh.www.ehrservices.PersonType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 ch.bfh.www.ehrservices.PersonType.class,
                                                                 list1));

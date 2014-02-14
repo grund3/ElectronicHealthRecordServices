@@ -26,21 +26,21 @@
             
 
                         /**
-                        * field for HealthProfessionals
+                        * field for HealthCareProfessionals
                         * This was an Array!
                         */
 
                         
-                                    protected ch.bfh.www.ehrservices.HealthCareProfessionalType[] localHealthProfessionals ;
+                                    protected ch.bfh.www.ehrservices.HealthCareProfessionalType[] localHealthCareProfessionals ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localHealthProfessionalsTracker = false ;
+                           protected boolean localHealthCareProfessionalsTracker = false ;
 
-                           public boolean isHealthProfessionalsSpecified(){
-                               return localHealthProfessionalsTracker;
+                           public boolean isHealthCareProfessionalsSpecified(){
+                               return localHealthCareProfessionalsTracker;
                            }
 
                            
@@ -49,8 +49,8 @@
                            * Auto generated getter method
                            * @return ch.bfh.www.ehrservices.HealthCareProfessionalType[]
                            */
-                           public  ch.bfh.www.ehrservices.HealthCareProfessionalType[] getHealthProfessionals(){
-                               return localHealthProfessionals;
+                           public  ch.bfh.www.ehrservices.HealthCareProfessionalType[] getHealthCareProfessionals(){
+                               return localHealthCareProfessionals;
                            }
 
                            
@@ -59,24 +59,24 @@
 
                                
                               /**
-                               * validate the array for HealthProfessionals
+                               * validate the array for HealthCareProfessionals
                                */
-                              protected void validateHealthProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType[] param){
+                              protected void validateHealthCareProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType[] param){
                              
                               }
 
 
                              /**
                               * Auto generated setter method
-                              * @param param HealthProfessionals
+                              * @param param HealthCareProfessionals
                               */
-                              public void setHealthProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType[] param){
+                              public void setHealthCareProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType[] param){
                               
-                                   validateHealthProfessionals(param);
+                                   validateHealthCareProfessionals(param);
 
-                               localHealthProfessionalsTracker = param != null;
+                               localHealthCareProfessionalsTracker = param != null;
                                       
-                                      this.localHealthProfessionals=param;
+                                      this.localHealthCareProfessionals=param;
                               }
 
                                
@@ -85,20 +85,20 @@
                              * Auto generated add method for the array for convenience
                              * @param param ch.bfh.www.ehrservices.HealthCareProfessionalType
                              */
-                             public void addHealthProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType param){
-                                   if (localHealthProfessionals == null){
-                                   localHealthProfessionals = new ch.bfh.www.ehrservices.HealthCareProfessionalType[]{};
+                             public void addHealthCareProfessionals(ch.bfh.www.ehrservices.HealthCareProfessionalType param){
+                                   if (localHealthCareProfessionals == null){
+                                   localHealthCareProfessionals = new ch.bfh.www.ehrservices.HealthCareProfessionalType[]{};
                                    }
 
                             
                                  //update the setting tracker
-                                localHealthProfessionalsTracker = true;
+                                localHealthCareProfessionalsTracker = true;
                             
 
                                java.util.List list =
-                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localHealthProfessionals);
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localHealthCareProfessionals);
                                list.add(param);
-                               this.localHealthProfessionals =
+                               this.localHealthCareProfessionals =
                              (ch.bfh.www.ehrservices.HealthCareProfessionalType[])list.toArray(
                             new ch.bfh.www.ehrservices.HealthCareProfessionalType[list.size()]);
 
@@ -163,11 +163,11 @@
 
                
                    }
-                if (localHealthProfessionalsTracker){
-                                       if (localHealthProfessionals!=null){
-                                            for (int i = 0;i < localHealthProfessionals.length;i++){
-                                                if (localHealthProfessionals[i] != null){
-                                                 localHealthProfessionals[i].serialize(new javax.xml.namespace.QName("","HealthProfessionals"),
+                if (localHealthCareProfessionalsTracker){
+                                       if (localHealthCareProfessionals!=null){
+                                            for (int i = 0;i < localHealthCareProfessionals.length;i++){
+                                                if (localHealthCareProfessionals[i] != null){
+                                                 localHealthCareProfessionals[i].serialize(new javax.xml.namespace.QName("","healthCareProfessionals"),
                                                            xmlWriter);
                                                 } else {
                                                    
@@ -178,7 +178,7 @@
                                             }
                                      } else {
                                         
-                                               throw new org.apache.axis2.databinding.ADBException("HealthProfessionals cannot be null!!");
+                                               throw new org.apache.axis2.databinding.ADBException("healthCareProfessionals cannot be null!!");
                                         
                                     }
                                  }
@@ -366,14 +366,14 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localHealthProfessionalsTracker){
-                             if (localHealthProfessionals!=null) {
-                                 for (int i = 0;i < localHealthProfessionals.length;i++){
+                 if (localHealthCareProfessionalsTracker){
+                             if (localHealthCareProfessionals!=null) {
+                                 for (int i = 0;i < localHealthCareProfessionals.length;i++){
 
-                                    if (localHealthProfessionals[i] != null){
+                                    if (localHealthCareProfessionals[i] != null){
                                          elementList.add(new javax.xml.namespace.QName("",
-                                                                          "HealthProfessionals"));
-                                         elementList.add(localHealthProfessionals[i]);
+                                                                          "healthCareProfessionals"));
+                                         elementList.add(localHealthCareProfessionals[i]);
                                     } else {
                                         
                                                 // nothing to do
@@ -383,7 +383,7 @@
                                  }
                              } else {
                                  
-                                        throw new org.apache.axis2.databinding.ADBException("HealthProfessionals cannot be null!!");
+                                        throw new org.apache.axis2.databinding.ADBException("healthCareProfessionals cannot be null!!");
                                     
                              }
 
@@ -468,7 +468,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","HealthProfessionals").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","healthCareProfessionals").equals(reader.getName())){
                                 
                                     
                                     
@@ -490,7 +490,7 @@
                                                                 //two continuous end elements means we are exiting the xml structure
                                                                 loopDone1 = true;
                                                             } else {
-                                                                if (new javax.xml.namespace.QName("","HealthProfessionals").equals(reader.getName())){
+                                                                if (new javax.xml.namespace.QName("","healthCareProfessionals").equals(reader.getName())){
                                                                     list1.add(ch.bfh.www.ehrservices.HealthCareProfessionalType.Factory.parse(reader));
                                                                         
                                                                 }else{
@@ -500,7 +500,7 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setHealthProfessionals((ch.bfh.www.ehrservices.HealthCareProfessionalType[])
+                                                        object.setHealthCareProfessionals((ch.bfh.www.ehrservices.HealthCareProfessionalType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 ch.bfh.www.ehrservices.HealthCareProfessionalType.class,
                                                                 list1));
