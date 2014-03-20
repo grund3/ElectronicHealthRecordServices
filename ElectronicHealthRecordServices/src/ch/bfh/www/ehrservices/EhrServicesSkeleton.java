@@ -1043,9 +1043,50 @@ public class EhrServicesSkeleton {
 
 	public ch.bfh.www.ehrservices.SetMasterDataForPatientResponse setMasterDataForPatient(
 			ch.bfh.www.ehrservices.SetMasterDataForPatient setMasterDataForPatient) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#setMasterDataForPatient");
+		
+		// get person object
+		Person person = Utility.getEM().find(
+				Person.class,
+				setMasterDataForPatient.getPersonID());
+		
+		// set new data to existing object
+		if(setMasterDataForPatient.getAddress() != null) person.getAddress().setAddress(setMasterDataForPatient.getAddress());
+		if(setMasterDataForPatient.getPostalcode() > 0) person.getAddress().setPostalcode(setMasterDataForPatient.getPostalcode());
+		if(setMasterDataForPatient.getMunicipality() != null) person.getAddress().setMunicipality(setMasterDataForPatient.getMunicipality());
+		if(setMasterDataForPatient.getCanton() != null) person.getAddress().setCanton(setMasterDataForPatient.getCanton());
+		if(setMasterDataForPatient.getCountry() != null) person.getAddress().setCountry(setMasterDataForPatient.getCountry());
+		if(setMasterDataForPatient.getEmail() != null) person.setEmail(setMasterDataForPatient.getEmail());
+		person.setBirthdate(setMasterDataForPatient.getBirthdate());
+		person.setFirstname(setMasterDataForPatient.getFirstname());
+		person.setName(setMasterDataForPatient.getName());
+		if(setMasterDataForPatient.getMobile() != null) person.setMobile(setMasterDataForPatient.getMobile());
+		if(setMasterDataForPatient.getPhone() != null) person.setPhone(setMasterDataForPatient.getPhone());
+		
+		SetMasterDataForPatientResponse response = new SetMasterDataForPatientResponse();
+
+		// update person object and prepare patient object for frontend
+		if (person != null) {
+			Utility.getEM().getTransaction().begin();
+			Utility.getEM().persist(person);	
+			Utility.getEM().getTransaction().commit();
+			
+			// update patient object for frontend
+			Query query = Utility.getEM().createQuery(
+					"SELECT p FROM Patient p WHERE p.person.id ='" + setMasterDataForPatient.getPersonID() + "'");
+			query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+			Patient user = (Patient) query.getSingleResult();
+
+			// Create patient object
+			PatientType patient = Utility.createPatientHelper(user);
+
+			// create address and person object
+			patient.setPerson(Utility.createPersonWithAddressHelper(user
+					.getPerson()));
+			
+			response.setPatient(patient);
+		}
+		
+		return response;
 	}
 
 	/**
