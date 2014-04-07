@@ -636,7 +636,7 @@ public class EhrServicesSkeleton {
 
 	/**
 	 * <pre>
-	 * Fügt einen neuen Eintrag in der Whitelist des Patienten hinzu.
+	 * Fügt einen neuen Eintrag in der Whitelist des Patienten hinzu. (Vertrauensperson)
 	 * Der Eintrag ist ein anderer Patient, welcher volle Berechtigung auf den Rechte gebenden Patienten erhält.
 	 * 
 	 * Giver => Gibt die Rechte an
@@ -917,10 +917,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Löscht einen gegebenen Notfallkontakt (Person) eines Patienten.
+	 * </pre>
 	 * 
-	 * @param removeEmergencyContact
-	 * @return removeEmergencyContactResponse
+	 * @param int Person ID, int Patient ID 
+	 * @return Gibt true zurück falls erfolgreich gelöscht.
 	 */
 
 	public ch.bfh.www.ehrservices.RemoveEmergencyContactResponse removeEmergencyContact(
@@ -948,10 +950,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Löscht eine Verbindung zwischen einem Patienten und einer Organisation.
+	 * </pre>
 	 * 
-	 * @param removeOrganisationHPFromPatient
-	 * @return removeOrganisationHPFromPatientResponse
+	 * @param int OrganisationHP ID, int Patient ID 
+	 * @return Gibt true zurück falls erfolgreich gelöscht.
 	 */
 
 	public ch.bfh.www.ehrservices.RemoveOrganisationHPFromPatientResponse removeOrganisationHPFromPatient(
@@ -977,10 +981,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Löscht einen Whitelist Eintrag. (Vertrauensperson)
+	 * </pre>
 	 * 
-	 * @param removePatientFromWhitelist
-	 * @return removePatientFromWhitelistResponse
+	 * @param int Patient 1 ID (Enzieht die Rechte), int Patient 2 (Werden die Rechte entzogen) ID 
+	 * @return Gibt true zurück falls erfolgreich gelöscht.
 	 */
 
 	public ch.bfh.www.ehrservices.RemovePatientFromWhitelistResponse removePatientFromWhitelist(
@@ -1006,10 +1012,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Löscht einen Healthcare Professional von der Blacklist
+	 * </pre>
 	 * 
-	 * @param removeHPFromBlacklist
-	 * @return removeHPFromBlacklistResponse
+	 * @param int Patient ID, int Healthcareprofessional ID 
+	 * @return Gibt true zurück falls erfolgreich gelöscht.
 	 */
 
 	public ch.bfh.www.ehrservices.RemoveHPFromBlacklistResponse removeHPFromBlacklist(
@@ -1035,10 +1043,12 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Überschreibt die Stammdaten des Patienten. Wird nichts mitgegeben (Null) wird keine Änderungen gemacht.
+	 * </pre>
 	 * 
-	 * @param setMasterDataForPatient
-	 * @return setMasterDataForPatientResponse
+	 * @param int Person ID (Person ist der Patient)
+	 * @return Gibt bei Erfolg das neue, geänderte Patient Objekt zurück.
 	 */
 
 	public ch.bfh.www.ehrservices.SetMasterDataForPatientResponse setMasterDataForPatient(
@@ -1090,32 +1100,54 @@ public class EhrServicesSkeleton {
 	}
 
 	/**
-	 * Auto generated method signature
+	 * <pre>
+	 * Gibt alle Dokumente eines Patienten zurück, auf welche ein bestimmter OrganisationHp berechtigt ist.
+	 * </pre>
 	 * 
-	 * @param getVisibleDocumentsForOrgaHP
-	 * @return getVisibleDocumentsForOrgaHPResponse
+	 * @param int Patient ID, int OrganisationHP ID
+	 * @return Gibt alle berechtigte Dokumente zurück.
 	 */
 
 	public ch.bfh.www.ehrservices.GetVisibleDocumentsForOrgaHPResponse getVisibleDocumentsForOrgaHP(
 			ch.bfh.www.ehrservices.GetVisibleDocumentsForOrgaHP getVisibleDocumentsForOrgaHP) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName() + "#getVisibleDocumentsForOrgaHP");
+		Query query = Utility.getEM().createQuery(
+				"SELECT pm FROM Permissionmatrix pm WHERE pm.patient.id ='" + getVisibleDocumentsForOrgaHP.getPatientID() + "'"
+						+ " AND pm.documentregister.organisationhp.id = '" + getVisibleDocumentsForOrgaHP.getOrganisationHPID() + "'");
+		List<Permissionmatrix> permissionmatrix = query.getResultList();
+		
+		GetVisibleDocumentsForOrgaHPResponse response = new GetVisibleDocumentsForOrgaHPResponse();
+		
+		for(Permissionmatrix pm : permissionmatrix) {		
+			response.addDocuments(Utility.createDocumentRegisterHelper(pm.getDocumentregister()));
+		}
+		
+		return response;
 	}
 
 	/**
-	 * Auto generated method signature
+	 * Gibt alle OrganisationHp Objekte zurück, welche auf ein bestimmtes Dokument berechtigt sind.
 	 * 
-	 * @param getAuthorisedOrgaHPsForDocument
-	 * @return getAuthorisedOrgaHPsForDocumentResponse
+	 * @param int Patient ID, int Documentregister ID
+	 * @return Gibt alle berechtigten OrganisationHps zurück
 	 */
 
 	public ch.bfh.www.ehrservices.GetAuthorisedOrgaHPsForDocumentResponse getAuthorisedOrgaHPsForDocument(
 			ch.bfh.www.ehrservices.GetAuthorisedOrgaHPsForDocument getAuthorisedOrgaHPsForDocument) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement "
-				+ this.getClass().getName()
-				+ "#getAuthorisedOrgaHPsForDocument");
+				
+		Query query = Utility.getEM().createQuery(
+				"SELECT pm FROM Permissionmatrix pm WHERE pm.documentregister.id = '" + getAuthorisedOrgaHPsForDocument.getDocumentRegisterID() + "'"  // TODO ist noch hp id nicht orgahp..
+				+ " AND pm.patient.id = '" + getAuthorisedOrgaHPsForDocument.getPatientID() + "'");
+		List<Permissionmatrix> permissionmatrix = query.getResultList();
+		
+		GetAuthorisedOrgaHPsForDocumentResponse response = new GetAuthorisedOrgaHPsForDocumentResponse();
+		
+		for(Permissionmatrix pm : permissionmatrix) {		
+			Organisationhp orgahp = Utility.getEM().find(
+					Organisationhp.class,pm.getDocumentregister().getOrganisationhp().getId());
+			response.addOrganisationHPs(Utility.createOrganisationHPHelper(orgahp));
+		}
+		
+		return response;
 	}
 
 }

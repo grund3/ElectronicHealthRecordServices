@@ -872,6 +872,9 @@
             			<xsd:element name="documentRegisterID"
             				type="xsd:int" minOccurs="1" maxOccurs="1">
             			</xsd:element>
+            			<xsd:element name="patientID"
+            				type="xsd:int" minOccurs="1" maxOccurs="1">
+            			</xsd:element>
             		</xsd:sequence>
             	</xsd:complexType>
             </xsd:element>
@@ -887,7 +890,12 @@
             	<xsd:complexType>
             		<xsd:sequence>
 
-            			<xsd:element name="organisationHPID" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+            			<xsd:element name="organisationHPID"
+            				type="xsd:int" minOccurs="1" maxOccurs="1">
+            			</xsd:element>
+            			<xsd:element name="patientID"
+            				type="xsd:int" minOccurs="1" maxOccurs="1">
+            			</xsd:element>
             		</xsd:sequence>
             	</xsd:complexType>
             </xsd:element>
